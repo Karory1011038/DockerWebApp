@@ -1,0 +1,148 @@
+const sqlite3 = require('sqlite3').verbose();
+
+// Initialize the database
+const db = new sqlite3.Database('database.db', (err) => {
+    if (err) {
+        console.error(err.message);
+    } else {
+        console.log('Connected to database.');
+        db.run(`CREATE TABLE IF NOT EXISTS products (
+                    id INTEGER PRIMARY KEY,
+                    name TEXT NOT NULL,
+                    price REAL NOT NULL,
+                    image BLOB,
+                    properties TEXT
+                );`
+        );
+        db.run(`CREATE TABLE IF NOT EXISTS admins (
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL,
+            id_tg INTEGER NOT NULL UNIQUE
+        );`
+);
+    }
+});
+
+
+// Export functions for interacting with the database
+module.exports = {
+    getAllProducts: () => {
+        return new Promise((resolve, reject) => {
+            db.all('SELECT * FROM products', (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    },
+    addProduct: (name, price, image, properties) => {
+        return new Promise((resolve, reject) => {
+            const query = 'INSERT INTO products (name, price, image, properties) VALUES (?, ?, ?, ?)';
+            db.run(query, [name, price, image, properties], (err) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
+        });
+    },
+    changeProduct: (image, id) => {
+        return new Promise((resolve, reject) => {
+            const query = 'UPDATE products SET image = ? WHERE id = ?';
+            db.run(query, [image, id], (err) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
+        });
+    },
+    getProduct: (id) => {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT * FROM products WHERE id = ?';
+            db.get(query, [id], (err, row) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(row);
+                }
+            });
+        });
+    },
+    deleteProduct: (id) => {
+        return new Promise((resolve, reject) => {
+            const query = 'DELETE FROM products WHERE id = ?';
+            db.run(query, [id], (err) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
+        });
+    },
+
+    getAllAdmins: () => {
+        return new Promise((resolve, reject) => {
+            db.all('SELECT * FROM admins', (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    },
+    addAdmin: async (name, id_tg) => {
+        return new Promise((resolve, reject) => {
+            const query = 'INSERT INTO admins (name, id_tg) VALUES (?, ?)';
+            db.run(query, [name, id_tg], function (error) {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(this.lastID);
+                }
+            });
+        });
+    },
+    deleteAdmin: (id) => {
+        return new Promise((resolve, reject) => {
+            const query = 'DELETE FROM admins WHERE id = ?';
+            db.run(query, [id], (err) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
+        });
+    },
+    getAdmin: (id) => {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT * FROM admins WHERE id = ?';
+            db.get(query, [id], (err, row) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(row);
+                }
+            });
+        });
+    },
+    getAdminByTg: (id) => {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT * FROM admins WHERE id_tg = ?';
+            db.get(query, [id], (err, row) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(row);
+                }
+            });
+        });
+    },
+}

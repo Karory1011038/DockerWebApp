@@ -1,0 +1,21 @@
+{
+  "name": "webapp",
+  "version": "1.0.0",
+  "description": "A project with a frontend built with Vue 3, a backend built with Express.js, and a Sqlite database, using Docker and Docker Compose to manage the containers",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo 'No tests configured' && exit 0",
+    "start": "node server.js"
+  },
+  "author": "Karory1011038",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "multer": "^1.4.5-lts.1",
+    "node-telegram-bot-api": "^0.60.0",
+    "request": "^2.88.2",
+    "socks5-https-client": "^1.2.1",
+    "sqlite3": "^5.1.4"
+  }
+}
