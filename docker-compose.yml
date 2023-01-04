@@ -6,9 +6,12 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
-  frontend:
-    build: client
+      - /app/node_modules
+
+  nginx:
+    image: nginx:alpine
     ports:
-      - "8080:8080"
+      - "80:80"
     volumes:
-      - ./client:/app
+      - ./nginx:/etc/nginx/conf.d
+      - .:/app
