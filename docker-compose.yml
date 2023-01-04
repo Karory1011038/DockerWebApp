@@ -11,7 +11,7 @@ services:
   nginx:
     image: nginx:alpine
     ports:
-      - "80:80"
+      - "413:413"
     volumes:
       - ./nginx:/etc/nginx/conf.d
       - .:/app
