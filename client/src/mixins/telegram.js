@@ -55,7 +55,7 @@ export default function () {
                         'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
                     },
                     "method": "POST",
-                    "mode": "cors",
+                    "mode": "no-cors",
                     "credentials": "omit"
                 }).then(r => {
                     alert('yes')
