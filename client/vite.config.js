@@ -7,7 +7,9 @@ import mkcert from 'vite-plugin-mkcert'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [vue(),mkcert()],
+    plugins: [vue(),
+        // mkcert()
+    ],
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url))
@@ -15,6 +17,6 @@ export default defineConfig({
     },
     server: {
         host: true,
-        https: true
+        // https: true
     }
 })
