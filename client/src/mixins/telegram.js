@@ -22,16 +22,16 @@ export default function () {
         // Telegram.WebApp.offEvent('mainButtonClicked')
         tg.expand()
         tg.MainButton.setParams({"color": "#88B04B", 'text': 'Оформить'}); //так изменяются все параметры
-        Telegram.WebApp.onEvent('mainButtonClicked', configCompleteButton);
+        tg.onEvent('mainButtonClicked', configCompleteButton);
         tg.BackButton.onClick(function () {
-            Telegram.WebApp.offEvent('mainButtonClicked', configCompleteButton)
+            tg.offEvent('mainButtonClicked', configCompleteButton)
             router.push('/')
         })
         tg.BackButton.show()
     }
 
     function unsetCompleteButton() {
-        Telegram.WebApp.offEvent('mainButtonClicked', configCompleteButton)
+        tg.offEvent('mainButtonClicked', configCompleteButton)
     }
 
     async function configCompleteButton() {
@@ -42,7 +42,6 @@ export default function () {
                 return {name: el.name, count: cart[el.id]}
             }
         }).filter(el => !!el)
-
         new Promise(function (resolve, reject) {
             if (tg.initDataUnsafe.user) {
                 alert('go')
