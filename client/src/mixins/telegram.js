@@ -48,6 +48,7 @@ export default function () {
                 tg.sendData(JSON.stringify({'user': user, 'items': cartItems})).then(r => resolve(r));
 
             } else {
+                alert('go')
                 fetch(new URL("http://81.163.23.58:8000/web-data"), {
                     "headers": {
                         "accept": "*/*",
@@ -63,6 +64,10 @@ export default function () {
                 }).then(r => {
                     alert('yes')
                     resolve(r)
+                }).catch(r => {
+                    alert('error')
+                    alert(r)
+                    reject(r)
                 })
             }
         }).then(() => {
