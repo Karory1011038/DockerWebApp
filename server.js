@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const {getAllProducts} = require('./server_components/backend');
 const cors = require('cors');
-app.use(cors({ origin: 'http://127.0.0.1:5173' , credentials :  true}));
+app.use(cors({ origin: 'http://81.163.23.58:5173' , credentials :  true}));
 
 const {bot} = require('./server_components/bot');
 
