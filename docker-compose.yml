@@ -11,7 +11,8 @@ services:
   nginx:
     image: nginx:alpine
     ports:
-      - "413:413"
+      - "443:443"
     volumes:
       - ./nginx:/etc/nginx/conf.d
       - .:/app
+      - ./sslcert:/app/sslcert
