@@ -6,3 +6,4 @@ client/.gitignore
 images
 package-lock.json
 database.db
+client/dist
