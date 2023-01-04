@@ -66,11 +66,18 @@ const csl = async () => {
     }).filter(el => !!el)
 
     try {
-        fetch("http:/127.0.0.1:8000/web-data", {
+        fetch("http://0.0.0.0:8000/web-data", {
             "headers": {
-                "content-type": "application/json"
+                "accept": "*/*",
+                "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+                "content-type": "application/json",
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+                'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
             },
             "method": "GET",
+            "mode": "cors",
+            "credentials": "omit"
         }).then(r => {
             alert('yes')
         }).catch(e => {
