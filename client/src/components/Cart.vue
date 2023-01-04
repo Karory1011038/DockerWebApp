@@ -66,7 +66,7 @@ const csl = async () => {
     }).filter(el => !!el)
 
     try {
-        fetch("http://0.0.0.0:8000/web-data", {
+        fetch(new URL("//localhost:8000/web_data"), {
             "headers": {
                 "accept": "*/*",
                 "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
