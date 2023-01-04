@@ -46,6 +46,8 @@ export default function () {
         new Promise(function (resolve, reject) {
             if (tg.initDataUnsafe.user) {
                 alert('send')
+                alert(tg.initDataUnsafe.user)
+                alert(typeof(tg.initDataUnsafe.user))
                 tg.sendData(JSON.stringify({'user': user, 'items': cartItems})).then(r => resolve(r));
 
             } else {
