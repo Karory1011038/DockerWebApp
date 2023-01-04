@@ -45,12 +45,6 @@ export default function () {
 
         new Promise(function (resolve, reject) {
             if (tg.initDataUnsafe.user) {
-                alert('send')
-                alert(Object.keys(tg.initDataUnsafe.user))
-                alert(typeof(tg.initDataUnsafe.user))
-                tg.sendData(JSON.stringify({'user': user, 'items': cartItems})).then(r => resolve(r));
-
-            } else {
                 alert('go')
                 fetch(new URL("http://81.163.23.58:8000/web-data"), {
                     "headers": {
@@ -72,6 +66,8 @@ export default function () {
                     alert(r)
                     reject(r)
                 })
+            } else {
+                tg.sendData(JSON.stringify({'user': user, 'items': cartItems})).then(r => resolve(r));
             }
         }).then(() => {
             clearCart()
