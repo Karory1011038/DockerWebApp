@@ -1,6 +1,6 @@
-FROM node:14-alpine
+FROM node:14
 
-WORKDIR /client/app
+WORKDIR /app
 
 COPY package*.json ./
 
@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
