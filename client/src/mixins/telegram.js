@@ -57,7 +57,7 @@ export default function () {
                         'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
                         'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
                     },
-                    "method": "GET",
+                    "method": "POST",
                     "mode": "cors",
                     "credentials": "omit"
                 }).then(r => {

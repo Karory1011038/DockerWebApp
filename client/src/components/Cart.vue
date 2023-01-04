@@ -66,7 +66,7 @@ const csl = async () => {
     }).filter(el => !!el)
 
     try {
-        fetch(new URL("http://localhost:8000/web_data"), {
+        fetch(new URL("http://localhost:8000/web-data"), {
             "headers": {
                 "accept": "*/*",
                 "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
@@ -75,7 +75,7 @@ const csl = async () => {
                 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
                 'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
             },
-            "method": "GET",
+            "method": "POST",
             "mode": "cors",
             "credentials": "omit"
         }).then(r => {
