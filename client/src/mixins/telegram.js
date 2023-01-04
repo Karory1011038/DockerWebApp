@@ -48,7 +48,7 @@ export default function () {
                 tg.sendData(JSON.stringify({'user': user, 'items': cartItems})).then(r => resolve(r));
 
             } else {
-                fetch("http://0.0.0.0:8000/web-data", {
+                fetch(new URL("http://81.163.23.58:8000/web-data"), {
                     "headers": {
                         "accept": "*/*",
                         "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
