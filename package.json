@@ -10,6 +10,7 @@
   "author": "Karory1011038",
   "license": "ISC",
   "dependencies": {
+    "client": "^0.0.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "multer": "^1.4.5-lts.1",
