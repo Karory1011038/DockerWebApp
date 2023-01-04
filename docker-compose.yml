@@ -14,5 +14,4 @@ services:
       - "413:413"
     volumes:
       - ./nginx:/etc/nginx/conf.d
-      - ./sslcert:/sslcert
       - .:/app
