@@ -1,10 +1,17 @@
 const express = require('express');
 const app = express();
+const https = require('https');
 const {getAllProducts} = require('./server_components/backend');
 const cors = require('cors');
 app.use(cors({ origin: 'http://81.163.23.58:5173' , credentials :  true}));
 
 const {bot} = require('./server_components/bot');
+const fs = require("fs");
+
+
+const privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
+const certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
+const credentials = {key: privateKey, cert: certificate};
 
 app.get('/products', getAllProducts);
 
@@ -29,10 +36,11 @@ app.post('/web-data', async (req, res) => {
     }
 })
 
+const httpsServer = https.createServer(credentials, app);
 
-app.listen(8000, () => {
-    console.log('Express server listening on port 8000');
-});
+
+httpsServer.listen(8000);
+
 
 //TODO
 /// add https
