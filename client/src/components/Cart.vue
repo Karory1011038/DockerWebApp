@@ -42,7 +42,7 @@ const cartItems = computed(() => {
     }).filter(el => !!el)
 })
 const totalSum = cartItems.value.reduce((partialSum, a) => partialSum + a.price, 0);
-;
+
 const goHome = () => {
     unsetCompleteButton()
     router.push('/')
@@ -70,16 +70,18 @@ async function csl() {
     const cart = cartStore.getCart
     const clearCart = cartStore.clearCart
 
-    const cartItems = items.value.map(el => {
-        if (Object.keys(cart).some(item => item === el.id) && cart[el.id] > 0) {
-            return {name: el.name, count: cart[el.id]}
-        }
-    }).filter(el => !!el)
+    const cartItems = computed(() => {
+        return items.value.map(el => {
+            if (Object.keys(cart).some(item => item == el.id) && cart[el.id] > 0) {
+                return {...el, count: cart[el.id]}
+            }
+        }).filter(el => !!el)
+    })
     new Promise(function (resolve, reject) {
         if (tg.initDataUnsafe.user) {
             const requestBody = JSON.stringify({
                 user: user,
-                items: cartItems,
+                items: cartItems.value,
                 queryId: tg.initDataUnsafe.query_id,
             });
             fetch('https://webappbot.website:8000/web-data', {
@@ -95,7 +97,7 @@ async function csl() {
                 reject(r)
             })
         } else {
-            tg.sendData(JSON.stringify({'user': user, 'items': cartItems})).then(r => resolve(r));
+            tg.sendData(JSON.stringify({'user': user, 'items': cartItems.value})).then(r => resolve(r));
         }
     }).then(() => {
         clearCart()
