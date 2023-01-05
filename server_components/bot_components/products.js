@@ -5,54 +5,56 @@ const db = require('../database.js');
 
 let currentList = []
 
-function showProducts(bot, chatId) {
-    db.getAllProducts()
-        .then((rows) => {
-            if (!rows || rows.length === 0) {
-                bot.sendMessage(chatId, "There are no products in the database.");
-                return;
+async function showProducts(bot, chatId) {
+    try {
+        const rows = await db.getAllProducts();
+        if (!rows || rows.length === 0) {
+            bot.sendMessage(chatId, "There are no products in the database.");
+            return;
+        }
+        const sortedRows = rows.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
+        const currentList = [];
+        for (const row of sortedRows) {
+            const result = await showProduct(bot, chatId, row);
+            if (result) {
+                currentList.push(result);
             }
-            Promise.all(rows.sort(function (a, b) {
-                return parseFloat(a.id) - parseFloat(b.id);
-            }).map((row) => showProduct(bot, chatId, row))).then(r => {
-                currentList = r
-                bot.sendMessage(chatId, 'All products shown', {
-                    reply_markup: {
-                        inline_keyboard: [[{
-                            text: 'Home', callback_data: '/start'
-                        },]]
-                    }
-                })
-            });
-        })
-        .catch((err) => {
-            console.error(err.message);
+        }
+        await bot.sendMessage(chatId, 'All products shown', {
+            reply_markup: {
+                inline_keyboard: [[{
+                    text: 'Home', callback_data: '/start'
+                },]]
+            }
         });
+    } catch (err) {
+        console.error(err.message);
+    }
 }
 
-function showProduct(bot, chatId, row) {
-    return new Promise((resolve, reject) => {
+async function showProduct(bot, chatId, row) {
+    try {
         let image;
         if (fs.existsSync(row.image)) {
             image = fs.readFileSync(row.image);
         } else {
             image = fs.readFileSync('images/img.png');
         }
-        bot.sendPhoto(chatId, image, {
-            caption: `Name: ${row.name}\nPrice: ${row.price}\nDescription:${row.properties}`, reply_markup: {
+        const r = await bot.sendPhoto(chatId, image, {
+            caption: `Name: ${row.name}\nPrice: ${row.price}\nDescription:${row.properties}`,
+            reply_markup: {
                 inline_keyboard: [[{
                     text: 'Change', callback_data: `change_product_${row.id}`
                 }, {
                     text: 'Delete', callback_data: `confirm_delete_product_${row.id}`
                 }]]
             }
-        }).then(r => {
-            resolve({...r, itemId: row.id})
-        })
-            .catch(r => reject(r))
-    })
+        });
+        return {...r, itemId: row.id};
+    } catch (err) {
+        bot.sendMessage(chatId, 'Error sending product: ' + err.message);
+    }
 }
-
 
 const createProductDialog = (bot, chatId) => {
     const askName = () => {
@@ -141,7 +143,7 @@ const createProductDialog = (bot, chatId) => {
 };
 
 const changeProductDialog = (bot, chatId, field, id) => {
-      const onReplyMessage = message => {
+    const onReplyMessage = message => {
         if (field === 'image') {
             if (message.photo) {
                 const fileId = message.photo[message.photo.length - 1].file_id;
@@ -169,7 +171,7 @@ const changeProductDialog = (bot, chatId, field, id) => {
                                 } else {
                                     bot.sendMessage(chatId, 'Old product image file not found.');
                                 }
-                                db.changeProduct(filePath, id,field)
+                                db.changeProduct(filePath, id, field)
                                     .then(() => {
                                         bot.sendMessage(chatId, 'The image of the product has been successfully changed.', {
                                             reply_markup: {
@@ -253,17 +255,15 @@ const changeProductDialog = (bot, chatId, field, id) => {
     }
 
 
-  bot.sendMessage(chatId, 'Enter the new value for the ' + field, {
-    reply_markup: {
-      force_reply: true
-    }
-  }).then((sentMessage) => {
-    const messageId = sentMessage.message_id;
-    bot.onReplyToMessage(chatId, messageId, onReplyMessage);
-  });
+    bot.sendMessage(chatId, 'Enter the new value for the ' + field, {
+        reply_markup: {
+            force_reply: true
+        }
+    }).then((sentMessage) => {
+        const messageId = sentMessage.message_id;
+        bot.onReplyToMessage(chatId, messageId, onReplyMessage);
+    });
 };
-
-
 
 
 function confirmDeleteProduct(bot, chatId, id) {
