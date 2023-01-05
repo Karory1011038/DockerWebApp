@@ -140,70 +140,131 @@ const createProductDialog = (bot, chatId) => {
     askName();
 };
 
-
 const changeProductDialog = (bot, chatId, field, id) => {
-    if (field === 'image') {
-        bot.sendMessage(chatId, 'Send the new image for the product:', {
-            reply_markup: {
-                force_reply: true
-            }
-        }).then((sentMessage) => {
-            const messageId = sentMessage.message_id;
-            bot.onReplyToMessage(chatId, messageId, (message) => {
-                if (message.photo) {
-                    const fileId = message.photo[message.photo.length - 1].file_id;
-                    bot.getFileLink(fileId).then((link) => {
-                        const imageUrl = link;
-                        const filePath = `images/${new Date().getTime()}.jpg`;
-                        download(imageUrl, filePath, (err) => {
-                            if (err) {
-                                console.error(err.message);
-                                return;
-                            }
-                            db.getProduct(id)
-                                .then((row) => {
-                                    if (!row) {
-                                        bot.sendMessage(chatId, 'Product not found.');
-                                        return;
-                                    }
-                                    // Delete the old product image from the images directory
-                                    if (fs.existsSync(row.image)) {
-                                        fs.unlink(row.image, (err) => {
-                                            if (err) {
-                                                console.error(err.message);
-                                                return;
+      const onReplyMessage = message => {
+        if (field === 'image') {
+            if (message.photo) {
+                const fileId = message.photo[message.photo.length - 1].file_id;
+                bot.getFileLink(fileId).then((link) => {
+                    const imageUrl = link;
+                    const filePath = `images/${new Date().getTime()}.jpg`;
+                    download(imageUrl, filePath, err => {
+                        if (err) {
+                            console.error(err.message);
+                            return;
+                        }
+                        db.getProduct(id)
+                            .then(row => {
+                                if (!row) {
+                                    bot.sendMessage(chatId, 'Product not found.');
+                                    return;
+                                }
+                                if (fs.existsSync(row.image)) {
+                                    fs.unlink(row.image, err => {
+                                        if (err) {
+                                            console.error(err.message);
+                                            return;
+                                        }
+                                    });
+                                } else {
+                                    bot.sendMessage(chatId, 'Old product image file not found.');
+                                }
+                                db.changeProduct(filePath, id)
+                                    .then(() => {
+                                        bot.sendMessage(chatId, 'The image of the product has been successfully changed.', {
+                                            reply_markup: {
+                                                inline_keyboard: [[{
+                                                    text: 'Home', callback_data: '/start'
+                                                },]]
                                             }
                                         });
-                                    } else {
-                                        bot.sendMessage(chatId, 'Old product image file not found.');
-                                    }
-                                    // Update the product image field in the database
-                                    db.changeProduct(filePath, id)
-                                        .then(() => {
-                                            bot.sendMessage(chatId, 'The image of the product has been successfully changed.', {
-                                                reply_markup: {
-                                                    inline_keyboard: [[{
-                                                        text: 'Home', callback_data: '/start'
-                                                    },]]
-                                                }
-                                            });
-                                        })
-                                        .catch((err) => {
-                                            console.error(err.message);
-                                        });
-                                })
-                                .catch((err) => {
-                                    console.error(err.message);
-                                });
-                        });
+                                    })
+                                    .catch((err) => {
+                                        console.error(err.message);
+                                    });
+                            })
+                            .catch((err) => {
+                                console.error(err.message);
+                            });
                     });
-                } else {
-                    bot.sendMessage(chatId, 'Please send a photo of the product.');
-                }
-            });
-        });
+                });
+            } else {
+                bot.sendMessage(chatId, 'Please send a photo of the product.');
+            }
+        } else if (field === 'name') {
+            if (message.text) {
+                const newName = message.text;
+                db.getProduct(id)
+                    .then(row => {
+                        if (!row) {
+                            bot.sendMessage(chatId, 'Product not found.');
+                            return;
+                        }
+                        db.changeProduct(newName, id, field)
+                            .then(() => {
+                                bot.sendMessage(chatId, 'The name of the product has been successfully changed.', {
+                                    reply_markup: {
+                                        inline_keyboard: [[{
+                                            text: 'Home', callback_data: '/start'
+                                        },]]
+                                    }
+                                });
+                            })
+                            .catch((err) => {
+                                console.error(err.message);
+                            });
+                    })
+                    .catch((err) => {
+                        console.error(err.message);
+                    });
+            } else {
+                bot.sendMessage(chatId, 'Please enter the new name of the product as a text message.');
+            }
+        } else if (field === 'properties') {
+            if (message.text) {
+                const newProperties = message.text;
+                db.getProduct(id)
+                    .then(row => {
+                        if (!row) {
+                            bot.sendMessage(chatId, 'Product not found.');
+                            return;
+                        }
+                        db.changeProduct(newProperties, id, field)
+                            .then(() => {
+                                bot.sendMessage(chatId, 'The properties of the product have been successfully changed.', {
+                                    reply_markup: {
+                                        inline_keyboard: [[{
+                                            text: 'Home', callback_data: '/start'
+                                        },]]
+                                    }
+                                });
+                            })
+                            .catch((err) => {
+                                console.error(err.message);
+                            });
+                    })
+                    .catch((err) => {
+                        console.error(err.message);
+                    });
+            } else {
+                bot.sendMessage(chatId, 'Please enter the new properties of the product as a text message.');
+            }
+        }
     }
-}
+
+
+  bot.sendMessage(chatId, 'Enter the new value for the ' + field, {
+    reply_markup: {
+      force_reply: true
+    }
+  }).then((sentMessage) => {
+    const messageId = sentMessage.message_id;
+    bot.onReplyToMessage(chatId, messageId, onReplyMessage);
+  });
+};
+
+
+
 
 function confirmDeleteProduct(bot, chatId, id) {
     db.getProduct(id)
@@ -248,7 +309,7 @@ const deleteProduct = (bot, msg, id) => {
                             }
                             bot.deleteMessage(chatId, currentList.find(el => el.itemId == id)?.message_id)
                                 .then(() => {
-                                    bot.deleteMessage(chatId,msgId)
+                                    bot.deleteMessage(chatId, msgId)
                                     bot.sendMessage(chatId, 'Product deleted successfully!', {
                                         reply_markup: {
                                             inline_keyboard: [[{
@@ -314,5 +375,10 @@ function download(url, filePath, cb) {
 
 
 module.exports = {
-    showProducts, confirmDeleteProduct, createProductDialog, changeProductDialog, deleteProduct, changeProductField
+    showProducts,
+    confirmDeleteProduct,
+    createProductDialog,
+    changeProductDialog,
+    deleteProduct,
+    changeProductField
 };
