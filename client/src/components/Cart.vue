@@ -38,7 +38,7 @@ onMounted(() => {
 const cart = useCartStore().getCart
 const cartItems = computed(() => {
     return items.value.map(el => {
-        if (Object.keys(cart).some(item => item === el.id) && cart[el.id] > 0) {
+        if (Object.keys(cart).some(item => item == el.id) && cart[el.id] > 0) {
             return {...el, count: cart[el.id]}
         }
     }).filter(el => !!el)
