@@ -244,18 +244,19 @@ const deleteProduct = (bot, chatId, id) => {
                                 console.error(err.message);
                                 return;
                             }
+                            console.log(currentList)
                             bot.deleteMessage(chatId, currentList.find(el => el.id === id))
                                 .then(() => {
                                     bot.sendMessage(chatId, 'Product deleted successfully!', {
                                         reply_markup: {
-                                            inline_keyboard: [[{
+                                            inline_keyboard: [{
                                                 text: 'Home', callback_data: '/start'
-                                            },]]
+                                            },]
                                         }
                                     });
                                 })
                                 .catch((error) => {
-                                    // bot.sendMessage(chatId, 'Product message error!');
+                                    bot.sendMessage(chatId, 'Product message error!');
                                     console.error(error);
                                 });
                         });
