@@ -4,7 +4,8 @@
         <div class="tg-link" @click="goHome">Edit</div>
     </div>
     <order-row style="margin: 20px" :items="cartItems"></order-row>
-    {{cartItems}}
+    {{ cartItems }}
+    {{items}}
     <div style="display: flex;justify-content: space-between;margin: 10px 20px">
         <div class="tg-text" style="font-size: 16px;font-weight: 600">Общая стоимость:</div>
         <div class="tg-text" style="font-weight: 600" @click="goHome">{{ totalSum }}฿</div>
@@ -25,7 +26,6 @@ import telegram from "../mixins/telegram";
 
 const store = useItemsStore();
 const items = computed(() => {
-    console.log(store.getItems)
     return store.getItems;
 });
 const user = computed(() => {
@@ -34,7 +34,6 @@ const user = computed(() => {
 onMounted(() => {
     store.fetchItems();
 });
-console.log(items)
 const {cart} = useCartStore()
 const cartItems = computed(() => {
     console.log(items)

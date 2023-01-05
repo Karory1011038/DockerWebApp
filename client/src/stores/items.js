@@ -34,7 +34,7 @@ export const useItemsStore = defineStore("user", {
             }
         },
         setUser(val) {
-            this.user.value = val
+            this.user = val
         }
     },
 })
