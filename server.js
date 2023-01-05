@@ -46,10 +46,12 @@ async function handleSendData(data) {
 app.get('/products', getAllProducts);
 
 app.post('/web-data', async (req, res) => {
+    console.log(req.body)
+    console.log(JSON.parse(req.body))
     await handleSendData(JSON.parse(req.body))
 })
 
-bot.on('message', (msg) => {
+web_bot.on('message', (msg) => {
     if (msg?.web_app_data?.data) {
         handleSendData(JSON.parse(msg?.web_app_data?.data))
     }
