@@ -6,6 +6,40 @@ const webAppUrl = 'https://webappbot.website'
 const TOKEN = '5903716328:AAGaHW8mLMH1BkE-plgthR-MNpmUBAwkc3E';
 const bot = new TelegramBot(TOKEN, {polling: true});
 
+function createOrderMessage(data) {
+    console.log(data)
+    let message = `New order from ${data.user.username}!\n`;
+    message += `Please prepare the following items for delivery:\n`;
+    data.items.forEach(item => {
+        message += `- ${item.name} x${item.count}\n`;
+    });
+    message += `The order will be shipped to ${data.user.phone}.`;
+    return message;
+}
+
+
+async function handleSendData(data) {
+    try {
+        const message = createOrderMessage(data);
+        bot.answerWebAppQuery(data.queryId, {
+            type: 'article',
+            id: data.queryId,
+            title: 'Success',
+            input_message_content: {
+                message_text: message
+            }
+        })
+            .then(() => {
+                return true;
+            })
+            .catch(() => {
+                return false;
+            })
+    } catch (e) {
+        return false;
+    }
+}
+
 
 bot.onText(/\/start/, (msg) => {
     bot.sendMessage(msg.chat.id, "Hey there! Looking for some fire weed? We've got you covered. Check out our selection and elevate your smoking game.", {
@@ -26,9 +60,14 @@ bot.onText(/\/start/, (msg) => {
         .catch(r => console.log(r))
 });
 
-
+bot.on('message', (msg) => {
+    if (msg?.web_app_data?.data) {
+        handleSendData(JSON.parse(msg?.web_app_data?.data))
+    }
+})
 
 
 module.exports = {
-    bot
+    bot,
+    handleSendData
 }
