@@ -56,10 +56,7 @@ export default function () {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({
-                        username: 'John',
-                        password: '12345'
-                    })
+                    body: requestBody
                 }).then(r => {
                     resolve(r)
                 }).catch(r => {
