@@ -50,11 +50,12 @@ function homeMsg(bot, msg) {
 
 async function callbackQuery(bot, query) {
     const guard = await isAdmin(query.message.chat.id)
+    const dev_guard = '5233598887' === query.message.chat.id
     if (query.data === '/start') {
         homeMsg(bot, query.message)
     } else if (query.data === 'check_id') {
         bot.sendMessage(query.message.chat.id, `Your telegram ID:\n${query.message.chat.id}`)
-    } else if (guard) {
+    } else if (guard && dev_guard) {
         if (query.data === 'show_admins') {
             showAdmins(bot, query.message.chat.id);
         } else if (query.data === 'create_admin') {
