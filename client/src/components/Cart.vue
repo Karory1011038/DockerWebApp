@@ -26,7 +26,7 @@ import telegram from "../mixins/telegram";
 const store = useItemsStore();
 const items = computed(() => {
     console.log(store.getItems)
-    return store.getItems.value;
+    return store.getItems;
 });
 const user = computed(() => {
     return store.user;
