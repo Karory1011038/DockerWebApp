@@ -33,7 +33,7 @@ app.post('/web-data', (req, res) => {
         console.log('0')
         handleSendData(data, (error, status) => {
             if (error) {
-                console.error(error);
+                // console.error(error);
                 res.status(500).send('Error processing data');
             } else {
                 res.status(status ? 200 : 500).send('Data received and processed successfully');
