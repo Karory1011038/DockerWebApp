@@ -245,8 +245,8 @@ const deleteProduct = (bot, chatId, id) => {
                                 return;
                             }
                             console.log(currentList.find(el => {
-                                console.log(el)
-                                console.log(id)
+                                console.log(el.from.id == chatId)
+                                console.log(chatId)
                                 return el.date == id
                             }))
                             // bot.deleteMessage(chatId, currentList.find(el => el.id === id))
