@@ -34,9 +34,10 @@ const user = computed(() => {
 onMounted(() => {
     store.fetchItems();
 });
-
+console.log(items)
 const {cart} = useCartStore()
 const cartItems = computed(() => {
+    console.log(items)
     return items.value.map(el => {
         if (Object.keys(cart).some(item => item === el.id) && cart[el.id] > 0) {
             return {...el, count: cart[el.id]}
