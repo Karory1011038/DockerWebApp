@@ -9,7 +9,6 @@ const {
 
 const TOKEN = '5986633368:AAHD8o7LzS-uyHPHrc0sKChapz2Wb_vxb5E';
 const bot = new TelegramBot(TOKEN, {polling: true});
-
 // Initialize database and create products table if it doesn't exist
 
 
