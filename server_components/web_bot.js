@@ -36,11 +36,7 @@ async function handleSendData(data, callback) {
 }
 
 async function handleSendDataByButton(msg, data, callback) {
-    const parsedData = JSON.parse(data)
-    console.log(data.user)
-    console.log(parsedData.user)
     try {
-        console.log('mes')
         let message = `Hello, ${data.user.username}! Your order includes the following items:\n`;
         data.items.forEach((item) => {
             message = message + `- ${item.name} x${item.count}\n`;
@@ -76,7 +72,7 @@ bot.onText(/\/start/, (msg) => {
 
 bot.on('message', (msg) => {
     if (msg?.web_app_data?.data) {
-        handleSendDataByButton(msg, msg?.web_app_data?.data, (error, status) => {
+        handleSendDataByButton(msg, JSON.parse(msg?.web_app_data?.data), (error, status) => {
             if (error) {
                 // console.error(error);
             } else {
