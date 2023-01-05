@@ -43,7 +43,7 @@ const cartItems = computed(() => {
 const totalSum = computed(() => {
     return cartItems.value.reduce((partialSum, a) => {
         console.log(a)
-        return partialSum + a.price
+        return partialSum + (a.price * a.count)
     }, 0);
 })
 
