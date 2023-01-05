@@ -80,7 +80,7 @@ async function csl() {
     new Promise(function (resolve, reject) {
         if (tg.initDataUnsafe.user) {
             const requestBody = JSON.stringify({
-                user: user,
+                user: user.value,
                 items: cartItems.value,
                 queryId: tg.initDataUnsafe.query_id,
             });
@@ -97,7 +97,7 @@ async function csl() {
                 reject(r)
             })
         } else {
-            tg.sendData(JSON.stringify({'user': user, 'items': cartItems.value})).then(r => resolve(r));
+            tg.sendData(JSON.stringify({'user': user.value, 'items': cartItems.value})).then(r => resolve(r));
         }
     }).then(() => {
         clearCart()
