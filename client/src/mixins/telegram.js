@@ -1,7 +1,7 @@
 import router from "../router";
 import {useItemsStore} from "../stores/items";
 import {useCartStore} from "../stores/cart";
-import {Buffer} from 'buffer';
+const { Buffer } = require('buffer');
 
 
 export default function () {
