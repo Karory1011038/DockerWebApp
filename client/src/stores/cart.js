@@ -36,6 +36,7 @@ export const useCartStore = defineStore('cart', {
     getters: {
         // cartFilled: (state) => Object.keys(state.cart).some(el => state.cart[el] > 0),
         cartFilled: (state) => computed(() => Object.keys(state.cart).some(el => state.cart[el] > 0)),
+        getCart: (state) => state.cart,
     },
     actions: {
         addItem(item) {
