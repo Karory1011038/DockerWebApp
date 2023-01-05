@@ -244,7 +244,8 @@ const deleteProduct = (bot, chatId, id) => {
                                 console.error(err.message);
                                 return;
                             }
-                            console.log(currentList.find(el => el.itemId == id))
+                            console.log(currentList.find(el => el.itemId == id).message_id)
+                            console.log(currentList.find(el => el.itemId == id).data)
                             // bot.deleteMessage(chatId, currentList.find(el => el.itemId == id))
                             //     .then(() => {
                             //         bot.sendMessage(chatId, 'Product deleted successfully!', {
