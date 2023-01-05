@@ -245,20 +245,20 @@ const deleteProduct = (bot, chatId, id) => {
                                 return;
                             }
                             console.log(currentList)
-                            bot.deleteMessage(chatId, currentList.find(el => el.id === id))
-                                .then(() => {
-                                    bot.sendMessage(chatId, 'Product deleted successfully!', {
-                                        reply_markup: {
-                                            inline_keyboard: [{
-                                                text: 'Home', callback_data: '/start'
-                                            },]
-                                        }
-                                    });
-                                })
-                                .catch((error) => {
-                                    bot.sendMessage(chatId, 'Product message error!');
-                                    console.error(error);
-                                });
+                            // bot.deleteMessage(chatId, currentList.find(el => el.id === id))
+                            //     .then(() => {
+                            //         bot.sendMessage(chatId, 'Product deleted successfully!', {
+                            //             reply_markup: {
+                            //                 inline_keyboard: [{
+                            //                     text: 'Home', callback_data: '/start'
+                            //                 },]
+                            //             }
+                            //         });
+                            //     })
+                            //     .catch((error) => {
+                            //         bot.sendMessage(chatId, 'Product message error!');
+                            //         console.error(error);
+                            //     });
                         });
                     } else {
                         bot.sendMessage(chatId, 'Product image file not found.');
