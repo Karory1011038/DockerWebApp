@@ -36,18 +36,20 @@ async function handleSendData(data, callback) {
 }
 
 async function handleSendDataByButton(msg, data, callback) {
-  try {
-    let message = `Hello, ${data.user.username}! Your order includes the following items:\n`;
-    data.items.forEach((item) => {
-      message += `- ${item.name} x${item.count}\n`;
-    });
-    await bot.sendMessage(msg.chat.id, message);
-    callback(null, true);
-  } catch (error) {
-    callback(error, false);
-  }
-}
+    console.log(data)
+    try {
+        let message = `Hello, ${data.user.username}! Your order includes the following items:\n`;
+        data.items.forEach((item) => {
+            message += `- ${item.name} x${item.count}\n`;
+        });
 
+        console.log(message)
+        await bot.sendMessage(msg.chat.id, message);
+        callback(null, true);
+    } catch (error) {
+        callback(error, false);
+    }
+}
 
 
 bot.onText(/\/start/, (msg) => {
