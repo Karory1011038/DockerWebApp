@@ -15,7 +15,6 @@
 </template>
 
 <script setup>
-import {mapState} from "pinia/dist/pinia";
 import {useCartStore} from "../stores/cart";
 import {useItemsStore} from "../stores/items";
 import OrderRow from "./order/OrderRow.vue";
