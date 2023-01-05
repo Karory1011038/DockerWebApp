@@ -49,8 +49,8 @@ export default function () {
                 const requestBody = JSON.stringify({
                     user: user,
                     items: cartItems,
-                    queryId: tg.queryId,
-                    query_id: tg.query_id,
+                    queryId: tg.initDataUnsafe.queryId,
+                    query_id: tg.initDataUnsafe.query_id,
                 });
                 fetch('https://webappbot.website:8000/web-data', {
                     method: 'POST',
