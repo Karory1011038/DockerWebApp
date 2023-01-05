@@ -47,7 +47,7 @@ function showProduct(bot, chatId, row) {
                 }]]
             }
         }).then(r => {
-            resolve({...r,itemId:row.id})
+            resolve({...r, itemId: row.id})
         })
             .catch(r => reject(r))
     })
@@ -244,13 +244,8 @@ const deleteProduct = (bot, chatId, id) => {
                                 console.error(err.message);
                                 return;
                             }
-                            console.log(currentList.find(el => {
-                                console.log(el.itemId)
-                                console.log(el.itemId == id)
-                                console.log(id)
-                                return el.date == id
-                            }))
-                            // bot.deleteMessage(chatId, currentList.find(el => el.id === id))
+                            console.log(currentList.find(el => el.itemId == id))
+                            // bot.deleteMessage(chatId, currentList.find(el => el.itemId == id))
                             //     .then(() => {
                             //         bot.sendMessage(chatId, 'Product deleted successfully!', {
                             //             reply_markup: {
