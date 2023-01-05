@@ -56,6 +56,7 @@ bot.onText(/\/start/, (msg) => {
 });
 
 bot.on('message', (msg) => {
+        console.log(msg?.web_app_data?.data)
   if (msg?.web_app_data?.data) {
     handleSendData(JSON.parse(msg?.web_app_data?.data), (error, status) => {
       if (error) {
