@@ -4,7 +4,6 @@
         <div class="tg-link" @click="goHome">Edit</div>
     </div>
     <order-row style="margin: 20px" :items="cartItems"></order-row>
-    {{cartItems}}
 
     <div style="display: flex;justify-content: space-between;margin: 10px 20px">
         <div class="tg-text" style="font-size: 16px;font-weight: 600">Общая стоимость:</div>
@@ -13,7 +12,7 @@
     <div style="margin: 20px">
         <order-form @validate="changeBtnStatus"></order-form>
     </div>
-<!--    <button @click="csl">GOOGGOGO</button>-->
+    <!--    <button @click="csl">GOOGGOGO</button>-->
 </template>
 
 <script setup>
@@ -21,12 +20,22 @@ import {mapState} from "pinia/dist/pinia";
 import {useCartStore} from "../stores/cart";
 import {useItemsStore} from "../stores/items";
 import OrderRow from "./order/OrderRow.vue";
-import {computed} from "vue";
+import {computed, onMounted} from "vue";
 import router from "../router";
 import OrderForm from "./order/form/OrderForm.vue";
 import telegram from "../mixins/telegram";
 
-const {items} = useItemsStore();
+const store = useItemsStore();
+const items = computed(() => {
+    return store.getItems;
+});
+const user = computed(() => {
+    return store.user;
+});
+onMounted(() => {
+    store.fetchItems();
+});
+
 const {cart} = useCartStore()
 const cartItems = computed(() => {
     return items.map(el => {
@@ -43,13 +52,12 @@ const goHome = () => {
     unsetCompleteButton()
     router.push('/')
 }
-const {setUser} = useItemsStore()
 const {tg, showButton, hideButton, setCompleteButton, unsetCompleteButton} = telegram();
 setCompleteButton()
 
 const changeBtnStatus = (val) => {
     if (val.username !== '' && val.phone.length >= 13) {
-        setUser(val)
+        store.setUser(val)
         showButton()
     } else
         hideButton()
@@ -69,14 +77,14 @@ const csl = async () => {
     try {
         console.log(JSON.stringify({'user': user, 'items': cartItems}))
         fetch("https://webappbot.website:8000/web-data", {
-                    method: "POST",
-                    mode: "no-cors",
-                    credentials: "omit",
-                    body: JSON.stringify({'user': user, 'items': cartItems}),
-                    headers: {
-                        "Content-Type": "application/json",
-                    }
-                }).then(r => {
+            method: "POST",
+            mode: "no-cors",
+            credentials: "omit",
+            body: JSON.stringify({'user': user, 'items': cartItems}),
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }).then(r => {
             // alert('yes')
         }).catch(e => {
             alert(e)
