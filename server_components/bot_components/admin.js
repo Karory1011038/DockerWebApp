@@ -139,7 +139,9 @@ function confirmDeleteAdmin(bot, chatId, id) {
         });
 }
 
-const deleteAdmin = (bot, chatId, id) => {
+const deleteAdmin = (bot, msg, id) => {
+    const chatId = msg.chat.id
+    const msgId = msg.message_id
     db.getAdmin(id).then(row => {
         if (!row) {
             bot.sendMessage(chatId, 'Admin not found.');
@@ -148,6 +150,7 @@ const deleteAdmin = (bot, chatId, id) => {
         db.deleteAdmin(id).then(() => {
             bot.deleteMessage(chatId, currentListAdmins.find(el => el.item == id).message)
                 .then(() => {
+                    bot.deleteMessage(chatId,msgId)
                     bot.sendMessage(chatId, 'Admin deleted successfully!', {
                         reply_markup: {
                             inline_keyboard: [[

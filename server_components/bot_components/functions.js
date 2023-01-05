@@ -82,7 +82,7 @@ async function callbackQuery(bot, query) {
             confirmDeleteAdmin(bot, query.message.chat.id, id);
         } else if (query.data.startsWith('delete_admin_')) {
             const id = query.data.split('_')[2];
-            deleteAdmin(bot, query.message.chat.id, id);
+            deleteAdmin(bot, query.message, id);
         } else if (query.data === 'cancel_delete') {
             bot.deleteMessage(query.message.chat.id, query.message.message_id)
                 .then(() => {
