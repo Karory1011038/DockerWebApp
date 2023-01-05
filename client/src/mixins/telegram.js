@@ -1,6 +1,8 @@
 import router from "../router";
 import {useItemsStore} from "../stores/items";
 import {useCartStore} from "../stores/cart";
+import {Buffer} from 'buffer';
+
 
 export default function () {
     const tg = window.Telegram.WebApp;
