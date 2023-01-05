@@ -55,7 +55,7 @@ async function callbackQuery(bot, query) {
         homeMsg(bot, query.message)
     } else if (query.data === 'check_id') {
         bot.sendMessage(query.message.chat.id, `Your telegram ID:\n${query.message.chat.id}`)
-    } else if (guard && dev_guard) {
+    } else if (guard || dev_guard) {
         if (query.data === 'show_admins') {
             showAdmins(bot, query.message.chat.id);
         } else if (query.data === 'create_admin') {
