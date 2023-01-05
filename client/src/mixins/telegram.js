@@ -49,10 +49,13 @@ export default function () {
                     method: "POST",
                     mode: "no-cors",
                     credentials: "omit",
-                    body: JSON.stringify({'user': user, 'items': cartItems}),
+                    body: JSON.stringify({
+                        user: user,
+                        items: cartItems,
+                    }),
                     headers: {
                         "Content-Type": "application/json",
-                    }
+                    },
                 }).then(r => {
                     alert('yes')
                     resolve(r)

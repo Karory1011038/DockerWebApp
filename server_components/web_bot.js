@@ -56,10 +56,17 @@ bot.onText(/\/start/, (msg) => {
 });
 
 bot.on('message', (msg) => {
-    if (msg?.web_app_data?.data) {
-        handleSendData(JSON.parse(msg?.web_app_data?.data))
-    }
-})
+  if (msg?.web_app_data?.data) {
+    handleSendData(JSON.parse(msg?.web_app_data?.data), (error, status) => {
+      if (error) {
+        console.error(error);
+      } else {
+        console.log(`Data processing completed with status: ${status}`);
+      }
+    });
+  }
+});
+
 
 
 module.exports = {
