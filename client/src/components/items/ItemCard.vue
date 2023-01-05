@@ -7,7 +7,6 @@
                 :src="item.image"
                 :alt="item.name"
             >
-            <div>{{item.image}}</div>
             <div style="line-height: 20px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden">
             <span class="tg-text item-title">
             {{ item.name }}

@@ -12,7 +12,7 @@
     <div style="margin: 20px">
         <order-form @validate="changeBtnStatus"></order-form>
     </div>
-    <button @click="csl">GOOGGOGO</button>
+<!--    <button @click="csl">GOOGGOGO</button>-->
 </template>
 
 <script setup>
@@ -76,7 +76,7 @@ const csl = async () => {
                         "Content-Type": "application/json",
                     }
                 }).then(r => {
-            alert('yes')
+            // alert('yes')
         }).catch(e => {
             alert(e)
         });
