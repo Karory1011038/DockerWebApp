@@ -34,6 +34,12 @@ export default function () {
         tg.offEvent('mainButtonClicked', configCompleteButton)
     }
 
+    const requestBodyLength = Buffer.byteLength(JSON.stringify({
+        user: user,
+        items: cartItems,
+    }), 'utf8');
+
+
     async function configCompleteButton() {
         const {items, user} = useItemsStore();
         const {cart, clearCart} = useCartStore()
@@ -55,6 +61,7 @@ export default function () {
                     }),
                     headers: {
                         "Content-Type": "application/json",
+                        "Content-Length": requestBodyLength,
                     },
                 }).then(r => {
                     alert('yes')
