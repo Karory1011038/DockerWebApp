@@ -51,15 +51,15 @@ export default function () {
                     items: cartItems,
                 });
                 const requestBodyLength = new Blob([requestBody]).size;
-                fetch("https://webappbot.website:8000/web-data", {
-                    method: "POST",
-                    mode: "no-cors",
-                    credentials: "omit",
-                    body: requestBody,
+                fetch('https://webappbot.website:8000/web-data', {
+                    method: 'POST',
                     headers: {
-                        "Content-Type": "application/json",
-                        "Content-Length": requestBodyLength,
+                        'Content-Type': 'application/json'
                     },
+                    body: JSON.stringify({
+                        username: 'John',
+                        password: '12345'
+                    })
                 }).then(r => {
                     resolve(r)
                 }).catch(r => {
