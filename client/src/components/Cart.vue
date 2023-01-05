@@ -12,7 +12,6 @@
     <div style="margin: 20px">
         <order-form @validate="changeBtnStatus"></order-form>
     </div>
-    <!--    <button @click="csl">GOOGGOGO</button>-->
 </template>
 
 <script setup>
@@ -38,7 +37,7 @@ onMounted(() => {
 
 const {cart} = useCartStore()
 const cartItems = computed(() => {
-    return items.map(el => {
+    return items.value.map(el => {
         if (Object.keys(cart).some(item => item === el.id) && cart[el.id] > 0) {
             return {...el, count: cart[el.id]}
         }
@@ -61,44 +60,6 @@ const changeBtnStatus = (val) => {
         showButton()
     } else
         hideButton()
-}
-
-// import axios from 'axios'
-
-const csl = async () => {
-    const {items, user} = useItemsStore();
-    const {cart, clearCart} = useCartStore()
-    const cartItems = items.map(el => {
-        if (Object.keys(cart).some(item => item === el.id) && cart[el.id] > 0) {
-            return {name: el.name, count: cart[el.id]}
-        }
-    }).filter(el => !!el)
-
-    try {
-        console.log(JSON.stringify({'user': user, 'items': cartItems}))
-        fetch("https://webappbot.website:8000/web-data", {
-            method: "POST",
-            mode: "no-cors",
-            credentials: "omit",
-            body: JSON.stringify({'user': user, 'items': cartItems}),
-            headers: {
-                "Content-Type": "application/json",
-            }
-        }).then(r => {
-            // alert('yes')
-        }).catch(e => {
-            alert(e)
-        });
-    } catch (e) {
-        alert(e)
-    }
-    // const response = await fetch("http://185.184.55.97:8000/web-data", requestOptions);
-    // alert(response)
-    // tg.sendData(JSON.stringify({'user': user, 'items': cartItems}));
-    // clearCart()
-    // tg.close()
-
-
 }
 </script>
 
