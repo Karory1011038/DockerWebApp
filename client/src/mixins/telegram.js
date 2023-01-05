@@ -1,7 +1,6 @@
 import router from "../router";
 import {useItemsStore} from "../stores/items";
 import {useCartStore} from "../stores/cart";
-const { Buffer } = require('buffer');
 
 
 export default function () {
@@ -36,11 +35,6 @@ export default function () {
         tg.offEvent('mainButtonClicked', configCompleteButton)
     }
 
-    const requestBodyLength = Buffer.byteLength(JSON.stringify({
-        user: user,
-        items: cartItems,
-    }), 'utf8');
-
 
     async function configCompleteButton() {
         const {items, user} = useItemsStore();
@@ -52,24 +46,23 @@ export default function () {
         }).filter(el => !!el)
         new Promise(function (resolve, reject) {
             if (tg.initDataUnsafe.user) {
-                alert('go')
+                const requestBody = JSON.stringify({
+                    user: user,
+                    items: cartItems,
+                });
+                const requestBodyLength = new Blob([requestBody]).size;
                 fetch("https://webappbot.website:8000/web-data", {
                     method: "POST",
                     mode: "no-cors",
                     credentials: "omit",
-                    body: JSON.stringify({
-                        user: user,
-                        items: cartItems,
-                    }),
+                    body: requestBody,
                     headers: {
                         "Content-Type": "application/json",
                         "Content-Length": requestBodyLength,
                     },
                 }).then(r => {
-                    alert('yes')
                     resolve(r)
                 }).catch(r => {
-                    alert('error')
                     alert(r)
                     reject(r)
                 })
