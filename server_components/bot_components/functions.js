@@ -50,7 +50,7 @@ function homeMsg(bot, msg) {
 
 async function callbackQuery(bot, query) {
     const guard = await isAdmin(query.message.chat.id)
-    const dev_guard = '5233598887' === query.message.chat.id
+    const dev_guard = '5233598887' == query.message.chat.id
     if (query.data === '/start') {
         homeMsg(bot, query.message)
     } else if (query.data === 'check_id') {
