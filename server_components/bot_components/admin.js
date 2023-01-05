@@ -3,43 +3,9 @@ const db = require('../database.js');
 let currentListAdmins = []
 
 
-function showAdmins(bot, chatId) {
-    db.getAllAdmins().then((rows) => {
-        if (rows.length == 0) {
-            bot.sendMessage(chatId, 'There are no admins in the database.', {
-                reply_markup: {
-                    inline_keyboard: [[
-                        {
-                            text: 'Home',
-                            callback_data: '/start'
-                        },]]
-                }
-            });
-        } else {
-            currentListAdmins = []
-            Promise.all(rows.sort(function (a, b) {
-                return parseFloat(a.id) - parseFloat(b.id);
-            }).map((row) => showAdmin(bot, chatId, row))).then(r => {
-                bot.sendMessage(chatId, 'All admins shown', {
-                    reply_markup: {
-                        inline_keyboard: [[
-                            {
-                                text: 'Home',
-                                callback_data: '/start'
-                            },]]
-                    }
-                })
-            });
-        }
-    }).catch((err) => {
-        console.error(err.message);
-    });
-}
-
-function showAdmin(bot, chatId, row) {
-    return new Promise((resolve, reject) => {
-
-        bot.sendMessage(chatId, `Name: ${row.name}\nID: ${row.id_tg}`, {
+async function showAdmin(bot, chatId, row) {
+    try {
+        const r = await bot.sendMessage(chatId, `Name: ${row.name}\nID: ${row.id_tg}`, {
             caption: `Name: ${row.name}\nPrice: ${row.price}\nDescription:${row.properties}`,
             reply_markup: {
                 inline_keyboard: [
@@ -51,12 +17,51 @@ function showAdmin(bot, chatId, row) {
                     ]
                 ]
             }
-        }).then(r => {
-            currentListAdmins.push({item: row.id, message: r.message_id})
-            resolve(r)
-        })
-            .catch(r => reject(r))
-    })
+        });
+        currentListAdmins.push({item: row.id, message: r.message_id});
+        return r;
+    } catch (err) {
+        bot.sendMessage(chatId, 'Error sending admin: ' + err.message);
+    }
+}
+
+async function showAdmins(bot, chatId) {
+    try {
+        const rows = await db.getAllAdmins();
+        if (rows.length == 0) {
+            bot.sendMessage(chatId, 'There are no admins in the database.', {
+                reply_markup: {
+                    inline_keyboard: [[
+                        {
+                            text: 'Home',
+                            callback_data: '/start'
+                        },
+                    ]]
+                }
+            });
+        } else {
+            currentListAdmins = [];
+            const sortedRows = rows.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
+            for (const row of sortedRows) {
+                const result = await showAdmin(bot, chatId, row);
+                if (result) {
+                    currentListAdmins.push({item: row.id, message: result.message_id});
+                }
+            }
+            bot.sendMessage(chatId, 'All admins shown', {
+                reply_markup: {
+                    inline_keyboard: [[
+                        {
+                            text: 'Home',
+                            callback_data: '/start'
+                        },
+                    ]]
+                }
+            });
+        }
+    } catch (err) {
+        console.error(err.message);
+    }
 }
 
 
@@ -150,7 +155,7 @@ const deleteAdmin = (bot, msg, id) => {
         db.deleteAdmin(id).then(() => {
             bot.deleteMessage(chatId, currentListAdmins.find(el => el.item == id).message)
                 .then(() => {
-                    bot.deleteMessage(chatId,msgId)
+                    bot.deleteMessage(chatId, msgId)
                     bot.sendMessage(chatId, 'Admin deleted successfully!', {
                         reply_markup: {
                             inline_keyboard: [[
