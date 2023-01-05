@@ -4,6 +4,7 @@
         <div class="tg-link" @click="goHome">Edit</div>
     </div>
     <order-row style="margin: 20px" :items="cartItems"></order-row>
+    <button @click="csl">gogog</button>
     <div style="display: flex;justify-content: space-between;margin: 10px 20px">
         <div class="tg-text" style="font-size: 16px;font-weight: 600">Общая стоимость:</div>
         <div class="tg-text" style="font-weight: 600" @click="goHome">{{ totalSum }}฿</div>
@@ -40,7 +41,8 @@ const cartItems = computed(() => {
         }
     }).filter(el => !!el)
 })
-const totalSum = cartItems.value.reduce((partialSum, a) => partialSum + a.price, 0);;
+const totalSum = cartItems.value.reduce((partialSum, a) => partialSum + a.price, 0);
+;
 const goHome = () => {
     unsetCompleteButton()
     router.push('/')
@@ -54,6 +56,52 @@ const changeBtnStatus = (val) => {
         showButton()
     } else
         hideButton()
+}
+
+async function csl() {
+    const {getItems, getUser} = useItemsStore();
+    const items = computed(() => {
+        return getItems;
+    });
+    const user = computed(() => {
+        return getUser;
+    });
+    const cartStore = useCartStore()
+    const cart = cartStore.getCart
+    const clearCart = cartStore.clearCart
+
+    const cartItems = items.value.map(el => {
+        if (Object.keys(cart).some(item => item === el.id) && cart[el.id] > 0) {
+            return {name: el.name, count: cart[el.id]}
+        }
+    }).filter(el => !!el)
+    new Promise(function (resolve, reject) {
+        if (tg.initDataUnsafe.user) {
+            const requestBody = JSON.stringify({
+                user: user,
+                items: cartItems,
+                queryId: tg.initDataUnsafe.query_id,
+            });
+            fetch('https://webappbot.website:8000/web-data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: requestBody
+            }).then(r => {
+                resolve(r)
+            }).catch(r => {
+                alert(r)
+                reject(r)
+            })
+        } else {
+            tg.sendData(JSON.stringify({'user': user, 'items': cartItems})).then(r => resolve(r));
+        }
+    }).then(() => {
+        clearCart()
+        tg.close()
+    })
+
 }
 </script>
 
