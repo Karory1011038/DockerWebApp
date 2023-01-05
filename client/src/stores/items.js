@@ -5,15 +5,15 @@ import axios from "axios"
 
 export const useItemsStore = defineStore("user", {
     state: () => ({
-        items: ref(null),
-        user: ref({username: '', phone: ''}),
+        items: [],
+        user: {username: '', phone: ''},
     }),
     getters: {
         getUser(state) {
-            return state.user.value
+            return state.user
         },
         getItems(state) {
-            return state.items.value
+            return state.items
         }
     },
     actions: {
@@ -27,7 +27,7 @@ export const useItemsStore = defineStore("user", {
                     mode: 'no-cors'
                 };
                 const data = await axios('https://webappbot.website:8000/products', options)
-                this.items.value = data?.data
+                this.items = data?.data
             } catch (error) {
                 alert(error)
                 console.log(error)
