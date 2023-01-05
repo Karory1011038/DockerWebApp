@@ -20,9 +20,9 @@ function createOrderMessage(data) {
 
 async function handleSendData(data, callback) {
     try {
-        console.log('0')
-        const message = createOrderMessage(data);
         console.log('1')
+        const message = createOrderMessage(data);
+        console.log('2')
         await bot.answerWebAppQuery(data.queryId, {
             type: 'article',
             id: data.queryId,
@@ -31,7 +31,7 @@ async function handleSendData(data, callback) {
                 message_text: message,
             },
         });
-        console.log('2')
+        console.log('3')
         callback(null, true);
     } catch (error) {
         callback(error, false);
