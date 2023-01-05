@@ -4,7 +4,7 @@
         <div style="text-align: center">
             <img
                 style="width: 100px;height: 100px"
-                :src="item.img"
+                :src="item.image"
                 :alt="item.name"
             >
             <div>{{item.img}}</div>
