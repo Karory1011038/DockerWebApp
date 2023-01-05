@@ -24,7 +24,7 @@ const items = computed(() => {
   return store.getItems;
 });
 const user = computed(() => {
-  return store.user;
+  return store.getUser;
 });
 onMounted(() => {
   store.fetchItems();

@@ -5,11 +5,7 @@
 <script>
 import {mapState} from "pinia/dist/pinia";
 import {useCartStore} from "../../stores/cart";
-import router from "../../router";
 import telegram from "../../mixins/telegram";
-import {useItemsStore} from "../../stores/items";
-import {computed} from "vue";
-
 export default {
     name: "MainButton",
     computed: {
@@ -17,18 +13,7 @@ export default {
     },
     setup() {
         const {tg, setCompleteButton} = telegram();
-        tg.MainButton.setParams({"color": "#88B04B", 'text': 'Оформить'}); //так изменяются все параметры
-        function clickMain() {
-            const {items} = useItemsStore();
-            const {cart} = useCartStore()
-            const cartItems = items.map(el => {
-                if (Object.keys(cart).some(item => item === el.id)) {
-                    return {name: el.name, count: cart[el.id]}
-                }
-            }).filter(el => !!el)
-            tg.sendData(JSON.stringify({'user': tg.initDataUnsafe.user.username, 'items': cartItems}));
-        }
-
+        setCompleteButton()
         return {
             clickMain
         }

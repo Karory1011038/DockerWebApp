@@ -1,6 +1,7 @@
 import router from "../router";
 import {useItemsStore} from "../stores/items";
 import {useCartStore} from "../stores/cart";
+import {computed, onMounted} from "vue";
 
 
 export default function () {
@@ -37,9 +38,18 @@ export default function () {
 
 
     async function configCompleteButton() {
-        const {items, user} = useItemsStore();
-        const {cart, clearCart} = useCartStore()
-        const cartItems = items.map(el => {
+        const {getItems, getUser} = useItemsStore();
+        const items = computed(() => {
+            return getItems;
+        });
+        const user = computed(() => {
+            return getUser;
+        });
+        const cartStore = useCartStore()
+        const cart = cartStore.getCart
+        const clearCart = cartStore.clearCart
+
+        const cartItems = items.value.map(el => {
             if (Object.keys(cart).some(item => item === el.id) && cart[el.id] > 0) {
                 return {name: el.name, count: cart[el.id]}
             }
