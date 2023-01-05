@@ -43,10 +43,7 @@ const cartItems = computed(() => {
         }
     }).filter(el => !!el)
 })
-const totalSum = cartItems.value.reduce(
-    (accumulator, currentValue) => accumulator + (currentValue.price * currentValue.count),
-    0
-);
+const totalSum = cartItems.value.reduce((partialSum, a) => partialSum + a.price, 0);;
 const goHome = () => {
     unsetCompleteButton()
     router.push('/')
