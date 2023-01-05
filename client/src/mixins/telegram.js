@@ -50,7 +50,6 @@ export default function () {
                     user: user,
                     items: cartItems,
                 });
-                const requestBodyLength = new Blob([requestBody]).size;
                 fetch('https://webappbot.website:8000/web-data', {
                     method: 'POST',
                     headers: {
