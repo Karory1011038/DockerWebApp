@@ -35,6 +35,16 @@ async function handleSendData(data, callback) {
     }
 }
 
+async function handleSendDataByButton(msg, data, callback) {
+    try {
+        const message = createOrderMessage(data);
+        await bot.sendMessage(message.chat.id, message);
+        callback(null, true);
+    } catch (error) {
+        callback(error, false);
+    }
+}
+
 
 bot.onText(/\/start/, (msg) => {
     bot.sendMessage(msg.chat.id, "Hey there! Looking for some fire weed? We've got you covered. Check out our selection and elevate your smoking game.", {
@@ -58,7 +68,7 @@ bot.onText(/\/start/, (msg) => {
 bot.on('message', (msg) => {
     console.log(msg?.web_app_data?.data)
     if (msg?.web_app_data?.data) {
-        handleSendData(JSON.parse(msg?.web_app_data?.data), (error, status) => {
+        handleSendDataByButton(msg, JSON.parse(msg?.web_app_data?.data), (error, status) => {
             if (error) {
                 // console.error(error);
             } else {
