@@ -36,10 +36,10 @@ async function handleSendData(data, callback) {
 }
 
 async function handleSendDataByButton(msg, data, callback) {
-    console.log(data)
+    console.log(msg.chat.id)
     try {
-        let message = `Hello, ${data.user.username}! Your order includes the following items:\n`;
         console.log('mes')
+        let message = `Hello, ${data.user.username}! Your order includes the following items:\n`;
         data.items.forEach((item) => {
             message = message + `- ${item.name} x${item.count}\n`;
         });
