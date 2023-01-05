@@ -246,6 +246,7 @@ const deleteProduct = (bot, chatId, id) => {
                             }
                             bot.deleteMessage(chatId, currentList.find(el => el.itemId == id)?.message_id)
                                 .then(() => {
+                                    bot.deleteMessage(chatId,chatId)
                                     bot.sendMessage(chatId, 'Product deleted successfully!', {
                                         reply_markup: {
                                             inline_keyboard: [[{
