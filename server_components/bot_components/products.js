@@ -244,22 +244,20 @@ const deleteProduct = (bot, chatId, id) => {
                                 console.error(err.message);
                                 return;
                             }
-                            console.log(currentList.find(el => el.itemId == id).message_id)
-                            console.log(currentList.find(el => el.itemId == id).data)
-                            // bot.deleteMessage(chatId, currentList.find(el => el.itemId == id))
-                            //     .then(() => {
-                            //         bot.sendMessage(chatId, 'Product deleted successfully!', {
-                            //             reply_markup: {
-                            //                 inline_keyboard: [{
-                            //                     text: 'Home', callback_data: '/start'
-                            //                 },]
-                            //             }
-                            //         });
-                            //     })
-                            //     .catch((error) => {
-                            //         bot.sendMessage(chatId, 'Product message error!');
-                            //         console.error(error);
-                            //     });
+                            bot.deleteMessage(chatId, currentList.find(el => el.itemId == id)?.message_id)
+                                .then(() => {
+                                    bot.sendMessage(chatId, 'Product deleted successfully!', {
+                                        reply_markup: {
+                                            inline_keyboard: [{
+                                                text: 'Home', callback_data: '/start'
+                                            },]
+                                        }
+                                    });
+                                })
+                                .catch((error) => {
+                                    bot.sendMessage(chatId, 'Product message error!');
+                                    console.error(error);
+                                });
                         });
                     } else {
                         bot.sendMessage(chatId, 'Product image file not found.');
