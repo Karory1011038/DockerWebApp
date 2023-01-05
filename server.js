@@ -26,7 +26,9 @@ const credentials = {key: privateKey, cert: certificate};
 app.get('/products', getAllProducts);
 
 app.post('/web-data', (req, res) => {
+    console.log(req.body)
     const data = JSON.parse(req.body)
+    console.log(data)
     if (data && data.user) {
         handleSendData(data, (error, status) => {
             if (error) {
