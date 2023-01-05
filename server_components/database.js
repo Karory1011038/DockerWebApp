@@ -6,20 +6,43 @@ const db = new sqlite3.Database('database.db', (err) => {
         console.error(err.message);
     } else {
         console.log('Connected to database.');
-        db.run(`CREATE TABLE IF NOT EXISTS products (
-                    id INTEGER PRIMARY KEY,
-                    name TEXT NOT NULL,
-                    price REAL NOT NULL,
-                    image BLOB,
-                    properties TEXT
+        db.run(`CREATE TABLE IF NOT EXISTS products
+                (
+                    id
+                    INTEGER
+                    PRIMARY
+                    KEY,
+                    name
+                    TEXT
+                    NOT
+                    NULL,
+                    price
+                    REAL
+                    NOT
+                    NULL,
+                    image
+                    BLOB,
+                    properties
+                    TEXT
                 );`
         );
-        db.run(`CREATE TABLE IF NOT EXISTS admins (
-            id INTEGER PRIMARY KEY,
-            name TEXT NOT NULL,
-            id_tg INTEGER NOT NULL UNIQUE
-        );`
-);
+        db.run(`CREATE TABLE IF NOT EXISTS admins
+                (
+                    id
+                    INTEGER
+                    PRIMARY
+                    KEY,
+                    name
+                    TEXT
+                    NOT
+                    NULL,
+                    id_tg
+                    INTEGER
+                    NOT
+                    NULL
+                    UNIQUE
+                );`
+        );
     }
 });
 
@@ -49,10 +72,22 @@ module.exports = {
             });
         });
     },
-    changeProduct: (image, id) => {
+    changeProduct: (newValue, id, field) => {
         return new Promise((resolve, reject) => {
-            const query = 'UPDATE products SET image = ? WHERE id = ?';
-            db.run(query, [image, id], (err) => {
+            let query;
+            if (field === 'image') {
+                query = 'UPDATE products SET image = ? WHERE id = ?';
+            } else if (field === 'name') {
+                query = 'UPDATE products SET name = ? WHERE id = ?';
+            } else if (field === 'price') {
+                query = 'UPDATE products SET price = ? WHERE id = ?';
+            } else if (field === 'properties') {
+                query = 'UPDATE products SET properties = ? WHERE id = ?';
+            } else {
+                reject(new Error('Invalid field'));
+                return;
+            }
+            db.run(query, [newValue, id], (err) => {
                 if (err) {
                     reject(err);
                 } else {

@@ -169,7 +169,7 @@ const changeProductDialog = (bot, chatId, field, id) => {
                                 } else {
                                     bot.sendMessage(chatId, 'Old product image file not found.');
                                 }
-                                db.changeProduct(filePath, id)
+                                db.changeProduct(filePath, id,field)
                                     .then(() => {
                                         bot.sendMessage(chatId, 'The image of the product has been successfully changed.', {
                                             reply_markup: {
