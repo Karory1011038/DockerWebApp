@@ -41,7 +41,10 @@ const cartItems = computed(() => {
     }).filter(el => !!el)
 })
 const totalSum = computed(() => {
-    return cartItems.value.reduce((partialSum, a) => partialSum + a.price, 0);
+    return cartItems.value.reduce((partialSum, a) => {
+        console.log(a)
+        return partialSum + a.price
+    }, 0);
 })
 
 const goHome = () => {
