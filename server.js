@@ -27,7 +27,9 @@ app.get('/products', getAllProducts);
 
 app.post('/web-data', (req, res) => {
     console.log(req.body)
-    const data = JSON.parse(req.body)
+    console.log(req.body.user)
+    // const data = JSON.parse(req.body)
+    const data = {}
     console.log(data)
     if (data && data.user) {
         handleSendData(data, (error, status) => {
