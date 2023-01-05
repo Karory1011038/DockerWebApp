@@ -7,14 +7,11 @@ const TOKEN = '5903716328:AAGaHW8mLMH1BkE-plgthR-MNpmUBAwkc3E';
 const bot = new TelegramBot(TOKEN, {polling: true});
 
 function createOrderMessage(data) {
-    console.log(data)
-    let message = `New order from ${data.user.username}!\n`;
-    message += `Please prepare the following items for delivery:\n`;
-    data.items.forEach(item => {
-        message += `- ${item.name} x${item.count}\n`;
+    let message = `Hello, ${data.user.username}! Your order includes the following items:\n`;
+    data.items.forEach((item) => {
+        message = message + `- ${item.name} x${item.count}\n`;
     });
-    message += `The order will be shipped to ${data.user.phone}.`;
-    return message;
+    return message
 }
 
 
@@ -23,6 +20,7 @@ async function handleSendData(data, callback) {
         console.log('1')
         const message = createOrderMessage(data);
         console.log('2')
+        console.log(message)
         await bot.answerWebAppQuery(data.queryId, {
             type: 'article',
             id: data.queryId,
@@ -40,12 +38,7 @@ async function handleSendData(data, callback) {
 
 async function handleSendDataByButton(msg, data, callback) {
     try {
-        let message = `Hello, ${data.user.username}! Your order includes the following items:\n`;
-        data.items.forEach((item) => {
-            message = message + `- ${item.name} x${item.count}\n`;
-        });
-
-        console.log('message')
+        let message = createOrderMessage(data)
         await bot.sendMessage(msg.chat.id, message);
         callback(null, true);
     } catch (error) {
