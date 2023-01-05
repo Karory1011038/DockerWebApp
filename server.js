@@ -3,9 +3,11 @@ const app = express();
 const https = require('https');
 const {getAllProducts} = require('./server_components/backend');
 const cors = require('cors');
-app.use(express.json())
+// app.use(express.json())
 const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json());
 
 
