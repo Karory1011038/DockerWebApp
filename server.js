@@ -25,24 +25,33 @@ function createOrderMessage(data) {
     return message;
 }
 
-
-app.get('/products', getAllProducts);
-
-app.post('/web-data', async (req, res) => {
-    const data = JSON.parse(req.body);
+async function handleSendData(data) {
     try {
-        let res = createOrderMessage(data)
+        const message = createOrderMessage(data);
         await web_bot.answerWebAppQuery(data.queryId, {
             type: 'article',
             id: data.queryId,
             title: 'Success',
             input_message_content: {
-                message_text: res
+                message_text: message
             }
-        })
-        return res.status(200).json({});
+        });
+        return {status: 200, data: {}};
     } catch (e) {
-        return res.status(500).json({})
+        return {status: 500, data: {}};
+    }
+}
+
+
+app.get('/products', getAllProducts);
+
+app.post('/web-data', async (req, res) => {
+    await handleSendData(JSON.parse(req.body))
+})
+
+bot.on('message', (msg) => {
+    if (msg?.web_app_data?.data) {
+        handleSendData(JSON.parse(msg?.web_app_data?.data))
     }
 })
 

@@ -27,11 +27,7 @@ bot.onText(/\/start/, (msg) => {
 });
 
 
-bot.on('message', (msg) => {
-    if (msg.text) {
-        // homeMsg(bot, msg)
-    }
-})
+
 
 module.exports = {
     bot
