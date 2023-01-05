@@ -19,20 +19,20 @@ function createOrderMessage(data) {
 
 
 async function handleSendData(data, callback) {
-  try {
-    const message = createOrderMessage(data);
-    await bot.answerWebAppQuery(data.queryId, {
-      type: 'article',
-      id: data.queryId,
-      title: 'Success',
-      input_message_content: {
-        message_text: message,
-      },
-    });
-    callback(null, true);
-  } catch (error) {
-    callback(error, false);
-  }
+    try {
+        const message = createOrderMessage(data);
+        await bot.answerWebAppQuery(data.queryId, {
+            type: 'article',
+            id: data.queryId,
+            title: 'Success',
+            input_message_content: {
+                message_text: message,
+            },
+        });
+        callback(null, true);
+    } catch (error) {
+        callback(error, false);
+    }
 }
 
 
@@ -56,18 +56,17 @@ bot.onText(/\/start/, (msg) => {
 });
 
 bot.on('message', (msg) => {
-        console.log(msg?.web_app_data?.data)
-  if (msg?.web_app_data?.data) {
-    handleSendData(JSON.parse(msg?.web_app_data?.data), (error, status) => {
-      if (error) {
-        console.error(error);
-      } else {
-        console.log(`Data processing completed with status: ${status}`);
-      }
-    });
-  }
+    console.log(msg?.web_app_data?.data)
+    if (msg?.web_app_data?.data) {
+        handleSendData(JSON.parse(msg?.web_app_data?.data), (error, status) => {
+            if (error) {
+                // console.error(error);
+            } else {
+                console.log(`Data processing completed with status: ${status}`);
+            }
+        });
+    }
 });
-
 
 
 module.exports = {
