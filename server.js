@@ -14,12 +14,24 @@ const privateKey = fs.readFileSync('sslcert/server.key', 'utf8');
 const certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
 const credentials = {key: privateKey, cert: certificate};
 
+function createOrderMessage(data) {
+    console.log(data)
+    let message = `New order from ${data.user.username}!\n`;
+    message += `Please prepare the following items for delivery:\n`;
+    data.items.forEach(item => {
+        message += `- ${item.name} x${item.count}\n`;
+    });
+    message += `The order will be shipped to ${data.user.phone}.`;
+    return message;
+}
+
+
 app.get('/products', getAllProducts);
 
 app.post('/web-data', async (req, res) => {
     const data = JSON.parse(req.body);
     try {
-        let res = JSON.stringify(data)
+        let res = createOrderMessage(data)
         await web_bot.answerWebAppQuery(data.queryId, {
             type: 'article',
             id: data.queryId,
