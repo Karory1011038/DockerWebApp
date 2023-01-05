@@ -26,9 +26,9 @@ const credentials = {key: privateKey, cert: certificate};
 app.get('/products', getAllProducts);
 
 app.post('/web-data', (req, res) => {
-    console.log(req.body)
-    if (req.body && req.body.username) {
-        handleSendData(req.body, (error, status) => {
+    const data = JSON.parse(req.body)
+    if (data && data.user) {
+        handleSendData(data, (error, status) => {
             if (error) {
                 console.error(error);
                 res.status(500).send('Error processing data');
