@@ -4,6 +4,9 @@ const https = require('https');
 const {getAllProducts} = require('./server_components/backend');
 const cors = require('cors');
 app.use(express.json())
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended: true}));
+
 app.use(cors({origin: 'https://webappbot.website', credentials: true}));
 
 const {bot} = require('./server_components/bot');
@@ -20,7 +23,7 @@ app.get('/products', getAllProducts);
 
 app.post('/web-data', (req, res) => {
     console.log(req.body)
-    if (req.body?.username) {
+    if (req.body && req.body.username) {
         handleSendData(req.body, (error, status) => {
             if (error) {
                 console.error(error);
