@@ -1,63 +1,41 @@
-import {ref, computed} from 'vue'
+import {ref} from 'vue'
 import {defineStore} from 'pinia'
-import telegram from "./../mixins/telegram";
+// Import axios to make HTTP requests
+import axios from "axios"
 
-export const useItemsStore = defineStore('items', () => {
-    const items = ref([
-    {
-        id: '1e',
-        name: 'Jack Reaper',
-        receive: 20,
-        price: 500,
-        img: 'https://reefdispensaries.com/wp-content/uploads/2018/05/REEFMarch2018MatureStrains_JackHerer-0775.jpg',
-        info: 'testInfo',
+export const useItemsStore = defineStore("user", {
+    state: () => ({
+        items: ref([]),
+        user: ref({username: '', phone: ''}),
+    }),
+    getters: {
+        getUser(state) {
+            return state.user.value
+        },
+        getItems(state) {
+            return state.items.value
+        }
     },
-    {
-        id: '2e',
-        name: 'White Widow',
-        receive: 20,
-        price: 500,
-        img: 'https://reefdispensaries.com/wp-content/uploads/2018/05/REEFMarch2018MatureStrains_JackHerer-0775.jpg',
-        info: 'testInfo',
+    actions: {
+        async fetchItems() {
+            try {
+                const options = {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    mode: 'no-cors'
+                };
+                const data = await axios('https://webappbot.website:8000/products', options)
+                console.log(data)
+                this.items.value = data.data
+            } catch (error) {
+                alert(error)
+                console.log(error)
+            }
+        },
+        setUser(val) {
+            this.user.value = val
+        }
     },
-    {
-        id: '3e',
-        name: 'Amnesia',
-        receive: 20,
-        price: 500,
-        img: 'https://reefdispensaries.com/wp-content/uploads/2018/05/REEFMarch2018MatureStrains_JackHerer-0775.jpg',
-        info: 'testInfo',
-    },
-    {
-        id: '4e',
-        name: 'Jack Reaper',
-        receive: 20,
-        price: 500,
-        img: 'https://reefdispensaries.com/wp-content/uploads/2018/05/REEFMarch2018MatureStrains_JackHerer-0775.jpg',
-        info: 'testInfo',
-    },
-    {
-        id: '5e',
-        name: 'White Widow',
-        receive: 20,
-        price: 500,
-        img: 'https://reefdispensaries.com/wp-content/uploads/2018/05/REEFMarch2018MatureStrains_JackHerer-0775.jpg',
-        info: 'testInfo',
-    },
-    {
-        id: '6e',
-        name: 'Amnesia',
-        receive: 20,
-        price: 500,
-        img: 'https://reefdispensaries.com/wp-content/uploads/2018/05/REEFMarch2018MatureStrains_JackHerer-0775.jpg',
-        info: 'testInfo',
-    },
-])
-    const user = ref({username:'',phone:''})
-
-    const setUser = (val) => {
-        user.value = val
-    }
-
-    return {items,setUser,user}
 })
