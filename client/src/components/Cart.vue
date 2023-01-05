@@ -6,7 +6,7 @@
     <order-row style="margin: 20px" :items="cartItems"></order-row>
     <div style="display: flex;justify-content: space-between;margin: 10px 20px">
         <div class="tg-text" style="font-size: 16px;font-weight: 600">Общая стоимость:</div>
-        <div class="tg-text" style="font-weight: 600" @click="goHome">{{ totalSum() }}฿</div>
+        <div class="tg-text" style="font-weight: 600" @click="goHome">{{ totalSum }}฿</div>
     </div>
     <div style="margin: 20px">
         <order-form @validate="changeBtnStatus"></order-form>
@@ -40,7 +40,9 @@ const cartItems = computed(() => {
         }
     }).filter(el => !!el)
 })
-const totalSum = cartItems.value.reduce((partialSum, a) => partialSum + a.price, 0);
+const totalSum = computed(() => {
+    return cartItems.value.reduce((partialSum, a) => partialSum + a.price, 0);
+})
 
 const goHome = () => {
     unsetCompleteButton()
