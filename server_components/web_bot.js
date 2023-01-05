@@ -18,26 +18,21 @@ function createOrderMessage(data) {
 }
 
 
-async function handleSendData(data) {
-    try {
-        const message = createOrderMessage(data);
-        bot.answerWebAppQuery(data.queryId, {
-            type: 'article',
-            id: data.queryId,
-            title: 'Success',
-            input_message_content: {
-                message_text: message
-            }
-        })
-            .then(() => {
-                return true;
-            })
-            .catch(() => {
-                return false;
-            })
-    } catch (e) {
-        return false;
-    }
+async function handleSendData(data, callback) {
+  try {
+    const message = createOrderMessage(data);
+    await bot.answerWebAppQuery(data.queryId, {
+      type: 'article',
+      id: data.queryId,
+      title: 'Success',
+      input_message_content: {
+        message_text: message,
+      },
+    });
+    callback(null, true);
+  } catch (error) {
+    callback(error, false);
+  }
 }
 
 

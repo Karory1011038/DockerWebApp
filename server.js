@@ -18,11 +18,18 @@ const credentials = {key: privateKey, cert: certificate};
 
 app.get('/products', getAllProducts);
 
-app.post('/web-data', async (req, res) => {
-    console.log(req.body)
-    const status = await handleSendData(req.body)
-    res.status(status ? 200 : 500);
-})
+app.post('/web-data', (req, res) => {
+  console.log(req.body);
+  handleSendData(req.body, (error, status) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Error processing data');
+    } else {
+      res.status(status ? 200 : 500).send('Data received and processed successfully');
+    }
+  });
+});
+
 
 
 const httpsServer = https.createServer(credentials, app);
