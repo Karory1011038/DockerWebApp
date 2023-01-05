@@ -227,7 +227,9 @@ function confirmDeleteProduct(bot, chatId, id) {
         });
 }
 
-const deleteProduct = (bot, chatId, id) => {
+const deleteProduct = (bot, msg, id) => {
+    const chatId = msg.chat.id
+    const msgId = msg.message_id
     db.getProduct(id)
         .then((row) => {
             if (!row) {
@@ -246,7 +248,7 @@ const deleteProduct = (bot, chatId, id) => {
                             }
                             bot.deleteMessage(chatId, currentList.find(el => el.itemId == id)?.message_id)
                                 .then(() => {
-                                    bot.deleteMessage(chatId,chatId)
+                                    bot.deleteMessage(chatId,msgId)
                                     bot.sendMessage(chatId, 'Product deleted successfully!', {
                                         reply_markup: {
                                             inline_keyboard: [[{

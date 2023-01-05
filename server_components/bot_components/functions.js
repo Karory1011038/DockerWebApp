@@ -73,7 +73,7 @@ async function callbackQuery(bot, query) {
             }
         } else if (query.data.startsWith('delete_product_')) {
             const id = query.data.split('_')[2];
-            deleteProduct(bot, query.message.chat.id, id);
+            deleteProduct(bot, query.message, id);
         } else if (query.data.startsWith('confirm_delete_product_')) {
             const id = query.data.split('_')[3];
             confirmDeleteProduct(bot, query.message.chat.id, id);
