@@ -248,9 +248,9 @@ const deleteProduct = (bot, chatId, id) => {
                                 .then(() => {
                                     bot.sendMessage(chatId, 'Product deleted successfully!', {
                                         reply_markup: {
-                                            inline_keyboard: [{
+                                            inline_keyboard: [[{
                                                 text: 'Home', callback_data: '/start'
-                                            },]
+                                            },]]
                                         }
                                     });
                                 })
