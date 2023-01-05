@@ -47,7 +47,7 @@ function showProduct(bot, chatId, row) {
                 }]]
             }
         }).then(r => {
-            resolve(r)
+            resolve({...r,itemId:row.id})
         })
             .catch(r => reject(r))
     })
@@ -245,9 +245,9 @@ const deleteProduct = (bot, chatId, id) => {
                                 return;
                             }
                             console.log(currentList.find(el => {
-                                console.log(el)
-                                // console.log(el.from.id == chatId)
-                                // console.log(chatId)
+                                console.log(el.itemId)
+                                console.log(el.itemId == id)
+                                console.log(id)
                                 return el.date == id
                             }))
                             // bot.deleteMessage(chatId, currentList.find(el => el.id === id))
