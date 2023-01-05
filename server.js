@@ -5,7 +5,9 @@ const {getAllProducts} = require('./server_components/backend');
 const cors = require('cors');
 app.use(express.json())
 const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 
 app.use(cors({origin: 'https://webappbot.website', credentials: true}));
 
