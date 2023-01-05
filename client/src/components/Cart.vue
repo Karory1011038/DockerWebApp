@@ -6,6 +6,7 @@
     <order-row style="margin: 20px" :items="cartItems"></order-row>
     {{ cartItems }}
     {{items}}
+    {{cart}}
     <div style="display: flex;justify-content: space-between;margin: 10px 20px">
         <div class="tg-text" style="font-size: 16px;font-weight: 600">Общая стоимость:</div>
         <div class="tg-text" style="font-weight: 600" @click="goHome">{{ totalSum }}฿</div>
