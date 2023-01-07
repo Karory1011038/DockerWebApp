@@ -51,12 +51,12 @@ bot.onText(/\/start/, (msg) => {
     bot.sendMessage(msg.chat.id, "Hey there! Looking for some fire weed? We've got you covered. Check out our selection and elevate your smoking game.", {
         reply_markup: {
             keyboard: [
-                [{text: 'Get your weed here', web_app: {url: webAppUrl}}]
+                [{text: ' > press here to start shopping <', web_app: {url: webAppUrl}}]
             ],
         }
     }).then(r => console.log(r))
         .catch(r => console.log(r))
-    bot.sendMessage(msg.chat.id, "Click here", {
+    bot.sendMessage(msg.chat.id, "click the window below to start", {
         reply_markup: {
             inline_keyboard: [
                 [{text: "Shop 'til you drop, baby", web_app: {url: webAppUrl}}]
