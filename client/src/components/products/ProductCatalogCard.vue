@@ -1,7 +1,7 @@
 <template>
     <div class="product-catalog-card-card">
         <transition name="bounce">
-            <div :key="cart[String(product.id)]" v-if="cart[String(product.id)]" class="product-catalog-card-circle">
+            <div :key="cart[String(product.id)]" v-show="cart[String(product.id)]" class="product-catalog-card-circle">
                 {{ cart[String(product.id)] }}
             </div>
         </transition>
@@ -41,8 +41,9 @@
 <script setup>
 import {useCartStore} from "../../stores/cart";
 import {onMounted, ref, watch} from "vue";
-import tg from '../../telegram/telegram'
+import telegram from '../../telegram/telegram'
 
+const tg = telegram()
 const props = defineProps({
     product: {
         type: Object,
