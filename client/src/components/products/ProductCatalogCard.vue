@@ -41,7 +41,7 @@
 <script setup>
 import {useCartStore} from "../../stores/cart";
 import {onMounted, ref, watch} from "vue";
-import tg from '../../telegram/telegram'
+import {tg} from '../../telegram/telegram'
 
 const props = defineProps({
     product: {
