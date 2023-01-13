@@ -104,7 +104,8 @@ watch(isCartFilled,(val) => {
     max-width: 100%;
     height: 25px;
     margin: 0;
-    font-size: 1.4em;
+    padding: 0 15px;
+    font-size: 1.2em;
     font-weight: 500;
     color: #FFFFFF;
     text-align: center;
