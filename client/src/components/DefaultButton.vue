@@ -1,6 +1,6 @@
 <template>
     <button @click="emit" :style="{'background-color':color}" class="tg-button" :class="customClass">
-        {{ text }}
+        <span class="tg-text">{{ text }}</span>
     </button>
 </template>
 

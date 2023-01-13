@@ -11,9 +11,7 @@
 
 <script>
 import OrderFormInput from "./OrderFormInput.vue";
-import {ref} from "vue";
-import telegram from "../../../mixins/telegram";
-
+import telegram from '../telegram/telegram'
 export default {
     name: "OrderForm",
     components: {OrderFormInput},
