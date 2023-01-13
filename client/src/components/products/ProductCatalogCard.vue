@@ -53,7 +53,6 @@ const props = defineProps({
     }
 })
 const cart = useCartStore().getCart
-const isCartFilled = useCartStore().cartFilled
 
 function addProduct(product) {
     cart[product.id] = cart[product.id] ? cart[product.id] + 1 : 1
@@ -65,14 +64,6 @@ function deleteProduct(product) {
     localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-function setButton(val){
-    val ? tg.MainButton.show() : tg.MainButton.hide()
-}
-
-watch(isCartFilled, setButton);
-onMounted(() =>{
-    setButton(isCartFilled)
-})
 
 </script>
 

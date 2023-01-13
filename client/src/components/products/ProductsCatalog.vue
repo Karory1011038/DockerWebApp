@@ -1,4 +1,4 @@
-<template>
+`<template>
     <div class="products-row">
         <div v-for="(product,index) in products" :key="index">
             <product-catalog-card @click="toProduct(product.id)" :product="product"></product-catalog-card>
@@ -8,12 +8,15 @@
 
 <script setup>
 import ProductCatalogCard from "./ProductCatalogCard.vue";
-import {computed} from "vue";
+import {computed, watch} from "vue";
 import { onMounted } from 'vue'
 import {useProductsStore} from "../../stores/products";
 import router from "../../router";
+import {useCartStore} from "../../stores/cart";
 const productsStore = useProductsStore()
+import telegram from '../../telegram/telegram'
 
+const {tg} = telegram()
 const products = computed(() => {
     return productsStore.getProducts;
 });
@@ -21,8 +24,16 @@ const products = computed(() => {
 const toProduct = (id) =>{
     router.push({ name: 'product', params: { id: id } })
 }
+const isCartFilled = useCartStore().cartFilled
 
+function setButton(val){
+    val ? tg.MainButton.show() : tg.MainButton.hide()
+}
+
+watch(isCartFilled, (val) => setButton(val));
 onMounted(() => {
+        setButton(isCartFilled)
+
     productsStore.fetchProducts()
 })
 </script>
@@ -35,4 +46,4 @@ onMounted(() => {
     justify-content: space-evenly;
     margin-top: 10px;
 }
-</style>
+</style>`
