@@ -39,9 +39,10 @@
 
 <script setup>
 import {useCartStore} from "../../stores/cart";
-import {ref} from "vue";
-import DefaultButton from "../DefaultButton.vue";
+import {ref, watch} from "vue";
+import telegram from '../../telegram/telegram'
 
+const {tg} = telegram()
 const props = defineProps({
     product: {
         type: Object,
@@ -54,14 +55,17 @@ const cart = useCartStore().getCart
 const isCartFilled = useCartStore().cartFilled
 
 function addProduct(product) {
-    this.cart[product.id] = this.cart[product.id] ? this.cart[product.id] + 1 : 1
+    cart[product.id] = this.cart[product.id] ? this.cart[product.id] + 1 : 1
     localStorage.setItem('cart', JSON.stringify(this.cart));
 }
 
 function deleteProduct(product) {
-    this.cart[product.id] = this.cart[product.id] ? this.cart[product.id] - 1 : 0
+    cart[product.id] = this.cart[product.id] ? this.cart[product.id] - 1 : 0
     localStorage.setItem('cart', JSON.stringify(this.cart));
 }
+watch(isCartFilled,(val) => {
+      val ? tg.MainButton.show() : tg.MainButton.hide()
+    });
 
 
 </script>
