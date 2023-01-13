@@ -35,7 +35,7 @@ function setButton(val) {
     val.value ? tg.MainButton.show() : tg.MainButton.hide()
 }
 
-watch(isCartFilled.value, (val) => setButton(val));
+watch(isCartFilled, (val) => setButton(val));
 onMounted(() => {
     setButton(isCartFilled)
     productsStore.fetchProducts()
