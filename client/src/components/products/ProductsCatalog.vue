@@ -15,6 +15,8 @@ import {useProductsStore} from "../../stores/products";
 import router from "../../router";
 import {useCartStore} from "../../stores/cart";
 
+const {isCartFilled} = useCartStore()
+
 const productsStore = useProductsStore()
 import telegram from '../../telegram/telegram'
 
@@ -26,9 +28,6 @@ const products = computed(() => {
 const toProduct = (id) => {
     router.push({name: 'product', params: {id: id}})
 }
-const isCartFilled = computed(() => {
-    return useCartStore().cartFilled
-});
 
 function setButton(val) {
     console.log(val)
@@ -37,7 +36,7 @@ function setButton(val) {
 
 watch(isCartFilled, (val) => setButton(val));
 onMounted(() => {
-    setButton(isCartFilled)
+    setButton(isCartFilled.value)
     productsStore.fetchProducts()
 })
 </script>
