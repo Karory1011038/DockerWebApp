@@ -72,3 +72,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+button {
+  transform: scale(1);
+  transition: transform 0.2s;
+}
+
+button:active {
+  transform: scale(0.9);
+}
