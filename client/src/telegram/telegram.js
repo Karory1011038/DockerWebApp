@@ -9,6 +9,7 @@ export default function () {
     tg.isClosingConfirmationEnabled = true;
     let actualCallback = null
     tg.BackButton.onClick(function () {
+        tg.offEvent('mainButtonClicked', actualCallback)
         router.push('/')
     })
 
