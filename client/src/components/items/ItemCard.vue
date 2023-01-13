@@ -54,7 +54,7 @@ export default {
         ...mapState(useCartStore, ['cart']),
     },
     methods: {
-        emit(ev) {const props = defineProps(['foo'])
+        emit(ev) {
             this.$emit(ev)
         }
     }

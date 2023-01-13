@@ -28,7 +28,6 @@ export default {
     },
     methods: {
         ...mapActions(useCartStore, ['addItem', 'deleteItem']),
-        changeButtonStatus(val){}
     },
     watch: {
         cartFilled: {
