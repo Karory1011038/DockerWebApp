@@ -104,6 +104,7 @@ export default function () {
     return {
         tg,
         setMainButton,
+        actualCallback,
         initHomeButtons,
         initProductButtons,
         initCartButtons,

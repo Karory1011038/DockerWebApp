@@ -26,7 +26,9 @@ const products = computed(() => {
 const toProduct = (id) => {
     router.push({name: 'product', params: {id: id}})
 }
-const isCartFilled = useCartStore().cartFilled
+const isCartFilled = computed(() => {
+    return useCartStore().cartFilled
+});
 
 function setButton(val) {
     val ? tg.MainButton.show() : tg.MainButton.hide()
@@ -34,7 +36,7 @@ function setButton(val) {
 
 watch(isCartFilled, (val) => setButton(val));
 onMounted(() => {
-    setButton(isCartFilled)
+    setButton(isCartFilled.value)
     productsStore.fetchProducts()
 })
 </script>
