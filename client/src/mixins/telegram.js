@@ -58,7 +58,14 @@ export default function () {
         })
         new Promise(function (resolve, reject) {
             if (true) {
-                tg.openInvoice('https://www.blockonomics.co/pay-url/7eb7eb00a65c4a03');
+                alert('go')
+                tg.openInvoice('https://www.blockonomics.co/pay-url/7eb7eb00a65c4a03')
+                    .then((r) => {
+                        alert(r)
+                    })
+                    .catch(e => {
+                        alert(e)
+                    })
             } else if (tg.initDataUnsafe.user) {
                 const requestBody = JSON.stringify({
                     user: user.value,
