@@ -31,11 +31,10 @@ const isCartFilled = computed(() => {
 });
 
 function setButton(val) {
-    console.log(val)
     val.value ? tg.MainButton.show() : tg.MainButton.hide()
 }
 
-watch(isCartFilled, (val) => setButton(val));
+watch(isCartFilled.value, (val) => setButton(val));
 onMounted(() => {
     setButton(isCartFilled)
     productsStore.fetchProducts()
