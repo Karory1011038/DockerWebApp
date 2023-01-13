@@ -60,7 +60,7 @@ function addProduct(product) {
 }
 
 function deleteProduct(product) {
-    cart[product.id] = cart[product.id] ? this.cart[product.id] - 1 : 0
+    cart[product.id] = cart[product.id] ? cart[product.id] - 1 : 0
     localStorage.setItem('cart', JSON.stringify(cart));
 }
 watch(isCartFilled,(val) => {
