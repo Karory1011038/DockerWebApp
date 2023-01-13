@@ -21,7 +21,7 @@ import router from "../router";
 import telegram from '../telegram/telegram'
 
 const {initProductButtons} = telegram()
-cinitProductButtons()
+initProductButtons()
 
 const productsStore = useProductsStore()
 const route = useRoute()
