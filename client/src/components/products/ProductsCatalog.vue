@@ -1,7 +1,5 @@
 <template>
     <div class="products-row">
-        {{ isCartFilled }}
-        {{ cart }}
         <div v-for="(product,index) in products" :key="index">
             <product-catalog-card @click="toProduct(product.id)" :product="product"></product-catalog-card>
         </div>
@@ -41,9 +39,9 @@ function setButton(val) {
     val.value ? tg.MainButton.show() : tg.MainButton.hide()
 }
 
-watch(isCartFilled, (val) => setButton(val));
+watch(isCartFilled.value, (val) => setButton(val));
 onMounted(() => {
-    setButton(isCartFilled.value)
+    setButton(isCartFilled)
     productsStore.fetchProducts()
 })
 </script>
