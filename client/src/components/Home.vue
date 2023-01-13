@@ -8,9 +8,9 @@
 import ProductsCatalog from "./products/ProductsCatalog.vue";
 import telegram from '../telegram/telegram'
 
-const {setMainButton, initHomeButtons} = telegram()
+const {initHomeButtons} = telegram()
 
-setMainButton(initHomeButtons)
+initHomeButtons()
 </script>
 
 <style scoped>

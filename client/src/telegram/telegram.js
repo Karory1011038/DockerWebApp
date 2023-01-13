@@ -9,18 +9,17 @@ export default function () {
     tg.isClosingConfirmationEnabled = true;
     let actualCallback = null
     tg.BackButton.onClick(function () {
-        tg.offEvent('mainButtonClicked', actualCallback)
         router.push('/')
     })
 
 //    setButtons
-    function setMainButton(initButtonFunc) {
+    function setMainButton(callback) {
         if (actualCallback) {
             tg.offEvent('mainButtonClicked', actualCallback)
             actualCallback = null
         }
-        actualCallback = initButtonFunc
-        tg.onEvent('mainButtonClicked', actualCallback);
+        actualCallback = callback
+        tg.onEvent('mainButtonClicked', callback);
     }
 
     function initHomeButtons() {
@@ -35,11 +34,14 @@ export default function () {
     function initCartButtons() {
         tg.expand()
         tg.MainButton.setParams({"color": "#88B04B", 'text': 'PLACE ORDER'}); //так изменяются все параметры
-        tg.onEvent('mainButtonClicked', placeOrder);
+        setMainButton(placeOrder)
         tg.BackButton.show()
     }
 
     function initProductButtons() {
+        setMainButton(function () {
+            router.push('/')
+        })
         tg.MainButton.hide();
         tg.BackButton.show()
     }

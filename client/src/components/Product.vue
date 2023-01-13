@@ -20,8 +20,8 @@ import {useProductsStore} from "../stores/products";
 import router from "../router";
 import telegram from '../telegram/telegram'
 
-
-telegram.initProductButtons()
+const {initProductButtons} = telegram()
+cinitProductButtons()
 
 const productsStore = useProductsStore()
 const route = useRoute()
@@ -30,7 +30,7 @@ let product = ref({})
 
 onMounted(() => {
     productsStore.getProduct(route.params.id)
-        .then(r =>{
+        .then(r => {
             product.value = r
         })
         .catch((err) => {
