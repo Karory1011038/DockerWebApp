@@ -59,7 +59,8 @@ export default function () {
         new Promise(function (resolve, reject) {
             if (true) {
                 alert('go')
-                tg.openInvoice('https://www.blockonomics.co/pay-url/7eb7eb00a65c4a03')
+                tg.openLink('https://www.blockonomics.co/pay-url/7eb7eb00a65c4a03')
+                tg.openInvoice('https://www.blockonomics.co/pay-url/7eb7eb00a65c4a03/')
                     .then((r) => {
                         alert(r)
                     })
