@@ -24,12 +24,15 @@ const {tg} = telegram()
 const products = computed(() => {
     return productsStore.getProducts;
 });
+const cart = computed(() => {
+    return cartStore.getCart;
+});
 
 const toProduct = (id) => {
     router.push({name: 'product', params: {id: id}})
 }
 const isCartFilled = computed(() => {
-    return cartStore.cartFilled
+    return Object.keys(cart.value).some(el => cart.value[el] > 0)
 });
 
 function setButton(val) {
