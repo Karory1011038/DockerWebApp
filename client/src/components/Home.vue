@@ -6,8 +6,9 @@
 
 <script setup>
 import ProductsCatalog from "./products/ProductsCatalog.vue";
-import initHomeButtons from '../telegram/telegram'
-import setMainButton  from '../telegram/telegram'
+import telegram from '../telegram/telegram'
+
+const {setMainButton, initHomeButtons} = telegram()
 
 setMainButton(initHomeButtons)
 </script>

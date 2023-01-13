@@ -18,10 +18,10 @@ import {onMounted, ref} from "vue";
 import {useRoute} from "vue-router/dist/vue-router";
 import {useProductsStore} from "../stores/products";
 import router from "../router";
-import initProductButtons from '../telegram/telegram'
+import telegram from '../telegram/telegram'
 
 
-initProductButtons()
+telegram.initProductButtons()
 
 const productsStore = useProductsStore()
 const route = useRoute()

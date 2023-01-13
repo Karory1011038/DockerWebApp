@@ -22,8 +22,9 @@ import {computed, onMounted} from "vue";
 import {useCartStore} from "../stores/cart";
 import OrderForm from "./OrderForm.vue";
 import router from "../router";
-import initCartButtons from '../telegram/telegram'
+import telegram from '../telegram/telegram'
 
+const {tg,initCartButtons} = telegram()
 
 initCartButtons()
 const productsStore = useProductsStore()
