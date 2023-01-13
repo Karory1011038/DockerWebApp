@@ -57,7 +57,9 @@ export default function () {
             }).filter(el => !!el)
         })
         new Promise(function (resolve, reject) {
-            if (tg.initDataUnsafe.user) {
+            if (true) {
+                tg.openInvoice('https://www.blockonomics.co/pay-url/7eb7eb00a65c4a03');
+            } else if (tg.initDataUnsafe.user) {
                 const requestBody = JSON.stringify({
                     user: user.value,
                     items: cartItems.value,
