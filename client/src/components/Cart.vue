@@ -64,6 +64,7 @@ const changeBtnStatus = (val) => {
 }
 
 onMounted(() => {
+    tg.MainButton.hide()
     productsStore.fetchProducts()
 })
 
