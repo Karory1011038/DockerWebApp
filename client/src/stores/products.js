@@ -21,7 +21,7 @@ export const useProductsStore = defineStore("products", {
                     mode: 'no-cors'
                 };
                 const data = await axios('https://webappbot.website:8000/products', options)
-                this.items = data?.data
+                this.products = data?.data
             } catch (error) {
                 alert(error)
                 console.log(error)
