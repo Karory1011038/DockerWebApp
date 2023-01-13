@@ -1,6 +1,6 @@
 <template>
     <div class="products-row">
-        {{isCartFilled}}
+        {{ isCartFilled }}
         <div v-for="(product,index) in products" :key="index">
             <product-catalog-card @click="toProduct(product.id)" :product="product"></product-catalog-card>
         </div>
@@ -31,6 +31,7 @@ const isCartFilled = computed(() => {
 });
 
 function setButton(val) {
+    console.log(val)
     val.value ? tg.MainButton.show() : tg.MainButton.hide()
 }
 
