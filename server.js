@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const https = require('https');
-const {getAllProducts} = require('./server_components/backend');
+const {getAllProducts,getProduct} = require('./server_components/backend');
 const cors = require('cors');
 // app.use(express.json())
 const bodyParser = require('body-parser');
@@ -24,6 +24,7 @@ const credentials = {key: privateKey, cert: certificate};
 
 
 app.get('/products', getAllProducts);
+app.get('/product/:id', getProduct);
 
 app.post('/web-data', (req, res) => {
     // const data = JSON.parse(req.body)
