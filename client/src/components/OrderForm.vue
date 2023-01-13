@@ -11,7 +11,8 @@
 
 <script>
 import OrderFormInput from "./OrderFormInput.vue";
-import telegram from '../telegram/telegram'
+import tg from '../telegram/telegram'
+
 export default {
     name: "OrderForm",
     components: {OrderFormInput},
@@ -33,7 +34,6 @@ export default {
         },
     },
     mounted() {
-        const {tg} = telegram()
         if (tg.initDataUnsafe.user)
             this.formData.username = tg.initDataUnsafe.user.username
     }

@@ -99,6 +99,7 @@ export default function () {
 
     return {
         tg,
+        setMainButton,
         initHomeButtons,
         initProductButtons,
         initCartButtons,
