@@ -1,6 +1,7 @@
 <template>
     <div class="products-row">
         {{ isCartFilled }}
+        {{ cart }}
         <div v-for="(product,index) in products" :key="index">
             <product-catalog-card @click="toProduct(product.id)" :product="product"></product-catalog-card>
         </div>
