@@ -60,7 +60,7 @@ function deleteProduct(product) {
 
 <style>
 .product-catalog-card-card {
-    background: #505160;
+    background: rgba(217, 217, 217, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
