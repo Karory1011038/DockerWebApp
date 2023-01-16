@@ -23,7 +23,7 @@ export const useProductsStore = defineStore("products", {
                     },
                     mode: 'no-cors'
                 };
-                const data = await axios('/products', options)
+                const data = await axios(webappbotBackendUrl + '/products', options)
                 this.products = data?.data
             } catch (error) {
                 // alert(error)
