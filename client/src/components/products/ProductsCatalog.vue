@@ -9,7 +9,7 @@
             No products found :c
         </div>
         <div>
-            <svg width="800px" height="800px" viewBox="0 0 64 64" id="svg5" version="1.1" xml:space="preserve"
+            <svg width="200px" height="200px" viewBox="0 0 64 64" id="svg5" version="1.1" xml:space="preserve"
                  xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
 
 <defs id="defs2"/>
