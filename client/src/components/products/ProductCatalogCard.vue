@@ -8,7 +8,7 @@
         <img :src="props.product.image" alt="Error load image"
              class="product-catalog-card-image">
         <div class="product-catalog-card-name condensed tg-text">{{ props.product.name }}</div>
-        <p class="product-catalog-card-description tg-text">{{ props.product.properties }}</p>
+        <p class="product-catalog-card-properties tg-text">{{ props.product.properties }}</p>
         <div class="button-container">
             <button :class="cart[String(product.id)]?'hidden':''" @click.stop="addProduct(props.product)"
                     id="add-button">
@@ -101,7 +101,7 @@ function deleteProduct(product) {
     /*text-overflow: ellipsis;*/
 }
 
-.product-catalog-card-description {
+.product-catalog-card-properties {
     padding: 0px 5px;
     font-weight: 300;
     font-style: normal;

@@ -5,7 +5,8 @@
         </div>
         <div class="product-info-container">
             <h1 class="product-name ff-font">{{ product.name }}</h1>
-            <p class="product-description">{{ product.properties }}</p>
+            <p class="product-properties">{{ product.properties }}</p>
+            <p class="product-description">{{ product.description }}</p>
             <div class="product-price-container">
                 <span class="product-price">{{ product.price }} ฿ / gram</span>
             </div>

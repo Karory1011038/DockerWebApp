@@ -6,7 +6,7 @@ let currentListAdmins = []
 async function showAdmin(bot, chatId, row) {
     try {
         const r = await bot.sendMessage(chatId, `Name: ${row.name}\nID: ${row.id_tg}`, {
-            caption: `Name: ${row.name}\nPrice: ${row.price}\nDescription:${row.properties}`,
+            // caption: `Name: ${row.name}\nPrice: ${row.price}\nDescription:${row.properties}`,
             reply_markup: {
                 inline_keyboard: [
                     [

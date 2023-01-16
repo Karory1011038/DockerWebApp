@@ -8,24 +8,15 @@ const db = new sqlite3.Database('database.db', (err) => {
         console.log('Connected to database.');
         db.run(`CREATE TABLE IF NOT EXISTS products
                 (
-                    id
-                    INTEGER
-                    PRIMARY
-                    KEY,
-                    name
-                    TEXT
-                    NOT
-                    NULL,
-                    price
-                    REAL
-                    NOT
-                    NULL,
-                    image
-                    BLOB,
-                    properties
-                    TEXT
+                    id INTEGER PRIMARY KEY,
+                    name TEXT NOT NULL,
+                    price REAL NOT NULL,
+                    image BLOB,
+                    properties TEXT,
+                    description TEXT
                 );`
         );
+
         db.run(`CREATE TABLE IF NOT EXISTS admins
                 (
                     id
