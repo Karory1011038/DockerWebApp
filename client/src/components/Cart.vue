@@ -8,8 +8,8 @@
     </div>
     <product-order-list style="margin: 20px" :products="cartProducts"></product-order-list>
     <div style="display: flex;justify-content: space-between;margin: 10px 20px">
-        <div class="tg-text total-label" style="font-size: 16px;font-weight: 600">Total price:</div>
-        <div class="tg-text total-price" style="font-weight: 600">{{ totalSum }} ฿</div>
+        <div class="tg-text total-label" >Total price:</div>
+        <div class="tg-text total-price" >{{ totalSum }} ฿</div>
     </div>
 
 </template>
