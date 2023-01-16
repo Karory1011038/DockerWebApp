@@ -129,6 +129,7 @@ import telegram from '../../telegram/telegram'
 const {tg} = telegram()
 const products = computed(() => {
     return productsStore.getProducts;
+    // return [{"id":1,"name":"ww","price":384,"image":"images/1673876843388.jpg","properties":"sat ind","description":"bdbdjdidifkc"}];
 });
 const cart = computed(() => {
     return cartStore.getCart;
@@ -138,7 +139,7 @@ const toProduct = (id) => {
     router.push({name: 'product', params: {id: id}})
 }
 const isCartFilled = computed(() => {
-    return Object.keys(cart.value).some(el => cart.value[el] > 0)
+    return Object.keys(cart.value).some(el => cart.value[el] > 0) && products.value.length > 0
 });
 
 function setButton(val) {
