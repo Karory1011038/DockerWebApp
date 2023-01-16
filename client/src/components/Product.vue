@@ -43,7 +43,6 @@ onMounted(() => {
 
 <style>
 .product-page-container {
-    margin-top: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
