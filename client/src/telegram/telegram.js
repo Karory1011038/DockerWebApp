@@ -55,19 +55,19 @@ export default function () {
         const user = computed(() => {
             return userStore.getUser;
         });
-        const {getCart, clearCart} = useCartStore();
+        const cartStore = useCartStore();
 
 
         const cartProducts = computed(() => {
             return products.value.map(el => {
-                if (Object.keys(getCart).some(item => item == el.id) && getCart[el.id] > 0) {
-                    return {...el, count: getCart[el.id]}
+                if (Object.keys(cartStore.getCart).some(item => item == el.id) && cartStore.getCart[el.id] > 0) {
+                    return {...el, count: cartStore.getCart[el.id]}
                 }
             }).filter(el => !!el)
         })
 
         sendOrder(user, cartProducts).then(() => {
-            clearCart()
+            cartStore.clearCart()
             tg.close()
         })
 
