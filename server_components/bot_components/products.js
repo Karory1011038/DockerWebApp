@@ -41,7 +41,7 @@ async function showProduct(bot, chatId, row) {
             image = fs.readFileSync('images/img.png');
         }
         const r = await bot.sendPhoto(chatId, image, {
-            caption: `Name: ${row.name}\nPrice: ${row.price}\nDescription:${row.properties}`,
+            caption: `Name: ${row.name}\nPrice: ${row.price}\nProperties:${row.properties}\nDescription:${row.description}`,
             reply_markup: {
                 inline_keyboard: [[{
                     text: 'Change', callback_data: `change_product_${row.id}`
@@ -94,12 +94,26 @@ const createProductDialog = (bot, chatId) => {
             const messageId = sentMessage.message_id;
             bot.onReplyToMessage(chatId, messageId, (message) => {
                 const properties = message.text;
-                askImage(name, price, properties);
+                askDescription(name, price, properties);
             });
         });
     };
 
-    const askImage = (name, price, properties) => {
+    const askDescription = (name, price, properties) => {
+        bot.sendMessage(chatId, 'Enter the description of the product:', {
+            reply_markup: {
+                force_reply: true,
+            },
+        }).then((sentMessage) => {
+            const messageId = sentMessage.message_id;
+            bot.onReplyToMessage(chatId, messageId, (message) => {
+                const description = message.text;
+                askImage(name, price, properties, description);
+            });
+        });
+    };
+
+    const askImage = (name, price, properties, description) => {
         bot.sendMessage(chatId, 'Send the image of the product:', {
             reply_markup: {
                 force_reply: true,
@@ -117,7 +131,7 @@ const createProductDialog = (bot, chatId) => {
                                 console.error(err.message);
                                 return;
                             }
-                            db.addProduct(name, price, filePath, properties)
+                            db.addProduct(name, price, filePath, properties, description)
                                 .then(() => {
                                     bot.sendMessage(chatId, 'Product created successfully!', {
                                         reply_markup: {
@@ -143,6 +157,7 @@ const createProductDialog = (bot, chatId) => {
 };
 
 const changeProductDialog = (bot, chatId, field, id) => {
+    const textFields = ['name', 'properties', 'description']
     const onReplyMessage = message => {
         if (field === 'image') {
             if (message.photo) {
@@ -193,64 +208,10 @@ const changeProductDialog = (bot, chatId, field, id) => {
             } else {
                 bot.sendMessage(chatId, 'Please send a photo of the product.');
             }
-        } else if (field === 'name') {
-            if (message.text) {
-                const newName = message.text;
-                db.getProduct(id)
-                    .then(row => {
-                        if (!row) {
-                            bot.sendMessage(chatId, 'Product not found.');
-                            return;
-                        }
-                        db.changeProduct(newName, id, field)
-                            .then(() => {
-                                bot.sendMessage(chatId, 'The name of the product has been successfully changed.', {
-                                    reply_markup: {
-                                        inline_keyboard: [[{
-                                            text: 'Home', callback_data: '/start'
-                                        },]]
-                                    }
-                                });
-                            })
-                            .catch((err) => {
-                                console.error(err.message);
-                            });
-                    })
-                    .catch((err) => {
-                        console.error(err.message);
-                    });
-            } else {
-                bot.sendMessage(chatId, 'Please enter the new name of the product as a text message.');
-            }
-        } else if (field === 'properties') {
-            if (message.text) {
-                const newProperties = message.text;
-                db.getProduct(id)
-                    .then(row => {
-                        if (!row) {
-                            bot.sendMessage(chatId, 'Product not found.');
-                            return;
-                        }
-                        db.changeProduct(newProperties, id, field)
-                            .then(() => {
-                                bot.sendMessage(chatId, 'The properties of the product have been successfully changed.', {
-                                    reply_markup: {
-                                        inline_keyboard: [[{
-                                            text: 'Home', callback_data: '/start'
-                                        },]]
-                                    }
-                                });
-                            })
-                            .catch((err) => {
-                                console.error(err.message);
-                            });
-                    })
-                    .catch((err) => {
-                        console.error(err.message);
-                    });
-            } else {
-                bot.sendMessage(chatId, 'Please enter the new properties of the product as a text message.');
-            }
+        } else if (textFields.some((el) => field == el)) {
+            editProductTextField(bot, message, field, onReplyMessage)
+        } else if (field === 'price') {
+
         }
     }
 
@@ -265,6 +226,40 @@ const changeProductDialog = (bot, chatId, field, id) => {
     });
 };
 
+function editProductTextField(bot, message, field, onReplyMessage) {
+    const chatId = message.chatId;
+    if (message.text) {
+        const newVal = message.text;
+        db.getProduct(id)
+            .then(row => {
+                if (!row) {
+                    bot.sendMessage(chatId, 'Product not found.');
+                    return;
+                }
+                db.changeProduct(newVal, id, field)
+                    .then(() => {
+                        bot.sendMessage(chatId, `The ${field} of the product has been successfully changed.`, {
+                            reply_markup: {
+                                inline_keyboard: [[{
+                                    text: 'Home', callback_data: '/start'
+                                },]]
+                            }
+                        });
+                    })
+                    .catch((err) => {
+                        console.error(err.message);
+                    });
+            })
+            .catch((err) => {
+                console.error(err.message);
+            });
+    } else {
+        bot.sendMessage(chatId, `Please enter the new ${field} of the product as a text message.`).then((sentMessage) => {
+            const messageId = sentMessage.message_id;
+            bot.onReplyToMessage(chatId, messageId, onReplyMessage);
+        });
+    }
+}
 
 function confirmDeleteProduct(bot, chatId, id) {
     db.getProduct(id)
