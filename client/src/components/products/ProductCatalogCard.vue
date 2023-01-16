@@ -16,12 +16,9 @@
             </button>
             <div :class="cart[String(product.id)]?'':'hidden'" id="counter-container">
                 <button @click.stop="deleteProduct(props.product)" id="decrement-button">
-                    <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
 <svg fill="#000000" width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2,12a1,1,0,0,1,1-1H21a1,1,0,0,1,0,2H3A1,1,0,0,1,2,12Z"/></svg>
                 </button>
                 <button @click.stop="addProduct(props.product)" id="increment-button">
-                    <?xml version="1.0" encoding="utf-8"?>
-                    <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                     <svg fill="#000000" width="14px" height="14px" viewBox="0 0 32 32" version="1.1"
                          xmlns="http://www.w3.org/2000/svg">
                         <title>plus</title>
