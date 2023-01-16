@@ -1,7 +1,7 @@
 <template>
     <div style="display: flex;justify-content: space-between;height: 64px">
         <img :src="product.image" :alt="product.name" class="order-image" style="margin-right: 10px;">
-        <div class="tg-text">
+        <div class="tg-text order-product-info">
             <span class="condensed order-product-name">{{ product.name }}</span>
             <br>
             <span class="order-product-properties">{{ product.properties }}</span>
@@ -33,7 +33,12 @@ export default {
     font-size: 16px;
     line-height: 19px;
 }
-
+.order-product-info{
+    max-width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 .order-product-properties {
     font-weight: 300;
     font-size: 14px;
