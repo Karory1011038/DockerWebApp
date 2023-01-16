@@ -138,7 +138,7 @@ const toProduct = (id) => {
     router.push({name: 'product', params: {id: id}})
 }
 const isCartFilled = computed(() => {
-    return Object.keys(cart.value).some(el => cart.value[el] > 0)
+    return Object.keys(cart.value).some(el => cart.value[el] > 0) && products > 0
 });
 
 function setButton(val) {
