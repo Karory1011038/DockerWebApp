@@ -166,6 +166,7 @@ onMounted(() => {
     productsStore.fetchProducts()
         .finally(() => {
             loading.value = false
+            window.scrollTo(0, 0);
         })
 })
 </script>
@@ -197,41 +198,41 @@ onMounted(() => {
 /*   ANIMATION   */
 
 #loading {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .loading-bar {
-  background-color: #0077C8;
-  width: 4px;
-  height: 18px;
-  margin: 0 8px;
-  border-radius: 4px;
-  animation: loading 1s ease-in-out infinite;
+    background-color: #0077C8;
+    width: 4px;
+    height: 18px;
+    margin: 0 8px;
+    border-radius: 4px;
+    animation: loading 1s ease-in-out infinite;
 }
 
 @keyframes loading {
-  0% {
-    transform: scale(1);
-  }
-  20% {
-    transform: scale(1, 3);
-  }
-  40% {
-    transform: scale(1);
-  }
+    0% {
+        transform: scale(1);
+    }
+    20% {
+        transform: scale(1, 3);
+    }
+    40% {
+        transform: scale(1);
+    }
 }
 
 .loading-bar:nth-of-type(1) {
-  animation-delay: 0.25s;
+    animation-delay: 0.25s;
 }
 
 .loading-bar:nth-of-type(2) {
-  animation-delay: 0.5s;
+    animation-delay: 0.5s;
 }
 
 .loading-bar:nth-of-type(3) {
-  animation-delay: 0.75s;
+    animation-delay: 0.75s;
 }
 
 </style>`
