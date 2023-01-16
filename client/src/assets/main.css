@@ -48,13 +48,14 @@ a {
 
 
 /*  FONTS  */
-.ff-font {
-    font-family: 'Freckle Face', cursive;
-}
 .chakra_petch {
-    font-family: 'Chakra Petch', normal;
+    font-family: 'Chakra Petch', normal, sans-serif;
+}
+
+.condensed {
+    font-family: 'Roboto Condensed', normal, sans-serif;
 }
 
 * {
-    font-family: 'Kaushan Script', cursive;
+    font-family: 'Roboto', sans-serif;
 }

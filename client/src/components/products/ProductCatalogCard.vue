@@ -7,12 +7,12 @@
         </transition>
         <img :src="props.product.image" alt="Error load image"
              class="product-catalog-card-image">
-        <div class="product-catalog-card-name ff-font">{{ props.product.name }}</div>
+        <div class="product-catalog-card-name condensed">{{ props.product.name }}</div>
         <p class="product-catalog-card-description">{{ props.product.properties }}</p>
         <div class="button-container">
             <button :class="cart[String(product.id)]?'hidden':''" @click.stop="addProduct(props.product)"
                     id="add-button">
-                <div class="product-catalog-card-price chakra_petch">{{ props.product.price }} ฿</div>
+                <div class="product-catalog-card-price chakra_petch">{{ props.product.price }} (฿)</div>
             </button>
             <div :class="cart[String(product.id)]?'':'hidden'" id="counter-container">
                 <button @click.stop="deleteProduct(props.product)" id="decrement-button">
@@ -136,7 +136,7 @@ function deleteProduct(product) {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 140px;
+    width: 130px;
     height: 50px;
 }
 
