@@ -148,7 +148,7 @@ const route = useRoute()
 let product = ref({})
 
 onMounted(() => {
-    loading = true
+    loading.value = true
     productsStore.getProduct(route.params.id)
         .then(r => {
             product.value = r.data
@@ -157,7 +157,7 @@ onMounted(() => {
             router.push('/')
         })
         .finally(() => {
-            loading = false
+            loading.value = false
         })
 })
 </script>
