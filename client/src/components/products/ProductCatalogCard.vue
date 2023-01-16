@@ -16,15 +16,10 @@
             </button>
             <div :class="cart[String(product.id)]?'':'hidden'" id="counter-container">
                 <button @click.stop="deleteProduct(props.product)" id="decrement-button">
-<svg fill="#000000" width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2,12a1,1,0,0,1,1-1H21a1,1,0,0,1,0,2H3A1,1,0,0,1,2,12Z"/></svg>
+                    <minus-icon></minus-icon>
                 </button>
-                <button style="position: relative" @click.stop="addProduct(props.product)" id="increment-button">
-                    <div style="margin: auto"><svg fill="#000000" width="14px" height="14px" viewBox="0 0 32 32" version="1.1"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <title>plus</title>
-                        <path
-                            d="M30 14.75h-12.75v-12.75c0-0.69-0.56-1.25-1.25-1.25s-1.25 0.56-1.25 1.25v0 12.75h-12.75c-0.69 0-1.25 0.56-1.25 1.25s0.56 1.25 1.25 1.25v0h12.75v12.75c0 0.69 0.56 1.25 1.25 1.25s1.25-0.56 1.25-1.25v0-12.75h12.75c0.69 0 1.25-0.56 1.25-1.25s-0.56-1.25-1.25-1.25v0z"></path>
-                    </svg></div>
+                <button  @click.stop="addProduct(props.product)" id="increment-button">
+                    <plus-icon></plus-icon>
                 </button>
             </div>
         </div>
@@ -36,6 +31,8 @@
 import {useCartStore} from "../../stores/cart";
 import {onMounted, ref, watch} from "vue";
 import telegram from '../../telegram/telegram'
+import PlusIcon from "../icons/PlusIcon.vue";
+import MinusIcon from "../icons/MinusIcon.vue";
 
 const {tg} = telegram()
 const props = defineProps({
