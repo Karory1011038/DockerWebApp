@@ -4,7 +4,7 @@ import {useProductsStore} from "../stores/products";
 import {computed} from "vue";
 import {useCartStore} from "../stores/cart";
 
-const webappbotBackendUrl = process.env.WEBAPPBOT_URL + ":" + process.env.WEBAPPBOT_BACKEND_PORT;
+const webappbotBackendUrl = import.meta.env.WEBAPPBOT_URL + ":" + import.meta.env.WEBAPPBOT_BACKEND_PORT;
 
 
 export default function () {
