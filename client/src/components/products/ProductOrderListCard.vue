@@ -24,7 +24,7 @@ export default {
 .order-image {
     width: 64px;
     height: 64px;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 10px;
     border: 2px solid;
 }
