@@ -4,6 +4,9 @@ import {useProductsStore} from "../stores/products";
 import {computed} from "vue";
 import {useCartStore} from "../stores/cart";
 
+const webappbotBackendUrl = process.env.WEBAPPBOT_URL + ":" + process.env.WEBAPPBOT_BACKEND_PORT;
+
+
 export default function () {
     const tg = window.Telegram.WebApp;
     tg.isClosingConfirmationEnabled = true;
@@ -80,7 +83,7 @@ export default function () {
                     items: cartProducts.value,
                     queryId: tg.initDataUnsafe.query_id,
                 });
-                fetch('https://webappbot.website:8000/web-data', {
+                fetch(webappbotBackendUrl + '/web-data', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

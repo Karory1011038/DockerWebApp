@@ -7,7 +7,7 @@ const {
     callbackQuery,
 } = require('./bot_components/functions');
 
-const TOKEN = '5986633368:AAHD8o7LzS-uyHPHrc0sKChapz2Wb_vxb5E';
+const TOKEN = process.env.ADMIN_BOT_TOKEN;
 const bot = new TelegramBot(TOKEN, {polling: true});
 // Initialize database and create products table if it doesn't exist
 

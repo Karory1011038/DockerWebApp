@@ -1,17 +1,18 @@
 const express = require('express');
 const app = express();
 const https = require('https');
-const {getAllProducts,getProduct} = require('./server_components/backend');
+const {getAllProducts, getProduct} = require('./server_components/backend');
 const cors = require('cors');
 // app.use(express.json())
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({
-  extended: true
+    extended: true
 }));
 app.use(bodyParser.json());
 
+const webappbotUrl = process.env.WEBAPPBOT_URL;
 
-app.use(cors({origin: 'https://webappbot.website', credentials: true}));
+app.use(cors({origin: webappbotUrl, credentials: true}));
 
 const {bot} = require('./server_components/bot');
 const {web_bot, handleSendData} = require('./server_components/web_bot');
@@ -45,7 +46,7 @@ app.post('/web-data', (req, res) => {
 
 const httpsServer = https.createServer(credentials, app);
 
-
-httpsServer.listen(8000);
+const port = process.env.WEBAPPBOT_BACKEND_PORT
+httpsServer.listen(port);
 
 

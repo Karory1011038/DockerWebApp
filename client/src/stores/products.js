@@ -1,14 +1,16 @@
 import {defineStore} from "pinia/dist/pinia";
 import axios from "axios"
 
+
+const webappbotBackendUrl = process.env.WEBAPPBOT_URL + ":" + process.env.WEBAPPBOT_BACKEND_PORT;
+
 export const useProductsStore = defineStore("products", {
     state: () => ({
         products: [],
     }),
     getters: {
         getProducts(state) {
-            // return state.products
-            return [{"id":1,"name":"ww","price":384,"image":"images/1673876843388.jpg","properties":"sat ind","description":"bdbdjdidifkc"}]
+            return state.products
         }
     },
     actions: {
@@ -21,7 +23,7 @@ export const useProductsStore = defineStore("products", {
                     },
                     mode: 'no-cors'
                 };
-                const data = await axios('https://webappbot.website:8000/products', options)
+                const data = await axios('/products', options)
                 this.products = data?.data
             } catch (error) {
                 // alert(error)
@@ -37,7 +39,7 @@ export const useProductsStore = defineStore("products", {
                     },
                     mode: 'no-cors'
                 };
-                return axios(`https://webappbot.website:8000/product/${id}`, options)
+                return axios( webappbotBackendUrl + `/product/${id}`, options)
             } catch (error) {
                 // alert(error)
                 console.log(error)

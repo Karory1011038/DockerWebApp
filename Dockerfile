@@ -4,6 +4,11 @@ FROM node:14
 WORKDIR /app
 
 ENV NODE_VERSION=16.13.0
+ENV WEBAPPBOT_URL=https://webappbot.website
+ENV WEBAPPBOT_BACKEND_PORT=8000
+ENV WEB_BOT_TOKEN=5903716328:AAGaHW8mLMH1BkE-plgthR-MNpmUBAwkc3E
+ENV ADMIN_BOT_TOKEN=5986633368:AAHD8o7LzS-uyHPHrc0sKChapz2Wb_vxb5E
+
 
 # Check if Node is already installed
 RUN which node || ( \
@@ -20,6 +25,9 @@ COPY package.json ./
 RUN npm install
 
 COPY . .
+
+
+
 
 EXPOSE 8000
 

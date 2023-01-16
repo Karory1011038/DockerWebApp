@@ -2,8 +2,8 @@ process.env.NTBA_FIX_319 = 1;
 process.env.NTBA_FIX_350 = 0;
 const TelegramBot = require('node-telegram-bot-api');
 
-const webAppUrl = 'https://webappbot.website'
-const TOKEN = '5903716328:AAGaHW8mLMH1BkE-plgthR-MNpmUBAwkc3E';
+const webAppUrl =  process.env.WEBAPPBOT_URL;
+const TOKEN = process.env.WEB_BOT_TOKEN;
 const bot = new TelegramBot(TOKEN, {polling: true});
 
 function createOrderMessage(data) {
