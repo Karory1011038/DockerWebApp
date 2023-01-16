@@ -88,15 +88,15 @@ function deleteProduct(product) {
 }
 
 .product-catalog-card-name {
-    line-height: 25px;
     max-width: 100%;
     height: 32px;
-    margin: 0;
     padding: 0 15px;
     font-weight: 700;
     font-size: 14px;
     text-align: center;
     color: #FFFFFF;
+    line-height: 16px;
+    margin-bottom: 5px;
     /*overflow: hidden;*/
     /*white-space: nowrap;*/
     /*text-overflow: ellipsis;*/
@@ -108,7 +108,7 @@ function deleteProduct(product) {
     font-style: normal;
     font-size: 12px;
     max-width: 100%;
-    height: 60px;
+    height: 42px;
     line-height: 14px;
     text-align: center;
     margin-bottom: 5px;
@@ -137,7 +137,7 @@ function deleteProduct(product) {
     justify-content: center;
     align-items: center;
     width: 120px;
-    height: 60px;
+    height: 50px;
 }
 
 #add-button {
