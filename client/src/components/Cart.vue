@@ -9,7 +9,7 @@
     <product-order-list style="margin: 20px" :products="cartProducts"></product-order-list>
     <div style="display: flex;justify-content: space-between;margin: 10px 20px">
         <div class="tg-text total-label" >Total price:</div>
-        <div class="tg-text total-price" >{{ totalSum }} ฿</div>
+        <div class="tg-text total-price chakra_petch" >{{ totalSum }} ฿</div>
     </div>
 
 </template>

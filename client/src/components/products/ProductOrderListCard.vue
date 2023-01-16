@@ -4,7 +4,7 @@
         <div class="tg-text condensed order-product-name">
             <span>{{ product.name }}</span>
         </div>
-        <div style="margin-left: auto;" class="tg-text order-product-price">
+        <div style="margin-left: auto;" class="tg-text order-product-price chakra_petch">
             {{ product.count }} * {{ product.price }} (฿)
         </div>
     </div>
