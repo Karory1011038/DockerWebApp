@@ -1,5 +1,6 @@
 <template>
     <div class="product-page-container">
+        {{product}}
         <div class="product-image-container">
             <img :src="product.image" alt="Error loading image" class="product-image">
         </div>
@@ -32,6 +33,7 @@ let product = ref({})
 onMounted(() => {
     productsStore.getProduct(route.params.id)
         .then(r => {
+            console.log(r)
             product.value = r
         })
         .catch((err) => {
