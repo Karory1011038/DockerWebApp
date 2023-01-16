@@ -7,7 +7,8 @@ export const useProductsStore = defineStore("products", {
     }),
     getters: {
         getProducts(state) {
-            return state.products
+            // return state.products
+            return [{"id":1,"name":"ww","price":384,"image":"images/1673876843388.jpg","properties":"sat ind","description":"bdbdjdidifkc"}]
         }
     },
     actions: {

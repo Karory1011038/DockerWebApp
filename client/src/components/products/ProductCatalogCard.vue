@@ -43,16 +43,15 @@ const props = defineProps({
         }
     }
 })
-const cart = useCartStore().getCart
+const cartStore = useCartStore()
+const cart = cartStore.getCart
 
 function addProduct(product) {
-    cart[product.id] = cart[product.id] ? cart[product.id] + 1 : 1
-    localStorage.setItem('cart', JSON.stringify(cart));
+    cartStore.addItem(product)
 }
 
 function deleteProduct(product) {
-    cart[product.id] = cart[product.id] ? cart[product.id] - 1 : 0
-    localStorage.setItem('cart', JSON.stringify(cart));
+    cartStore.deleteItem(product)
 }
 
 

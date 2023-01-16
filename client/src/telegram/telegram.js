@@ -68,7 +68,7 @@ export default function () {
 
         sendOrder(user, cartProducts).then(() => {
             cartStore.clearCart()
-            tg.close()
+            // tg.close()
         })
 
     }
