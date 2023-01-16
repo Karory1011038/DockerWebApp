@@ -180,6 +180,7 @@ onMounted(() => {
 .product-image {
     max-width: 100%;
     max-height: 100%;
+    min-height: 100vw;
 }
 
 .product-info-container {
@@ -199,8 +200,8 @@ onMounted(() => {
     line-height: 1.5;
 }
 
-.product-description {
-    margin-bottom: 0.5rem;
+.product-properties {
+    margin-bottom: 0.75rem;
 }
 
 .product-price-container {
