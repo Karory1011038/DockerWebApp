@@ -80,10 +80,16 @@ const createProductDialog = (bot, chatId) => {
             const messageId = sentMessage.message_id;
             bot.onReplyToMessage(chatId, messageId, (message) => {
                 const price = message.text;
-                askProperties(name, price);
+                if (isNaN(price)) {
+                    bot.sendMessage(chatId, "Price must be a number. Please enter a valid price.");
+                    askPrice(name)
+                } else {
+                    askProperties(name, price);
+                }
             });
         });
     };
+
 
     const askProperties = (name, price) => {
         bot.sendMessage(chatId, 'Enter the properties of the product:', {
@@ -157,7 +163,7 @@ const createProductDialog = (bot, chatId) => {
 };
 
 const changeProductDialog = (bot, chatId, field, id) => {
-    const textFields = ['name', 'properties', 'description']
+    const fields = ['name', 'price', 'properties', 'description']
     const onReplyMessage = message => {
         if (field === 'image') {
             if (message.photo) {
@@ -208,10 +214,8 @@ const changeProductDialog = (bot, chatId, field, id) => {
             } else {
                 bot.sendMessage(chatId, 'Please send a photo of the product.');
             }
-        } else if (textFields.some((el) => field == el)) {
-            editProductTextField(bot, message, field, id, onReplyMessage)
-        } else if (field === 'price') {
-
+        } else if (fields.some((el) => field == el)) {
+            editProductField(bot, message, field, id, onReplyMessage)
         }
     }
 
@@ -226,12 +230,14 @@ const changeProductDialog = (bot, chatId, field, id) => {
     });
 };
 
-function editProductTextField(bot, message, field, id, onReplyMessage) {
+function editProductField(bot, message, field, id, onReplyMessage) {
     const chatId = message.chat.id;
     if (message.text) {
-        console.log('text')
-
         const newVal = message.text;
+        if (isNaN(newVal) && field === 'price') {
+            bot.sendMessage(chatId, "Price must be a number. Please enter a valid price.");
+            return;
+        }
         db.getProduct(id)
             .then(row => {
                 if (!row) {
