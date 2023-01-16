@@ -51,10 +51,10 @@ module.exports = {
             });
         });
     },
-    addProduct: (name, price, image, properties) => {
+    addProduct: (name, price, image, properties,description) => {
         return new Promise((resolve, reject) => {
-            const query = 'INSERT INTO products (name, price, image, properties) VALUES (?, ?, ?, ?)';
-            db.run(query, [name, price, image, properties], (err) => {
+            const query = 'INSERT INTO products (name, price, image, properties,description) VALUES (?, ?, ?, ?,?)';
+            db.run(query, [name, price, image, properties,description], (err) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -74,6 +74,8 @@ module.exports = {
                 query = 'UPDATE products SET price = ? WHERE id = ?';
             } else if (field === 'properties') {
                 query = 'UPDATE products SET properties = ? WHERE id = ?';
+            } else if (field === 'description') {
+                query = 'UPDATE products SET description = ? WHERE id = ?';
             } else {
                 reject(new Error('Invalid field'));
                 return;

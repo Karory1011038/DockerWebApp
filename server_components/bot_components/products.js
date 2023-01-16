@@ -209,7 +209,7 @@ const changeProductDialog = (bot, chatId, field, id) => {
                 bot.sendMessage(chatId, 'Please send a photo of the product.');
             }
         } else if (textFields.some((el) => field == el)) {
-            editProductTextField(bot, message, field, onReplyMessage)
+            editProductTextField(bot, message, field, id, onReplyMessage)
         } else if (field === 'price') {
 
         }
@@ -226,9 +226,11 @@ const changeProductDialog = (bot, chatId, field, id) => {
     });
 };
 
-function editProductTextField(bot, message, field, onReplyMessage) {
+function editProductTextField(bot, message, field, id, onReplyMessage) {
     const chatId = message.chat.id;
     if (message.text) {
+        console.log('text')
+
         const newVal = message.text;
         db.getProduct(id)
             .then(row => {
@@ -254,6 +256,8 @@ function editProductTextField(bot, message, field, onReplyMessage) {
                 console.error(err.message);
             });
     } else {
+        console.log('no-text')
+
         bot.sendMessage(chatId, `Please enter the new ${field} of the product as a text message.`).then((sentMessage) => {
             const messageId = sentMessage.message_id;
             bot.onReplyToMessage(chatId, messageId, onReplyMessage);
@@ -349,6 +353,8 @@ function changeProductField(bot, chatId, id) {
                         text: 'Properties', callback_data: `change_product_properties_${id}`
                     }, {
                         text: 'Image', callback_data: `change_product_image_${id}`
+                    }], [{
+                        text: 'Description', callback_data: `change_product_description_${id}`
                     }]]
                 }
             });
