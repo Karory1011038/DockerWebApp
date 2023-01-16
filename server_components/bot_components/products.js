@@ -13,7 +13,6 @@ async function showProducts(bot, chatId) {
             return;
         }
         const sortedRows = rows.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
-        const currentList = [];
         for (const row of sortedRows) {
             const result = await showProduct(bot, chatId, row);
             if (result) {
@@ -262,8 +261,6 @@ function editProductField(bot, message, field, id, onReplyMessage) {
                 console.error(err.message);
             });
     } else {
-        console.log('no-text')
-
         bot.sendMessage(chatId, `Please enter the new ${field} of the product as a text message.`).then((sentMessage) => {
             const messageId = sentMessage.message_id;
             bot.onReplyToMessage(chatId, messageId, onReplyMessage);

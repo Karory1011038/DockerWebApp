@@ -154,8 +154,6 @@ const isCartFilled = computed(() => {
 });
 
 function setButton(val) {
-    console.log(typeof val)
-    console.log('val')
     val ? tg.MainButton.show() : tg.MainButton.hide()
 }
 
