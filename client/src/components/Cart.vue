@@ -29,7 +29,7 @@ const {tg, initCartButtons, goHome} = telegram()
 initCartButtons()
 const productsStore = useProductsStore()
 const userStore = useUserStore()
-const {getCart} = useCartStore();
+const cartStore = useCartStore();
 
 const products = computed(() => {
     return productsStore.getProducts;
@@ -38,8 +38,8 @@ const products = computed(() => {
 
 const cartProducts = computed(() => {
     return products.value.map(el => {
-        if (Object.keys(getCart).some(item => item == el.id) && getCart[el.id] > 0) {
-            return {...el, count: getCart[el.id]}
+        if (Object.keys(cartStore.getCart).some(item => item == el.id) && cartStore.getCart[el.id] > 0) {
+            return {...el, count: cartStore.getCart[el.id]}
         }
     }).filter(el => !!el)
 })
