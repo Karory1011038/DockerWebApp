@@ -6,10 +6,10 @@
         <div class="product-info-container">
             <h1 class="product-name tg-text condensed">{{ product.name }}</h1>
             <p class="product-properties tg-text">{{ product.properties }}</p>
-            <p class="product-description tg-text">{{ product.description }}</p>
             <div class="product-price-container">
                 <span class="product-price tg-text chakra_petch">{{ product.price }} ฿ / gram</span>
             </div>
+            <p class="product-description tg-text">{{ product.description }}</p>
         </div>
     </div>
 </template>
@@ -68,7 +68,6 @@ onMounted(() => {
 }
 
 .product-name {
-    color: black;
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 1rem;
@@ -77,7 +76,10 @@ onMounted(() => {
 .product-description {
     font-size: 1.5rem;
     line-height: 1.5;
-    margin-bottom: 2rem;
+}
+
+.product-description {
+    margin-bottom: 0.5rem;
 }
 
 .product-price-container {
