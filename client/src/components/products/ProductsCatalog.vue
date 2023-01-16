@@ -1,17 +1,18 @@
 <template>
     <div v-if="products.length > 0 && !loading" class="products-row">
         <div v-for="product in products" :key="product.id">
-            <product-catalog-card @click="toProduct(product.id)" :key="product.id" :product="product"></product-catalog-card>
+            <product-catalog-card @click="toProduct(product.id)" :key="product.id"
+                                  :product="product"></product-catalog-card>
         </div>
     </div>
-    <div v-else style="width: 100%;height: 100%">
+    <div v-else style="display: flex;width: 100%;height: var(--tg-viewport-height)">
         <div class="center">
             <div v-if="loading">
-                <div class="loading-animation">
-                    <div class="tetrimino tetrimino-1"></div>
-                    <div class="tetrimino tetrimino-2"></div>
-                    <div class="tetrimino tetrimino-3"></div>
-                    <div class="tetrimino tetrimino-4"></div>
+                <div id="loading">
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
                 </div>
             </div>
             <div v-else>
@@ -195,46 +196,42 @@ onMounted(() => {
 
 /*   ANIMATION   */
 
-.loading-animation {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
+#loading {
+  display: flex;
+  justify-content: center;
 }
 
-.tetrimino {
-    width: 50px;
-    height: 50px;
-    animation: falling 1s ease-in-out infinite;
+.loading-bar {
+  background-color: #0077C8;
+  width: 4px;
+  height: 18px;
+  margin: 0 8px;
+  border-radius: 4px;
+  animation: loading 1s ease-in-out infinite;
 }
 
-.tetrimino-1 {
-    background-color: #F44336;
+@keyframes loading {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1, 3);
+  }
+  40% {
+    transform: scale(1);
+  }
 }
 
-.tetrimino-2 {
-    background-color: #9C27B0;
-    animation-delay: 0.2s;
+.loading-bar:nth-of-type(1) {
+  animation-delay: 0.25s;
 }
 
-.tetrimino-3 {
-    background-color: #2196F3;
-    animation-delay: 0.4s;
+.loading-bar:nth-of-type(2) {
+  animation-delay: 0.5s;
 }
 
-.tetrimino-4 {
-    background-color: #4CAF50;
-    animation-delay: 0.6s;
-}
-
-@keyframes falling {
-    0% {
-        transform: translateY(-50px);
-    }
-    100% {
-        transform: translateY(100%);
-    }
+.loading-bar:nth-of-type(3) {
+  animation-delay: 0.75s;
 }
 
 </style>`
