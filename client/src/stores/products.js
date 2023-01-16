@@ -23,7 +23,7 @@ export const useProductsStore = defineStore("products", {
                 const data = await axios('https://webappbot.website:8000/products', options)
                 this.products = data?.data
             } catch (error) {
-                alert(error)
+                // alert(error)
                 console.log(error)
             }
         },
@@ -38,7 +38,7 @@ export const useProductsStore = defineStore("products", {
                 };
                 return axios(`https://webappbot.website:8000/product/${id}`, options)
             } catch (error) {
-                alert(error)
+                // alert(error)
                 console.log(error)
             }
         },

@@ -90,7 +90,7 @@ export default function () {
                 }).then(r => {
                     resolve(r)
                 }).catch(r => {
-                    alert(r)
+                    // alert(r)
                     reject(r)
                 })
             } else {

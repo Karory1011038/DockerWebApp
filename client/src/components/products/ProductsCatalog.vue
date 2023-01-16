@@ -115,14 +115,14 @@
 
 <script setup>
 import ProductCatalogCard from "./ProductCatalogCard.vue";
-import {computed, watch} from "vue";
+import {computed, ref, watch} from "vue";
 import {onMounted} from 'vue'
 import {useProductsStore} from "../../stores/products";
 import router from "../../router";
 import {useCartStore} from "../../stores/cart";
 
 const cartStore = useCartStore()
-
+let loading = ref(false);
 const productsStore = useProductsStore()
 import telegram from '../../telegram/telegram'
 
@@ -151,7 +151,11 @@ watch(isCartFilled, (val) => {
 });
 onMounted(() => {
     setButton(isCartFilled)
+    loading.value = true
     productsStore.fetchProducts()
+        .finally(() =>{
+            loading.value = false
+        })
 })
 </script>
 
