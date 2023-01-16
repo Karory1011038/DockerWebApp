@@ -1,7 +1,7 @@
 <template>
     <div v-if="products.length > 0 && !loading" class="products-row">
-        <div v-for="(product,index) in products" :key="index">
-            <product-catalog-card @click="toProduct(product.id)" :product="product"></product-catalog-card>
+        <div v-for="product in products" :key="product.id">
+            <product-catalog-card @click="toProduct(product.id)" :key="product.id" :product="product"></product-catalog-card>
         </div>
     </div>
     <div v-else style="width: 100%;height: 100%">
