@@ -5,11 +5,11 @@
             <img :src="product.image" alt="Error loading image" class="product-image">
         </div>
         <div class="product-info-container">
-            <h1 class="product-name ff-font">{{ product.name }}</h1>
-            <p class="product-properties">{{ product.properties }}</p>
-            <p class="product-description">{{ product.description }}</p>
+            <h1 class="product-name tg-text">{{ product.name }}</h1>
+            <p class="product-properties tg-text">{{ product.properties }}</p>
+            <p class="product-description tg-text">{{ product.description }}</p>
             <div class="product-price-container">
-                <span class="product-price">{{ product.price }} ฿ / gram</span>
+                <span class="product-price tg-text">{{ product.price }} ฿ / gram</span>
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@ onMounted(() => {
     productsStore.getProduct(route.params.id)
         .then(r => {
             console.log(r)
-            product.value = r
+            product.value = r.data
         })
         .catch((err) => {
             router.push('/')
