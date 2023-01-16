@@ -154,6 +154,8 @@ const isCartFilled = computed(() => {
 });
 
 function setButton(val) {
+    console.log(typeof val)
+    console.log('val')
     val ? tg.MainButton.show() : tg.MainButton.hide()
 }
 
@@ -161,12 +163,12 @@ watch(isCartFilled, (val) => {
     setButton(val)
 });
 onMounted(() => {
-    setButton(isCartFilled)
     loading.value = true
     productsStore.fetchProducts()
         .finally(() => {
             loading.value = false
             window.scrollTo(0, 0);
+            setButton(isCartFilled.value)
         })
 })
 </script>

@@ -1,7 +1,5 @@
 <template>
     <div style="display: flex;justify-content: space-between;margin: 10px 20px">
-            <button style="background-color: black;width: 500px" @click="clearCart">CLEAR</button>
-
         <div class="tg-text condensed order-title">YOUR ORDER</div>
         <div class="tg-link edit-button" @click="goHome">Edit</div>
     </div>
@@ -38,7 +36,7 @@ const products = computed(() => {
 });
 
 const clearCart = () => {
-    cartStore.clearCart()
+    cartStore.commit('clearCart')
 }
 
 const cartProducts = computed(() => {
