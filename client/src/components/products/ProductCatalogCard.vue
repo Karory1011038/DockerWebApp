@@ -9,11 +9,10 @@
              class="product-catalog-card-image">
         <div class="product-catalog-card-name ff-font">{{ props.product.name }}</div>
         <p class="product-catalog-card-description">{{ props.product.properties }}</p>
-        <div class="product-catalog-card-price">{{ props.product.price }} ฿</div>
         <div class="button-container">
             <button :class="cart[String(product.id)]?'hidden':''" @click.stop="addProduct(props.product)"
                     id="add-button">
-                Add
+                <div class="product-catalog-card-price chakra_petch">{{ props.product.price }} ฿</div>
             </button>
             <div :class="cart[String(product.id)]?'':'hidden'" id="counter-container">
                 <button @click.stop="deleteProduct(props.product)" id="decrement-button">
@@ -92,40 +91,50 @@ function deleteProduct(product) {
     width: 100%;
     height: 148px;
     object-fit: cover;
-    padding: 2px;
+    padding: 5px;
     border-radius: 10px;
 }
 
 .product-catalog-card-name {
     line-height: 25px;
     max-width: 100%;
-    height: 25px;
+    height: 32px;
     margin: 0;
     padding: 0 15px;
-    font-size: 1.2em;
-    font-weight: 500;
-    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 14px;
     text-align: center;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    color: #FFFFFF;
+    /*overflow: hidden;*/
+    /*white-space: nowrap;*/
+    /*text-overflow: ellipsis;*/
 }
 
 .product-catalog-card-description {
     padding: 0px 5px;
-    color: #d6d6d6;
-    overflow: hidden;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 12px;
     max-width: 100%;
     height: 48px;
-    font-size: 0.7em;
     text-align: center;
     margin-bottom: 2px;
+    color: #FFFFFF;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .product-catalog-card-price {
-    font-size: 1.1em;
-    font-weight: 500;
-    color: white;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 21px;
+    text-align: center;
+
+    color: #000000;
 }
 
 
@@ -140,11 +149,11 @@ function deleteProduct(product) {
 
 #add-button {
     border: 0;
-    background-color: #AEBD38;
+    background: #75FE72;
     color: black;
     position: absolute;
-    border-radius: 10px;
-    height: 40px;
+    border-radius: 100px;
+    height: 50px;
     width: 100%;
     z-index: 1;
     transition: all 0.3s ease-in-out;
@@ -154,7 +163,7 @@ function deleteProduct(product) {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 40px;
+    height: 50px;
     transition: all 0.3s ease-in-out;
 }
 
@@ -162,16 +171,20 @@ function deleteProduct(product) {
 #decrement-button {
     background-color: #AEBD38;
     border: 0;
-    width: calc(50% - 14px);
-    height: 100%;
-    border-radius: 10px;
+    /*width: calc(50% - 14px);*/
+    /*height: 100%;*/
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 
 }
 
 #decrement-button {
+    background: #FF5050;
 }
 
 #increment-button {
+    background: #75FE72;
 }
 
 .hidden {
