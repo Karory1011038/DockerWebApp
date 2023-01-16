@@ -18,7 +18,7 @@
                 <button @click.stop="deleteProduct(props.product)" id="decrement-button">
                     <minus-icon></minus-icon>
                 </button>
-                <button  @click.stop="addProduct(props.product)" id="increment-button">
+                <button @click.stop="addProduct(props.product)" id="increment-button">
                     <plus-icon></plus-icon>
                 </button>
             </div>
@@ -108,9 +108,10 @@ function deleteProduct(product) {
     font-style: normal;
     font-size: 12px;
     max-width: 100%;
-    height: 48px;
+    height: 60px;
+    line-height: 14px;
     text-align: center;
-    margin-bottom: 2px;
+    margin-bottom: 5px;
     color: #FFFFFF;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -136,7 +137,7 @@ function deleteProduct(product) {
     justify-content: center;
     align-items: center;
     width: 120px;
-    height: 40px;
+    height: 60px;
 }
 
 #add-button {
