@@ -24,7 +24,7 @@ import OrderForm from "./OrderForm.vue";
 import router from "../router";
 import telegram from '../telegram/telegram'
 
-const {tg, initCartButtons, actualCallback} = telegram()
+const {tg, initCartButtons, goHome} = telegram()
 
 initCartButtons()
 const productsStore = useProductsStore()
@@ -50,10 +50,6 @@ const totalSum = computed(() => {
     }, 0);
 })
 
-const goHome = () => {
-    tg.offEvent('mainButtonClicked', actualCallback)
-    router.push('/')
-}
 
 const changeBtnStatus = (val) => {
     if (val.username !== '' && val.phone.length >= 13) {

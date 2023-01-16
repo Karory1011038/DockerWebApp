@@ -24,7 +24,7 @@ export default function () {
     }
 
     function initHomeButtons() {
-        tg.MainButton.setParams({"color": "#75FE72", 'text': 'VIEW ORDER','text-color':"#2F2F2F"});
+        tg.MainButton.setParams({"color": "#75FE72", 'text': 'VIEW ORDER', 'text-color': "#2F2F2F"});
         setMainButton(function () {
             router.push('/cart')
         })
@@ -34,15 +34,13 @@ export default function () {
 
     function initCartButtons() {
         tg.expand()
-        tg.MainButton.setParams({"color": "#75FE72", 'text': 'CONFIRM ORDER','text-color':"#2F2F2F"}); //так изменяются все параметры
+        tg.MainButton.setParams({"color": "#75FE72", 'text': 'CONFIRM ORDER', 'text-color': "#2F2F2F"}); //так изменяются все параметры
         setMainButton(placeOrder)
         tg.BackButton.show()
     }
 
     function initProductButtons() {
-        setMainButton(function () {
-            router.push('/')
-        })
+        setMainButton(goHome)
         tg.MainButton.hide();
         tg.BackButton.show()
     }
@@ -68,14 +66,14 @@ export default function () {
             }).filter(el => !!el)
         })
 
-        sendOrder(user,cartProducts).then(() => {
+        sendOrder(user, cartProducts).then(() => {
             clearCart()
             tg.close()
         })
 
     }
 
-    function sendOrder(user,cartProducts){
+    function sendOrder(user, cartProducts) {
         return new Promise(function (resolve, reject) {
             if (tg.initDataUnsafe.user) {
                 const requestBody = JSON.stringify({
@@ -101,10 +99,14 @@ export default function () {
         })
     }
 
+    function goHome() {
+        tg.offEvent('mainButtonClicked', actualCallback)
+        router.push('/')
+    }
+
+
     return {
-        tg,
-        setMainButton,
-        actualCallback,
+        tg, goHome,
         initHomeButtons,
         initProductButtons,
         initCartButtons,
