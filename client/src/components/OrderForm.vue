@@ -1,9 +1,9 @@
 <template>
     <div>
-        <order-form-input prepend="@" label="Имя пользователя" placeholder="someuser"
+        <order-form-input prepend="@" label="Username" placeholder="someuser"
                           v-model="formData.username"></order-form-input>
         <br>
-        <order-form-input prepend="+66" label="Номер телефона" placeholder="(012) 345-6789"
+        <order-form-input prepend="+66" label="Phone number" placeholder="(012) 345-6789"
                           :phone-val="true"
                           v-model="formData.phone"></order-form-input>
     </div>
