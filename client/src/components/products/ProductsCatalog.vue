@@ -6,10 +6,10 @@
     </div>
     <div v-else style="width: 100%;height: 100%">
         <div class="center">
-            <div style="width: 100%;text-align: center;margin-bottom: 20px">
+            <div  class="np-message tg-text condensed">
                 No products found :c
             </div>
-            <div>
+            <div style="margin-left: -24px;">
                 <svg width="200px" height="200px" viewBox="0 0 64 64" id="svg5" version="1.1" xml:space="preserve"
                      xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
 
@@ -166,7 +166,14 @@ onMounted(() => {
 .center {
     margin: auto;
     width: 50%;
-    border: 3px solid green;
     padding: 10px;
+}
+
+.np-message {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 24px;
 }
 </style>`
