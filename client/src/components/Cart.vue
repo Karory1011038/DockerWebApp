@@ -1,5 +1,7 @@
 <template>
     <div style="display: flex;justify-content: space-between;margin: 10px 20px">
+            <button style="background-color: black;width: 500px" @click="clearCart">CLEAR</button>
+
         <div class="tg-text condensed order-title">YOUR ORDER</div>
         <div class="tg-link edit-button" @click="goHome">Edit</div>
     </div>
@@ -8,8 +10,8 @@
     </div>
     <product-order-list style="margin: 20px" :products="cartProducts"></product-order-list>
     <div style="display: flex;justify-content: space-between;margin: 10px 20px">
-        <div class="tg-text total-label" >Total price:</div>
-        <div class="tg-text total-price chakra_petch" >{{ totalSum }} ฿</div>
+        <div class="tg-text total-label">Total price:</div>
+        <div class="tg-text total-price chakra_petch">{{ totalSum }} ฿</div>
     </div>
 
 </template>
@@ -35,6 +37,9 @@ const products = computed(() => {
     return productsStore.getProducts;
 });
 
+const clearCart = () => {
+    cartStore.clearCart()
+}
 
 const cartProducts = computed(() => {
     return products.value.map(el => {
