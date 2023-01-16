@@ -1,15 +1,14 @@
 <template>
     <div class="product-page-container">
-        {{product}}
         <div class="product-image-container">
             <img :src="product.image" alt="Error loading image" class="product-image">
         </div>
         <div class="product-info-container">
-            <h1 class="product-name tg-text">{{ product.name }}</h1>
+            <h1 class="product-name tg-text condensed">{{ product.name }}</h1>
             <p class="product-properties tg-text">{{ product.properties }}</p>
             <p class="product-description tg-text">{{ product.description }}</p>
             <div class="product-price-container">
-                <span class="product-price tg-text">{{ product.price }} ฿ / gram</span>
+                <span class="product-price tg-text chakra_petch">{{ product.price }} ฿ / gram</span>
             </div>
         </div>
     </div>
@@ -65,7 +64,7 @@ onMounted(() => {
 
 .product-info-container {
     width: 100%;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     text-align: center;
 }
 
