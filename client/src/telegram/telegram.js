@@ -24,7 +24,7 @@ export default function () {
     }
 
     function initHomeButtons() {
-        tg.MainButton.setParams({"color": "#88B04B", 'text': 'VIEW ORDER'});
+        tg.MainButton.setParams({"color": "#75FE72", 'text': 'VIEW ORDER','textColor':"#2F2F2F"});
         setMainButton(function () {
             router.push('/cart')
         })
@@ -34,7 +34,7 @@ export default function () {
 
     function initCartButtons() {
         tg.expand()
-        tg.MainButton.setParams({"color": "#88B04B", 'text': 'PLACE ORDER'}); //так изменяются все параметры
+        tg.MainButton.setParams({"color": "#75FE72", 'text': 'CONFIRM ORDER','textColor':"#2F2F2F"}); //так изменяются все параметры
         setMainButton(placeOrder)
         tg.BackButton.show()
     }

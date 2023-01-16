@@ -3,7 +3,7 @@
         <order-form-input prepend="@" label="Имя пользователя" placeholder="someuser"
                           v-model="formData.username"></order-form-input>
         <br>
-        <order-form-input prepend="+66" label="Номер телефона" placeholder="(123) 456-7890"
+        <order-form-input prepend="+66" label="Номер телефона" placeholder="(012) 345-6789"
                           :phone-val="true"
                           v-model="formData.phone"></order-form-input>
     </div>

@@ -1,15 +1,15 @@
 <template>
     <div style="display: flex;justify-content: space-between;margin: 10px 20px">
-        <div class="tg-text" style="font-size: 18px;font-weight: 600">YOUR ORDER</div>
-        <div class="tg-link" @click="goHome">Edit</div>
+        <div class="tg-text condensed order-title">YOUR ORDER</div>
+        <div class="tg-link edit-button" @click="goHome">Edit</div>
     </div>
     <div style="margin: 20px">
         <order-form @validate="changeBtnStatus"></order-form>
     </div>
     <product-order-list style="margin: 20px" :products="cartProducts"></product-order-list>
     <div style="display: flex;justify-content: space-between;margin: 10px 20px">
-        <div class="tg-text" style="font-size: 16px;font-weight: 600">Общая стоимость:</div>
-        <div class="tg-text" style="font-weight: 600">{{ totalSum }} ฿</div>
+        <div class="tg-text total-label" style="font-size: 16px;font-weight: 600">Total price:</div>
+        <div class="tg-text total-price" style="font-weight: 600">{{ totalSum }} ฿</div>
     </div>
 
 </template>
@@ -24,7 +24,7 @@ import OrderForm from "./OrderForm.vue";
 import router from "../router";
 import telegram from '../telegram/telegram'
 
-const {tg,initCartButtons,actualCallback} = telegram()
+const {tg, initCartButtons, actualCallback} = telegram()
 
 initCartButtons()
 const productsStore = useProductsStore()
@@ -34,7 +34,6 @@ const {getCart} = useCartStore();
 const products = computed(() => {
     return productsStore.getProducts;
 });
-
 
 
 const cartProducts = computed(() => {
@@ -72,5 +71,27 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.order-title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+}
 
+.edit-button {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.total-label {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.total-price {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 21px;
+}
 </style>
