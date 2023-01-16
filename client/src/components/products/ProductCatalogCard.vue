@@ -7,8 +7,8 @@
         </transition>
         <img :src="props.product.image" alt="Error load image"
              class="product-catalog-card-image">
-        <div class="product-catalog-card-name condensed">{{ props.product.name }}</div>
-        <p class="product-catalog-card-description">{{ props.product.properties }}</p>
+        <div class="product-catalog-card-name condensed tg-text">{{ props.product.name }}</div>
+        <p class="product-catalog-card-description tg-text">{{ props.product.properties }}</p>
         <div class="button-container">
             <button :class="cart[String(product.id)]?'hidden':''" @click.stop="addProduct(props.product)"
                     id="add-button">
@@ -94,7 +94,6 @@ function deleteProduct(product) {
     font-weight: 700;
     font-size: 14px;
     text-align: center;
-    color: #FFFFFF;
     line-height: 16px;
     margin-bottom: 5px;
     /*overflow: hidden;*/
@@ -112,7 +111,6 @@ function deleteProduct(product) {
     line-height: 14px;
     text-align: center;
     margin-bottom: 10px;
-    color: #FFFFFF;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
