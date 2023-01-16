@@ -15,6 +15,7 @@ export const useCartStore = defineStore('cart', {
             localStorage.setItem('cart', JSON.stringify(this.cart));
         },
         clearCart() {
+            this.cart = []
             localStorage.removeItem('cart')
         },
         deleteItem(item) {
