@@ -111,7 +111,7 @@ function deleteProduct(product) {
     height: 42px;
     line-height: 14px;
     text-align: center;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     color: #FFFFFF;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -136,7 +136,7 @@ function deleteProduct(product) {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 120px;
+    width: 140px;
     height: 50px;
 }
 
