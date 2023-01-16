@@ -66,14 +66,13 @@ export default function () {
             }).filter(el => !!el)
         })
 
-        sendOrder(user, cartProducts).then(() => {
-            cartStore.clearCart()
-            // tg.close()
+        sendOrder(user, cartProducts,cartStore).then(() => {
+            tg.close()
         })
 
     }
 
-    function sendOrder(user, cartProducts) {
+    function sendOrder(user, cartProducts,cartStore) {
         return new Promise(function (resolve, reject) {
             if (tg.initDataUnsafe.user) {
                 const requestBody = JSON.stringify({
@@ -88,6 +87,8 @@ export default function () {
                     },
                     body: requestBody
                 }).then(r => {
+                                cartStore.clearCart()
+
                     resolve(r)
                 }).catch(r => {
                     // alert(r)
@@ -95,6 +96,8 @@ export default function () {
                 })
             } else {
                 tg.sendData(JSON.stringify({'user': user.value, 'items': cartProducts.value})).then(r => resolve(r));
+                            cartStore.clearCart()
+
             }
         })
     }
