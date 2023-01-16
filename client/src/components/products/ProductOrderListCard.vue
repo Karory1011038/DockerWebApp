@@ -26,6 +26,7 @@ export default {
     height: 64px;
     object-fit: contain;
     border-radius: 10px;
+    border: 2px solid;
 }
 
 .order-product-name {
