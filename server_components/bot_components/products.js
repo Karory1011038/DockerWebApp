@@ -41,7 +41,7 @@ async function showProduct(bot, chatId, row) {
             image = fs.readFileSync('images/img.png');
         }
         const r = await bot.sendPhoto(chatId, image, {
-            caption: `Name: ${row.name}\nPrice: ${row.price}\nProperties:${row.properties}\nDescription:${row.description}`,
+            caption: `Name: ${row.name}\nPrice: ${row.price}\nProperties:${row.properties}\nDescription:${row.description || 'Not specified'}`,
             reply_markup: {
                 inline_keyboard: [[{
                     text: 'Change', callback_data: `change_product_${row.id}`
@@ -227,7 +227,7 @@ const changeProductDialog = (bot, chatId, field, id) => {
 };
 
 function editProductTextField(bot, message, field, onReplyMessage) {
-    const chatId = message.chatId;
+    const chatId = message.chat.id;
     if (message.text) {
         const newVal = message.text;
         db.getProduct(id)
