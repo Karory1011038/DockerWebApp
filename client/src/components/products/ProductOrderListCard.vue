@@ -34,7 +34,7 @@ export default {
     line-height: 19px;
 }
 .order-product-info{
-    max-width: 200px;
+    max-width: 190px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
