@@ -1,7 +1,7 @@
 import {defineStore} from "pinia/dist/pinia";
 import axios from "axios"
 
-const webappbotBackendUrl = import.meta.env.WEBAPPBOT_URL + ":" + import.meta.env.WEBAPPBOT_BACKEND_PORT;
+const webappbotBackendUrl = process.env.VUE_APP_URL + ":" + process.env.VUE_APP_URL;
 
 console.log(import.meta.env.WEBAPPBOT_URL)
 console.log('import.meta.env.WEBAPPBOT_URL')
