@@ -15,4 +15,5 @@ services:
     volumes:
       - ./nginx:/etc/nginx/conf.d
       - ./sslcert:/etc/nginx/conf.d/sslcert
+      - .env:/app/.env
       - .:/app
