@@ -1,10 +1,7 @@
 import {defineStore} from "pinia/dist/pinia";
 import axios from "axios"
 
-const webappbotBackendUrl = process.env.VUE_APP_URL + ":" + process.env.VUE_APP_URL;
-
-console.log(process.env.VUE_APP_URL)
-console.log('process.env.VUE_APP_URL')
+const webappbotBackendUrl = import.meta.env.VITE_WEBAPPBOT_URL + ":" + import.meta.env.VITE_WEBAPPBOT_BACKEND_PORT;
 
 export const useProductsStore = defineStore("products", {
     state: () => ({

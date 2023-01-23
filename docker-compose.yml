@@ -12,11 +12,11 @@ services:
     image: nginx:alpine
     ports:
       - "443:443"
-    environment:
-      - WEBAPPBOT_BACKEND_PORT=8000
-      - WEBAPPBOT_URL=https://webappbot.website
+#    environment:
+#      - WEBAPPBOT_BACKEND_PORT=8000
+#      - WEBAPPBOT_URL=https://webappbot.website
     volumes:
       - ./nginx:/etc/nginx/conf.d
       - ./sslcert:/etc/nginx/conf.d/sslcert
-      - .env:/app/.env
+#      - .env:/app/.env
       - .:/app
