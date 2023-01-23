@@ -3,8 +3,8 @@ import axios from "axios"
 
 const webappbotBackendUrl = process.env.VUE_APP_URL + ":" + process.env.VUE_APP_URL;
 
-console.log(import.meta.env.WEBAPPBOT_URL)
-console.log('import.meta.env.WEBAPPBOT_URL')
+console.log(process.env.VUE_APP_URL)
+console.log('process.env.VUE_APP_URL')
 
 export const useProductsStore = defineStore("products", {
     state: () => ({
