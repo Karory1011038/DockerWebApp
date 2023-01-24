@@ -28,7 +28,7 @@ export default {
 
 <style>
 .products-horizontal-row {
-    height: 450px;
+    height: 45vh;
     overflow-y: scroll
 }
 .products-horizontal-row.has-more::before {
