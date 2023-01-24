@@ -25,8 +25,8 @@ export default {
         gsap.utils.toArray(".revealUp").forEach(function (elem) {
             ScrollTrigger.create({
                 trigger: elem,
-                start: "top 90%",
-                end: "bottom 10%",
+                start: "top 70%",
+                end: "bottom 30%",
                 markers: true,
                 onEnter: function () {
                     gsap.fromTo(
