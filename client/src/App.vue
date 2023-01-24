@@ -1,5 +1,5 @@
-<style scoped>
-.bgc{
+<style>
+#app{
     /*background-color: black !important;*/
 }
 </style>

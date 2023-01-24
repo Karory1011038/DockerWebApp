@@ -1,5 +1,5 @@
 <template>
-    <div class="container  text-center  ">
+    <div class="container  text-center">
         <h2 class="newAnima">Weed Space</h2>
         <div>{{ localizedText.hello + `, ${userName}.` }}</div>
         <div>{{ localizedText.welcome }}</div>
@@ -12,9 +12,13 @@
             </div>
         </div>
     </div>
+    <products-catalog></products-catalog>
+
 </template>
 
 <script setup>
+import ProductsCatalog from "./products/ProductsCatalog.vue";
+
 import telegram from '../telegram/telegram'
 import {computed, onMounted} from "vue";
 ///Text
@@ -45,7 +49,7 @@ initHomeButtons()
 <style>
 
 .newAnima {
-    margin: 100px auto;
+    margin: 35px auto;
     font-size: 3.5rem;
     font-weight: 300;
     animation: lights 5s 750ms linear infinite;
@@ -97,7 +101,7 @@ initHomeButtons()
 
 .scrolldown-container{
     display: flex;
-    margin: 80px;
+    margin: 35px auto;
 }
 
 .scrolldown {
