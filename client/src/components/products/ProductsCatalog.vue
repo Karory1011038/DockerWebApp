@@ -2,7 +2,7 @@
     <div class="product-row">
         <section class="scrollport">
             <div>
-                <product-catalog-card :product="products[1]"></product-catalog-card>
+<!--                <product-catalog-card :product="products[1]"></product-catalog-card>-->
             </div>
             <div></div>
             <div></div>
