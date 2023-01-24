@@ -9,6 +9,7 @@ const webappbotBackendUrl = import.meta.env.VITE_WEBAPPBOT_URL + ":" + import.me
 
 export default function () {
     const tg = window.Telegram.WebApp;
+    tg.expand()
     tg.isClosingConfirmationEnabled = true;
     let actualCallback = null
     tg.BackButton.onClick(function () {
@@ -26,7 +27,7 @@ export default function () {
         tg.onEvent('mainButtonClicked', callback);
     }
 
-    const tgUserData = tg.initDataUnsafe.user || {language_code:'en'}
+    const tgUserData = tg.initDataUnsafe.user || {language_code: 'en'}
 
     function initCatalogButtons() {
         tg.MainButton.setParams({"color": "#75FE72", 'text': 'VIEW ORDER', 'text-color': "#2F2F2F"});
@@ -47,7 +48,6 @@ export default function () {
     }
 
     function initCartButtons() {
-        tg.expand()
         tg.MainButton.setParams({"color": "#75FE72", 'text': 'CONFIRM ORDER', 'text-color': "#2F2F2F"}); //так изменяются все параметры
         setMainButton(placeOrder)
         tg.BackButton.show()
