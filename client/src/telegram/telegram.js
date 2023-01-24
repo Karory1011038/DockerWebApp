@@ -30,7 +30,7 @@ export default function () {
     const tgUserData = tg.initDataUnsafe.user || {language_code: 'en'}
     const colorScheme = tg.colorScheme
 
-    function initCatalogButtons() {
+    function initHomeButtons() {
         tg.MainButton.setParams({"color": "#75FE72", 'text': 'VIEW ORDER', 'text-color': "#2F2F2F"});
         setMainButton(function () {
             router.push('/cart')
@@ -39,14 +39,7 @@ export default function () {
             tg.BackButton.hide()
     }
 
-    function initHomeButtons() {
-        tg.MainButton.setParams({"color": "#75FE72", 'text': 'GO SHOPPING', 'text-color': "#2F2F2F"});
-        setMainButton(function () {
-            router.push('/catalog')
-        })
-        if (tg.BackButton.isVisible)
-            tg.BackButton.hide()
-    }
+
 
     function initCartButtons() {
         tg.MainButton.setParams({"color": "#75FE72", 'text': 'CONFIRM ORDER', 'text-color': "#2F2F2F"}); //так изменяются все параметры
@@ -128,7 +121,6 @@ export default function () {
         colorScheme,
         goHome,
         initHomeButtons,
-        initCatalogButtons,
         initProductButtons,
         initCartButtons,
     }
