@@ -44,7 +44,7 @@ const userName = computed(() => {
 
 .newAnima {
     padding: 12vh 0;
-    margin-bottom: 30vh;
+    margin-bottom: 20vh;
     font-size: 4rem;
     font-weight: 800;
     font-family: 'Neonderthaw', cursive;
