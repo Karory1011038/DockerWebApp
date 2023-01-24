@@ -10,7 +10,7 @@ export const useUserStore = defineStore("user", {
         },
         getFullName(state) {
             if (state.user?.first_name && state.user?.last_name)
-                return `${ state.user.first_name} ${state.user.last_name}.`
+                return `${ state.user.first_name} ${state.user.last_name}`
             else
                 return 'Incognito'
         },
