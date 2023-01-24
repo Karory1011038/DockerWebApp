@@ -1,11 +1,11 @@
 <template>
-    <div>{{tgData}}</div>
+    <div>{{tgUserData}}</div>
 </template>
 
 <script setup>
 import telegram from '../telegram/telegram'
 
-const {initHomeButtons,tgData} = telegram()
+const {initHomeButtons,tgUserData} = telegram()
 
 initHomeButtons()
 </script>
