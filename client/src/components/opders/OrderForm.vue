@@ -6,7 +6,7 @@
                           v-model="formData.username"></order-form-input>
 
         <br>
-        <order-form-input prepend="+66" label="Phone" placeholder="(012) 345-6789"
+        <order-form-input prepend=" +66" label="Phone" placeholder="(012) 345-6789"
                           :phone-val="true"
                           v-model="formData.phone"></order-form-input>
 
