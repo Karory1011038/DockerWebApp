@@ -33,11 +33,12 @@ const userName = computed(() => {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Neonderthaw&display=swap');
+
 .welcome-container{
     height: 100vh;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Neonderthaw&display=swap');
 .newAnima {
     padding: 15vh 0;
     margin-bottom: 30vh;
