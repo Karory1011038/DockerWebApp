@@ -17,7 +17,7 @@
 <script setup>
 import {text} from '../assets/text'
 import {useUserStore} from "../stores/user";
-import {computed, ref} from "vue";
+import {computed} from "vue";
 import telegram from "../telegram/telegram";
 
 const {colorScheme} = telegram()
