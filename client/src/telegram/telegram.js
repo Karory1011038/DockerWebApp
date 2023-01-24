@@ -26,7 +26,7 @@ export default function () {
         tg.onEvent('mainButtonClicked', callback);
     }
 
-    const tgUserData = tg.initDataUnsafe.user
+    const tgUserData = tg.initDataUnsafe.user || {language_code:'en'}
 
     function initCatalogButtons() {
         tg.MainButton.setParams({"color": "#75FE72", 'text': 'VIEW ORDER', 'text-color': "#2F2F2F"});
