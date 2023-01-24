@@ -1,7 +1,9 @@
 <template>
     <div class="product-row">
         <section class="scrollport">
-            <div></div>
+            <div>
+                <product-catalog-card :product="products[1]"></product-catalog-card>
+            </div>
             <div></div>
             <div></div>
             <div></div>
@@ -124,7 +126,7 @@ gsap.utils.toArray(".revealUp").forEach(function (elem) {
 }
 
 .scrollport > div {
-  block-size: var(--size-15);
+  block-size: 250px;
   aspect-ratio: var(--ratio-square);
   background-color: var(--surface-2);
   border-radius: var(--radius-3);
