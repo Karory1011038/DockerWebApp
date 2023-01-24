@@ -125,7 +125,7 @@ body {
 }
 
 .section {
-    height: var(--tg-viewport-height);
+    height: 100vh;
     width: 100%;
     position: relative;
     padding: 0;
