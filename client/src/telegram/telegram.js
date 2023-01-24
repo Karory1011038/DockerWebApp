@@ -26,10 +26,21 @@ export default function () {
         tg.onEvent('mainButtonClicked', callback);
     }
 
-    function initHomeButtons() {
+    const tgData = tg.initDataUnsafe
+
+    function initCatalogButtons() {
         tg.MainButton.setParams({"color": "#75FE72", 'text': 'VIEW ORDER', 'text-color': "#2F2F2F"});
         setMainButton(function () {
             router.push('/cart')
+        })
+        if (tg.BackButton.isVisible)
+            tg.BackButton.hide()
+    }
+
+    function initHomeButtons() {
+        tg.MainButton.setParams({"color": "#75FE72", 'text': 'GO SHOPPING', 'text-color': "#2F2F2F"});
+        setMainButton(function () {
+            router.push('/catalog')
         })
         if (tg.BackButton.isVisible)
             tg.BackButton.hide()
@@ -111,8 +122,11 @@ export default function () {
 
 
     return {
-        tg, goHome,
+        tg,
+        tgData,
+        goHome,
         initHomeButtons,
+        initCatalogButtons,
         initProductButtons,
         initCartButtons,
     }

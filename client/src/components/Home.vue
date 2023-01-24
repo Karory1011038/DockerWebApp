@@ -1,14 +1,11 @@
 <template>
-    <div class="container">
-        <products-catalog></products-catalog>
-    </div>
+    <div>{{tgData}}</div>
 </template>
 
 <script setup>
-import ProductsCatalog from "./products/ProductsCatalog.vue";
 import telegram from '../telegram/telegram'
 
-const {initHomeButtons} = telegram()
+const {initHomeButtons,tgData} = telegram()
 
 initHomeButtons()
 </script>
