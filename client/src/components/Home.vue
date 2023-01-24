@@ -1,6 +1,6 @@
 <template>
-    <welcome-block></welcome-block>
-    <products-catalog></products-catalog>
+    <welcome-block @click="scrollTo"></welcome-block>
+    <div id="catalog"><products-catalog></products-catalog></div>
 </template>
 
 <script setup>
@@ -15,6 +15,11 @@ import {useUserStore} from "../stores/user";
 
 const userStore = useUserStore()
 
+function scrollTo() {
+    document.getElementById('catalog').scrollIntoView({behavior: "smooth"});
+}
+
+defineExpose({scrollTo});
 
 const {initHomeButtons, tgUserData} = telegram()
 
