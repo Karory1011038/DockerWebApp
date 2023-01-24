@@ -4,7 +4,7 @@
         <div>{{ localizedText.hello + `, ${userName}.` }}</div>
         <div>{{ localizedText.welcome }}</div>
         <div class="scrolldown-container">
-            <div v-if="whiteTheme" :class="whiteTheme? 'dark': ''" class='scrolldown'>
+            <div v-if="whiteTheme" :class="!whiteTheme? 'dark': ''" class='scrolldown'>
                 <div class="chevrons">
                     <div class='chevrondown'></div>
                     <div class='chevrondown'></div>
