@@ -1,6 +1,5 @@
 <template>
 <div class="welcome-container text-center">
-    <span style="font-size: 55px;color: red">{{language}}</span>
         <h2 class="newAnima">Weed Space</h2>
         <div>{{ localizedText.hello + `, ${userName}.` }}</div>
         <div>{{ localizedText.welcome }}</div>
