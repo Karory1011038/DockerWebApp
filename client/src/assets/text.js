@@ -1,7 +1,7 @@
 export const text = {
   en: {
     welcome: 'Let\'s grab some dank buds, bro!',
-    hello: 'Yo, ',
+    hello: 'Yo',
     login: 'Login',
     logout: 'Logout',
     profile: 'Profile',

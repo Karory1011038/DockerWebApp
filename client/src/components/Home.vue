@@ -1,8 +1,16 @@
 <template>
-    <div class="container">
+    <div class="container  text-center  ">
+        <h2 class="newAnima">Weed Space</h2>
         <div>{{ localizedText.hello + `, ${userName}.` }}</div>
         <div>{{ localizedText.welcome }}</div>
-        <h2 class="newAnima text-center">Weed Space</h2>
+        <div class="scrolldown-container">
+            <div class='scrolldown'>
+                <div class="chevrons">
+                    <div class='chevrondown'></div>
+                    <div class='chevrondown'></div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -34,13 +42,14 @@ onMounted(() => {
 initHomeButtons()
 </script>
 
-<style scoped>
+<style>
 
 .newAnima {
-    margin: auto;
+    margin: 100px auto;
     font-size: 3.5rem;
     font-weight: 300;
     animation: lights 5s 750ms linear infinite;
+    will-change: auto;
 }
 
 @keyframes lights {
@@ -86,13 +95,95 @@ initHomeButtons()
 
 }
 
-body {
-    margin: 0;
-    /*font: 100% / 1.5 Raleway, sans-serif;*/
-    /*color: hsl(230, 100%, 95%);*/
-    /*background: linear-gradient(135deg, hsl(230, 40%, 12%), hsl(230, 20%, 7%)) !important;*/
-    height: 100vh;
+.scrolldown-container{
     display: flex;
+    margin: 80px;
 }
 
+.scrolldown {
+    --color: white;
+    --sizeX: 30px;
+    --sizeY: 50px;
+    position: relative;
+    margin: 0 auto 16px;
+    width: var(--sizeX);
+    height: var(--sizeY);
+    /*margin-left: calc(var(--sizeX) / 2);*/
+    border: calc(var(--sizeX) / 10) solid var(--color);
+    border-radius: 50px;
+    box-sizing: border-box;
+}
+
+.scrolldown::before {
+    content: "";
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+    background-color: var(--color);
+    border-radius: 100%;
+    animation: scrolldown-anim 2s infinite;
+    box-sizing: border-box;
+    box-shadow: 0px -5px 3px 1px #ffffff66;
+}
+
+@keyframes scrolldown-anim {
+    0% {
+        opacity: 0;
+        height: 6px;
+    }
+    40% {
+        opacity: 1;
+        height: 10px;
+    }
+    80% {
+        transform: translate(0, 20px);
+        height: 10px;
+        opacity: 0;
+    }
+    100% {
+        height: 3px;
+        opacity: 0;
+    }
+}
+
+.chevrons {
+    padding: 6px 0 0 0;
+    margin-left: -3px;
+    margin-top: 48px;
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chevrondown {
+    margin-top: -6px;
+    position: relative;
+    border: solid var(--color);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg);
+}
+
+.chevrondown:nth-child(odd) {
+    animation: pulse 500ms ease infinite alternate;
+}
+
+.chevrondown:nth-child(even) {
+    animation: pulse 500ms ease infinite alternate 250ms;
+}
+
+@keyframes pulse {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.5;
+    }
+}
 </style>
