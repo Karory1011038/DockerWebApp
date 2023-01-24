@@ -32,7 +32,7 @@ export default {
 :root {
     --s-width: 900px;
     --s-gutter: 2.5rem;
-    --c-background: rgb(0, 0, 0);
+    //--c-background: rgb(0, 0, 0);
     --c-accent: hsl(213, 74%, 58%);
 }
 
@@ -117,8 +117,8 @@ export default {
         // • restore active colors & content
         #{$root}__input:checked + & {
             --step-bullet-bg: hsl(213, 70%, 50%);
-            --step-bullet-color: white;
-            --step-color: white;
+            --step-bullet-color: black;
+            --step-color: black;
 
             #{$root}__button {
                 &::before {
