@@ -1,6 +1,8 @@
 <template>
-    <label>
-        <span class="label">{{ label }}</span>
+    <div class="order-form-input-container">
+        <div style="display:flex;">
+            <div style="margin: auto" class="label">{{ label }}</div>
+        </div>
         <div class="tg-bg">
             <div class="tg-text input-text" style="display: inline-block;width: 30px;text-align: center">{{
                     prepend
@@ -9,7 +11,7 @@
             <input :value="modelValue" :placeholder="placeholder" class="input-text order-form-input tg-text tg-bg"
                    @input="changeValue">
         </div>
-    </label>
+    </div>
 </template>
 
 <script>
@@ -47,8 +49,15 @@ export default {
 }
 
 .label {
-    font-weight: 300;
-    font-size: 14px;
+    font-weight: 500;
+    font-size: 18px;
     line-height: 16px;
+}
+
+.order-form-input-container {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid;
+    margin-bottom: 15px;
 }
 </style>

@@ -1,11 +1,13 @@
 <template>
     <stepper :step="3"></stepper>
-    <first-step></first-step>
+<!--    <first-step></first-step>-->
+    <second-step></second-step>
 </template>
 
 <script setup>
 import FirstStep from './createOrderSteps/FirstStep.vue'
 import Stepper from "./Stepper.vue";
+import SecondStep from "./createOrderSteps/SecondStep.vue";
 
 </script>
 

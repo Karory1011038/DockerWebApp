@@ -1,17 +1,25 @@
 <template>
-    <div>
+    <div class="order-form-container">
+        <div class="order-form-title tg-text">Shipping address</div>
+
         <order-form-input prepend="@" label="Username" placeholder="someuser"
                           v-model="formData.username"></order-form-input>
+
         <br>
         <order-form-input prepend="+66" label="Phone number" placeholder="(012) 345-6789"
                           :phone-val="true"
                           v-model="formData.phone"></order-form-input>
+
+        <br>
+        <order-form-input label="Address" placeholder="Enter address..."
+                          v-model="formData.username"></order-form-input>
     </div>
 </template>
 
 <script>
-import OrderFormInput from "./OrderFormInput.vue";
-import telegram from '../telegram/telegram'
+import OrderFormInput from "../OrderFormInput.vue";
+import telegram from '../../telegram/telegram'
+
 export default {
     name: "OrderForm",
     components: {OrderFormInput},
@@ -41,5 +49,14 @@ export default {
 </script>
 
 <style>
-
+.order-form-title{
+    font-size: 24px;
+    font-weight: 800;
+    padding-bottom: 25px;
+}
+.order-form-container {
+    height: 65vh;
+    padding: 20px;
+    background-color: black;
+}
 </style>

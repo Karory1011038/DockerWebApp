@@ -7,5 +7,4 @@ import CreateOrderSteps from './opders/CreateOrderSteps.vue'
 </script>
 
 <style scoped>
-
 </style>
