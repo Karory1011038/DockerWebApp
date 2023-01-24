@@ -105,7 +105,7 @@ initHomeButtons()
 
 .scrolldown-container {
     display: flex;
-    margin: 35px auto;
+    margin: 35px auto 0;
 }
 
 .scrolldown {
