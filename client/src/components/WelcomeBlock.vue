@@ -1,14 +1,10 @@
 <template>
 <div class="welcome-container text-center">
-    {{whiteTheme}}
-    {{themeParams}}
-    <br>
-    {{tg.colorScheme}}
         <h2 class="newAnima">Weed Space</h2>
         <div>{{ localizedText.hello + `, ${userName}.` }}</div>
         <div>{{ localizedText.welcome }}</div>
         <div class="scrolldown-container">
-            <div v-if="whiteTheme" :class="!whiteTheme? 'dark': ''" class='scrolldown'>
+            <div :class="isDarkTheme? 'dark': ''" class='scrolldown'>
                 <div class="chevrons">
                     <div class='chevrondown'></div>
                     <div class='chevrondown'></div>
@@ -24,8 +20,8 @@ import {useUserStore} from "../stores/user";
 import {computed, ref} from "vue";
 import telegram from "../telegram/telegram";
 
-const {themeParams,tg} = telegram()
-const whiteTheme = themeParams.text_color !== '#ffffff'
+const {colorScheme} = telegram()
+const isDarkTheme = colorScheme === 'dark'
 
 const language = computed(() => {
     return userStore.getLang;
