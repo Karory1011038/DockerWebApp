@@ -12,7 +12,7 @@
 
         <br>
         <order-form-input label="Address" placeholder="Enter address..."
-                          v-model="formData.username"></order-form-input>
+                          v-model="formData.address"></order-form-input>
     </div>
 </template>
 
