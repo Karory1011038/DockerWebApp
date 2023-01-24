@@ -171,7 +171,7 @@ const userName = computed(() => {
 .chevrondown {
     margin-top: -6px;
     position: relative;
-    border: solid black;
+    border: solid var(--color);
     border-width: 0 3px 3px 0;
     display: inline-block;
     width: 10px;
