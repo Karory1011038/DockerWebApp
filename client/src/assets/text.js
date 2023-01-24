@@ -1,7 +1,7 @@
 export const text = {
   en: {
-    welcome: 'Welcome to our bot store! We offer a wide variety of high-quality cannabis products for your enjoyment. Browse through our selection and place your order today for fast and discreet delivery. Let us help you discover the benefits of cannabis and elevate your experience!',
-    hello: 'Yo',
+    welcome: 'Let\'s grab some dank buds, bro!',
+    hello: 'Yo, ',
     login: 'Login',
     logout: 'Logout',
     profile: 'Profile',
