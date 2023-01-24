@@ -107,7 +107,7 @@ body {
   margin: 0;
   font: 100% / 1.5 Raleway, sans-serif;
   color: hsl(230, 100%, 95%);
-  background: linear-gradient(135deg, hsl(230, 40%, 12%), hsl(230, 20%, 7%));
+  background: linear-gradient(135deg, hsl(230, 40%, 12%), hsl(230, 20%, 7%)) !important;
   height: 100vh;
   display: flex;
 }
