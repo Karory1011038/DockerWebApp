@@ -14,6 +14,5 @@
 import OrderForm from "../OrderForm.vue";
 </script>
 
-<style scoped>
-
+<style >
 </style>

@@ -44,7 +44,7 @@ onMounted(() => {
 
 </script>
 
-<style scoped>
+<style>
 .order-title {
     font-weight: 700;
     font-size: 26px;
