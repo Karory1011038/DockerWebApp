@@ -1,5 +1,6 @@
 <template>
     <div className="section bg1">
+        {{products}}
         <products-row :products="products" className="revealUp">
             <template #header>
                 <div>buds</div>
