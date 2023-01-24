@@ -1,5 +1,5 @@
 <template>
-    <div class="container  text-center">
+    <div class="text-center">
 <!--        <ticker></ticker>-->
         <h2 class="newAnima">Weed Space</h2>
         <div>{{ localizedText.hello + `, ${userName}.` }}</div>
@@ -52,7 +52,8 @@ initHomeButtons()
 <style>
 
 .newAnima {
-    margin: 35px auto;
+    margin: 0   35px auto;
+    padding-top: 35px;
     font-size: 3.5rem;
     font-weight: 300;
     animation: lights 5s 750ms linear infinite;
