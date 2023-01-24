@@ -98,7 +98,7 @@ const userName = computed(() => {
 
 .scrolldown-container {
     display: flex;
-    margin: 35px auto;
+    padding: 35px 0;
 }
 
 .scrolldown {
