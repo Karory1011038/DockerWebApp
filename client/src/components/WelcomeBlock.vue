@@ -43,10 +43,9 @@ const userName = computed(() => {
 }
 
 .newAnima {
-    padding: 15vh 0;
+    padding: 12vh 0;
     margin-bottom: 30vh;
     font-size: 4rem;
-    line-height: 3.8rem;
     font-weight: 800;
     font-family: 'Neonderthaw', cursive;
     animation: lights 5s 750ms linear infinite;
@@ -99,6 +98,7 @@ const userName = computed(() => {
 .scrolldown-container {
     display: flex;
     padding: 35px 0;
+    margin-bottom: 20px;
 }
 
 .scrolldown {
