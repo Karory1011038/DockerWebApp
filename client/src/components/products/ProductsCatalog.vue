@@ -1,14 +1,17 @@
 <template>
-    <div className="section">
-        <h1>Scroll Down</h1>
-    </div>
     <div className="section bg1">
         <products-row className="revealUp">
-
+            <template #header>
+                <div>weed</div>
+            </template>
         </products-row>
     </div>
     <div className="section bg2">
-        <h1 className="revealUp">Animation 2</h1>
+        <products-row className="revealUp">
+            <template #header>
+                <div>weed</div>
+            </template>
+        </products-row>
     </div>
     <div className="spacer"></div>
 </template>
@@ -27,7 +30,7 @@ export default {
                 trigger: elem,
                 start: "top 70%",
                 end: "bottom 30%",
-                markers: true,
+                markers: false,
                 onEnter: function () {
                     gsap.fromTo(
                         elem,

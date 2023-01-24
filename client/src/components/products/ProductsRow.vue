@@ -1,5 +1,10 @@
 <template>
+    <div style="display: block">
+     <slot name="header">
+
+        </slot>
     <div class="product-row">
+
         <section class="scrollport">
             <div>
 <!--                <product-catalog-card :product="products[1]"></product-catalog-card>-->
@@ -16,7 +21,7 @@
             <div></div>
         </section>
     </div>
-
+</div>
 </template>
 
 <script>
