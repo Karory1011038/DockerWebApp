@@ -22,6 +22,7 @@ import telegram from "../telegram/telegram";
 
 const {colorScheme} = telegram()
 const isDarkTheme = colorScheme === 'dark'
+const userStore = useUserStore()
 
 const language = computed(() => {
     return userStore.getLang;
@@ -29,7 +30,6 @@ const language = computed(() => {
 const localizedText = computed(() => text[language.value])
 ///TEXT
 
-const userStore = useUserStore()
 const userName = computed(() => {
     return userStore.getFullName;
 });
