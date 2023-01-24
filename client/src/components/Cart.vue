@@ -1,12 +1,12 @@
 <template>
-    <div style="display: flex;justify-content: space-between;margin: 10px 20px">
-        <div class="tg-text condensed order-title">YOUR ORDER</div>
-        <div class="tg-link edit-button" @click="goHome">Edit</div>
+    <div style="display: flex;justify-content: space-between;padding: 10px 20px">
+        <div class="tg-text condensed order-title"><span class="order-number">#W003</span><br>YOUR ORDER</div>
+        <div class="tg-link edit-button" @click="goHome">EDIT</div>
     </div>
-    <div style="margin: 20px">
-        <order-form @validate="changeBtnStatus"></order-form>
-    </div>
-    <product-order-list style="margin: 20px" :products="cartProducts"></product-order-list>
+<!--    <div style="margin: 20px">-->
+<!--        <order-form @validate="changeBtnStatus"></order-form>-->
+<!--    </div>-->
+    <product-order-list  :products="cartProducts"></product-order-list>
     <div style="display: flex;justify-content: space-between;margin: 10px 20px">
         <div class="tg-text total-label">Total price:</div>
         <div class="tg-text total-price chakra_petch">{{ totalSum }} ฿</div>
@@ -72,14 +72,25 @@ onMounted(() => {
 <style scoped>
 .order-title {
     font-weight: 700;
-    font-size: 24px;
+    font-size: 26px;
     line-height: 28px;
 }
 
-.edit-button {
-    font-weight: 300;
+.order-number{
     font-size: 16px;
+    line-height: 16px;
+    font-weight: 500;
+}
+
+.edit-button {
+    margin:  auto 0;
+    font-weight: 600;
+    font-size: 18px;
     line-height: 19px;
+    background-color: black;
+    border-radius: 30px;
+    text-align: center;
+    padding: 15px 25px;
 }
 
 .total-label {

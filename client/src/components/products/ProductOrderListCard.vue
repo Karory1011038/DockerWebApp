@@ -1,5 +1,5 @@
 <template>
-    <div style="display: flex;justify-content: space-between;height: 64px">
+    <div class="order-product-card">
         <img :src="product.image" :alt="product.name" class="order-image" style="margin-right: 10px;">
         <div class="tg-text order-product-info">
             <span class="condensed order-product-name">{{ product.name }}</span>
@@ -21,6 +21,14 @@ export default {
 </script>
 
 <style>
+.order-product-card {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    /*background-color: var(--tg-theme-bg-color);*/
+    background-color: black;
+}
+
 .order-image {
     width: 64px;
     height: 64px;
@@ -34,12 +42,14 @@ export default {
     font-size: 16px;
     line-height: 19px;
 }
-.order-product-info{
+
+.order-product-info {
     max-width: 190px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
 .order-product-properties {
     font-weight: 300;
     font-size: 14px;

@@ -6,7 +6,7 @@
         <div class="product-row">
 
             <section class="scrollport">
-                <div v-for="product in products">
+                <div v-for="product in products" @click="addProduct(product)">
                     <!--                <product-catalog-card :product="products[1]"></product-catalog-card>-->
                 </div>
             </section>
@@ -14,18 +14,22 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: "ProductsRow",
-    props: {
-        products: {
-            type: Array,
-            default() {
-                return [1,2,3,4]
-            }
-        }
-    }
+<script setup>
+import {useCartStore} from "../../stores/cart";
+
+const cartStore = useCartStore()
+const props =  defineProps({
+      products: {
+          type: Array,
+          default(){
+              return [1,2,3,4]
+          }
+      },
+   })
+function addProduct(product) {
+    cartStore.addItem(product)
 }
+
 </script>
 
 <style>

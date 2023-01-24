@@ -7,7 +7,7 @@
         </products-row>
     </div>
     <div className="section bg2">
-        <products-row className="revealUp">
+        <products-row  className="revealUp">
             <template #header>
                 <div>joints / wax / edible</div>
             </template>
@@ -23,9 +23,11 @@ import {onMounted} from 'vue'
 import {useProductsStore} from "../../stores/products";
 import {useCartStore} from "../../stores/cart";
 import telegram from "../../telegram/telegram";
+
 const {tg} = telegram()
 const productsStore = useProductsStore()
 const cartStore = useCartStore()
+
 
 const products = computed(() => {
     return productsStore.getProducts;
@@ -58,7 +60,6 @@ onMounted(() => {
 })
 
 
-
 // GSAP
 import gsap from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
@@ -66,47 +67,47 @@ import ProductsRow from "./ProductsRow.vue";
 
 gsap.registerPlugin(ScrollTrigger);
 onMounted(() => {
-        gsap.utils.toArray(".revealUp").forEach(function (elem) {
-            ScrollTrigger.create({
-                trigger: elem,
-                start: "top 70%",
-                end: "bottom 30%",
-                markers: false,
-                onEnter: function () {
-                    gsap.fromTo(
-                        elem,
-                        {y: 100, autoAlpha: 0},
-                        {
-                            duration: 1.25,
-                            y: 0,
-                            autoAlpha: 1,
-                            ease: "back",
-                            overwrite: "auto"
-                        }
-                    );
-                },
-                onLeave: function () {
-                    gsap.fromTo(elem, {autoAlpha: 1}, {autoAlpha: 0, overwrite: "auto"});
-                },
-                onEnterBack: function () {
-                    gsap.fromTo(
-                        elem,
-                        {y: -100, autoAlpha: 0},
-                        {
-                            duration: 1.25,
-                            y: 0,
-                            autoAlpha: 1,
-                            ease: "back",
-                            overwrite: "auto"
-                        }
-                    );
-                },
-                onLeaveBack: function () {
-                    gsap.fromTo(elem, {autoAlpha: 1}, {autoAlpha: 0, overwrite: "auto"});
-                }
-            });
+    gsap.utils.toArray(".revealUp").forEach(function (elem) {
+        ScrollTrigger.create({
+            trigger: elem,
+            start: "top 70%",
+            end: "bottom 30%",
+            markers: false,
+            onEnter: function () {
+                gsap.fromTo(
+                    elem,
+                    {y: 100, autoAlpha: 0},
+                    {
+                        duration: 1.25,
+                        y: 0,
+                        autoAlpha: 1,
+                        ease: "back",
+                        overwrite: "auto"
+                    }
+                );
+            },
+            onLeave: function () {
+                gsap.fromTo(elem, {autoAlpha: 1}, {autoAlpha: 0, overwrite: "auto"});
+            },
+            onEnterBack: function () {
+                gsap.fromTo(
+                    elem,
+                    {y: -100, autoAlpha: 0},
+                    {
+                        duration: 1.25,
+                        y: 0,
+                        autoAlpha: 1,
+                        ease: "back",
+                        overwrite: "auto"
+                    }
+                );
+            },
+            onLeaveBack: function () {
+                gsap.fromTo(elem, {autoAlpha: 1}, {autoAlpha: 0, overwrite: "auto"});
+            }
         });
-    })
+    });
+})
 
 </script>
 
