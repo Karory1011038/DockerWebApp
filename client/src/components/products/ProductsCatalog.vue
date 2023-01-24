@@ -2,14 +2,14 @@
     <div className="section bg1">
         <products-row className="revealUp">
             <template #header>
-                <div>weed</div>
+                <div>buds</div>
             </template>
         </products-row>
     </div>
     <div className="section bg2">
         <products-row className="revealUp">
             <template #header>
-                <div>weed</div>
+                <div>joints / wax / edible</div>
             </template>
         </products-row>
     </div>
