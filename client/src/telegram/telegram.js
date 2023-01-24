@@ -28,6 +28,7 @@ export default function () {
     }
 
     const tgUserData = tg.initDataUnsafe.user || {language_code: 'en'}
+    const themeParams = tg.themeParams || {}
 
     function initCatalogButtons() {
         tg.MainButton.setParams({"color": "#75FE72", 'text': 'VIEW ORDER', 'text-color': "#2F2F2F"});
@@ -124,6 +125,7 @@ export default function () {
     return {
         tg,
         tgUserData,
+        themeParams	,
         goHome,
         initHomeButtons,
         initCatalogButtons,

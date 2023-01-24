@@ -1,10 +1,11 @@
 <template>
 <div class="welcome-container text-center">
+    {{themeParams}}
         <h2 class="newAnima">Weed Space</h2>
         <div>{{ localizedText.hello + `, ${userName}.` }}</div>
         <div>{{ localizedText.welcome }}</div>
         <div class="scrolldown-container">
-            <div class='scrolldown'>
+            <div v-if="whiteTheme" class='scrolldown dark'>
                 <div class="chevrons">
                     <div class='chevrondown'></div>
                     <div class='chevrondown'></div>
@@ -17,8 +18,11 @@
 <script setup>
 import {text} from '../assets/text'
 import {useUserStore} from "../stores/user";
-import {computed} from "vue";
+import {computed, ref} from "vue";
+import telegram from "../telegram/telegram";
 
+const whiteTheme = ref(true)
+const {themeParams} = telegram()
 
 const language = computed(() => {
     return userStore.getLang;
@@ -100,6 +104,7 @@ const userName = computed(() => {
 
 .scrolldown {
     --color: white;
+    --wave-color: #ffffff66;
     --sizeX: 30px;
     --sizeY: 50px;
     position: relative;
@@ -110,6 +115,11 @@ const userName = computed(() => {
     border: calc(var(--sizeX) / 10) solid var(--color);
     border-radius: 50px;
     box-sizing: border-box;
+}
+
+.scrolldown.dark{
+    --color: black;
+    --wave-color: #00000066;
 }
 
 .scrolldown::before {
@@ -124,7 +134,7 @@ const userName = computed(() => {
     border-radius: 100%;
     animation: scrolldown-anim 2s infinite;
     box-sizing: border-box;
-    box-shadow: 0px -5px 3px 1px #ffffff66;
+    box-shadow: 0px -5px 3px 1px var(--wave-color);
 }
 
 @keyframes scrolldown-anim {
@@ -160,7 +170,7 @@ const userName = computed(() => {
 .chevrondown {
     margin-top: -6px;
     position: relative;
-    border: solid var(--color);
+    border: solid black;
     border-width: 0 3px 3px 0;
     display: inline-block;
     width: 10px;
