@@ -1,6 +1,6 @@
 <template>
     <div className="section bg1">
-        <products-row className="revealUp">
+        <products-row :products="products" className="revealUp">
             <template #header>
                 <div>buds</div>
             </template>
@@ -16,15 +16,56 @@
     <div className="spacer"></div>
 </template>
 
-<script>
+<script setup>
+// FUNC
+import {computed, ref, watch} from "vue";
+import {onMounted} from 'vue'
+import {useProductsStore} from "../../stores/products";
+import {useCartStore} from "../../stores/cart";
+import telegram from "../../telegram/telegram";
+const {tg} = telegram()
+const productsStore = useProductsStore()
+const cartStore = useCartStore()
+
+const products = computed(() => {
+    return productsStore.getProducts;
+});
+const cart = computed(() => {
+    return cartStore.getCart;
+});
+
+let loading = ref(false);
+
+const isCartFilled = computed(() => {
+    return Object.keys(cart.value).some(el => cart.value[el] > 0) && products.value.length > 0
+});
+
+function setButton(val) {
+    val ? tg.MainButton.show() : tg.MainButton.hide()
+}
+
+watch(isCartFilled, (val) => {
+    setButton(val)
+});
+onMounted(() => {
+    loading.value = true
+    productsStore.fetchProducts()
+        .finally(() => {
+            loading.value = false
+            window.scrollTo(0, 0);
+            setButton(isCartFilled.value)
+        })
+})
+
+
+
+// GSAP
 import gsap from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import ProductsRow from "./ProductsRow.vue";
 
 gsap.registerPlugin(ScrollTrigger);
-export default {
-    components: {ProductsRow},
-    mounted() {
+onMounted(() => {
         gsap.utils.toArray(".revealUp").forEach(function (elem) {
             ScrollTrigger.create({
                 trigger: elem,
@@ -65,8 +106,8 @@ export default {
                 }
             });
         });
-    }
-}
+    })
+
 </script>
 
 <style>
