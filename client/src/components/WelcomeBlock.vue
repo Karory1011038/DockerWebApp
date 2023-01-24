@@ -1,6 +1,6 @@
 <template>
 <div class="welcome-container text-center">
-    {{themeParams}}
+    {{whiteTheme}}
         <h2 class="newAnima">Weed Space</h2>
         <div>{{ localizedText.hello + `, ${userName}.` }}</div>
         <div>{{ localizedText.welcome }}</div>
@@ -21,8 +21,8 @@ import {useUserStore} from "../stores/user";
 import {computed, ref} from "vue";
 import telegram from "../telegram/telegram";
 
-const whiteTheme = ref(true)
 const {themeParams} = telegram()
+const whiteTheme = themeParams.text_color === '#ffffff'
 
 const language = computed(() => {
     return userStore.getLang;
