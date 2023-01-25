@@ -1,6 +1,6 @@
 <style>
 #app{
-    /*background-color: black !important;*/
+    /*background-color: beige !important;*/
 }
 </style>
 
